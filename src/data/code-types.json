@@ -1,0 +1,639 @@
+{
+	"総合科目": {
+		"codes": [
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6"
+		],
+		"except-codes": [],
+		"childs": {
+			"フレッシュマン・セミナー": {
+				"codes": [
+					"11"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"学問への誘い": {
+				"codes": [
+					"1227",
+					"1228"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"学士基盤科目": {
+				"codes": [
+					"12"
+				],
+				"except-codes": [
+					"1227",
+					"1228"
+				],
+				"childs": {}
+			},
+			"学士基盤科目（高年次向け）": {
+				"codes": [
+					"14"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"体育": {
+				"codes": [
+					"2"
+				],
+				"except-codes": [],
+				"childs": {
+					"1年次": {
+						"codes": [
+							"21"
+						],
+						"except-codes": []
+					},
+					"2年次": {
+						"codes": [
+							"22"
+						],
+						"except-codes": []
+					},
+					"3年次": {
+						"codes": [
+							"23"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"外国語": {
+				"codes": [
+					"3"
+				],
+				"except-codes": [],
+				"childs": {
+					"英語": {
+						"codes": [
+							"31"
+						],
+						"except-codes": [
+							"3190012",
+							"3190022"
+						]
+					},
+					"ドイツ語": {
+						"codes": [
+							"32"
+						],
+						"except-codes": []
+					},
+					"フランス語": {
+						"codes": [
+							"33"
+						],
+						"except-codes": []
+					},
+					"中国語": {
+						"codes": [
+							"34"
+						],
+						"except-codes": []
+					},
+					"ロシア語": {
+						"codes": [
+							"35"
+						],
+						"except-codes": []
+					},
+					"スペイン語": {
+						"codes": [
+							"36"
+						],
+						"except-codes": []
+					},
+					"朝鮮語": {
+						"codes": [
+							"37"
+						],
+						"except-codes": []
+					},
+					"日本語、Japan-Expert（学士）プログラム": {
+						"codes": [
+							"391",
+							"392"
+						],
+						"except-codes": []
+					},
+					"外国語（短期留学生用カリキュラム）": {
+						"codes": [
+							"390"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"情報": {
+				"codes": [
+					"6"
+				],
+				"except-codes": [],
+				"childs": {
+					"情報リテラシー（講義）": {
+						"codes": [
+							"61"
+						],
+						"except-codes": []
+					},
+					"情報リテラシー（演習）": {
+						"codes": [
+							"64"
+						],
+						"except-codes": []
+					},
+					"データサイエンス": {
+						"codes": [
+							"65"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"国語": {
+				"codes": [
+					"5"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"芸術": {
+				"codes": [
+					"4"
+				],
+				"except-codes": [],
+				"childs": {}
+			}
+		}
+	},
+	"自由科目": {
+		"codes": [
+			"8",
+			"9"
+		],
+		"except-codes": [],
+		"childs": {
+			"自由科目（特設）": {
+				"codes": [
+					"8"
+				],
+				"except-codes": [
+					"8049911",
+					"8049921",
+					"8149911"
+				],
+				"childs": {}
+			},
+			"教職に関する科目": {
+				"codes": [
+					"9"
+				],
+				"except-codes": [
+					"99"
+				],
+				"childs": {}
+			},
+			"博物館に関する科目": {
+				"codes": [
+					"99"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"日本事情等科目": {
+				"codes": [
+					"8049911",
+					"8049921",
+					"8149911"
+				],
+				"except-codes": [],
+				"childs": {}
+			}
+		}
+	},
+	"専門基礎科目・専門科目": {
+		"codes": [
+			"A",
+			"B",
+			"C",
+			"E",
+			"F",
+			"G",
+			"H",
+			"W",
+			"Y",
+			"VB"
+		],
+		"except-codes": [],
+		"childs": {
+			"全学群対象": {
+				"codes": [
+					"AB0",
+					"BB0"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"人文・文化学群": {
+				"codes": [
+					"A"
+				],
+				"except-codes": [
+					"AB0"
+				],
+				"childs": {
+					"人文学類": {
+						"codes": [
+							"AB"
+						],
+						"except-codes": [
+							"AB0"
+						]
+					},
+					"比較文化学類": {
+						"codes": [
+							"AC"
+						],
+						"except-codes": []
+					},
+					"日本語・日本文化学類": {
+						"codes": [
+							"AE"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"社会・国際学群": {
+				"codes": [
+					"B"
+				],
+				"except-codes": [
+					"BE"
+				],
+				"childs": {
+					"社会・国際学群グローバル科目群": {
+						"codes": [
+							"BA"
+						],
+						"except-codes": []
+					},
+					"社会学類": {
+						"codes": [
+							"BB"
+						],
+						"except-codes": [
+							"BB00101",
+							"BB00201",
+							"BB00301",
+							"BB00401",
+							"BB00501",
+							"BB00601"
+						]
+					},
+					"国際総合学類": {
+						"codes": [
+							"BC"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"人間学群": {
+				"codes": [
+					"C"
+				],
+				"except-codes": [],
+				"childs": {
+					"学群コア・カリキュラム": {
+						"codes": [
+							"CA"
+						],
+						"except-codes": []
+					},
+					"教育学類": {
+						"codes": [
+							"CB"
+						],
+						"except-codes": []
+					},
+					"心理学類": {
+						"codes": [
+							"CC"
+						],
+						"except-codes": []
+					},
+					"障害科学類": {
+						"codes": [
+							"CE"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"生命環境学群": {
+				"codes": [
+					"E"
+				],
+				"except-codes": [],
+				"childs": {
+					"学群共通科目": {
+						"codes": [
+							"EZ"
+						],
+						"except-codes": []
+					},
+					"生物学類": {
+						"codes": [
+							"EB"
+						],
+						"except-codes": []
+					},
+					"生物資源学類": {
+						"codes": [
+							"EC"
+						],
+						"except-codes": []
+					},
+					"地球学類": {
+						"codes": [
+							"EE"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"理工学群": {
+				"codes": [
+					"F"
+				],
+				"except-codes": [],
+				"childs": {
+					"学群共通科目": {
+						"codes": [
+							"FA"
+						],
+						"except-codes": []
+					},
+					"数学類": {
+						"codes": [
+							"FB"
+						],
+						"except-codes": []
+					},
+					"物理学類": {
+						"codes": [
+							"FC"
+						],
+						"except-codes": []
+					},
+					"化学類": {
+						"codes": [
+							"FE"
+						],
+						"except-codes": []
+					},
+					"応用理工学類": {
+						"codes": [
+							"FF",
+							"FA01131",
+							"FA01141",
+							"FA01231",
+							"FA01241",
+							"FA01331",
+							"FA01341",
+							"FA01431",
+							"FA01441",
+							"FA01531",
+							"FA01541",
+							"FA01631",
+							"FA01641",
+							"FA01731",
+							"FA01741",
+							"FA01831",
+							"FA01841"
+						],
+						"except-codes": []
+					},
+					"工学システム学類": {
+						"codes": [
+							"FG"
+						],
+						"except-codes": []
+					},
+					"社会工学類": {
+						"codes": [
+							"FH"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"情報学群": {
+				"codes": [
+					"G"
+				],
+				"except-codes": [],
+				"childs": {
+					"学群共通科目": {
+						"codes": [
+							"GA"
+						],
+						"except-codes": []
+					},
+					"情報科学類": {
+						"codes": [
+							"GB"
+						],
+						"except-codes": []
+					},
+					"情報メディア創成学類": {
+						"codes": [
+							"GC"
+						],
+						"except-codes": []
+					},
+					"知識情報・図書館学類": {
+						"codes": [
+							"GE"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"医学群": {
+				"codes": [
+					"H"
+				],
+				"except-codes": [],
+				"childs": {
+					"医学類": {
+						"codes": [
+							"HB",
+							"FCB1231",
+							"FCB1331",
+							"FE11181",
+							"FE11191"
+						],
+						"except-codes": []
+					},
+					"看護学類": {
+						"codes": [
+							"HC"
+						],
+						"except-codes": []
+					},
+					"医療科学類": {
+						"codes": [
+							"HE"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"体育専門学群": {
+				"codes": [
+					"W"
+				],
+				"except-codes": [],
+				"childs": {}
+			},
+			"芸術専門学群": {
+				"codes": [
+					"Y"
+				],
+				"except-codes": [],
+				"childs": {
+					"専門基礎科目(共通)": {
+						"codes": [
+							"YA"
+						],
+						"except-codes": []
+					},
+					"専門科目(美術史領域)": {
+						"codes": [
+							"Y11",
+							"YBA"
+						],
+						"except-codes": []
+					},
+					"専門科目(芸術支援領域)": {
+						"codes": [
+							"Y12",
+							"YBB"
+						],
+						"except-codes": []
+					},
+					"専門科目(洋画領域)": {
+						"codes": [
+							"YBC"
+						],
+						"except-codes": []
+					},
+					"専門科目(版画領域)": {
+						"codes": [
+							"YBD"
+						],
+						"except-codes": []
+					},
+					"専門科目(日本画領域)": {
+						"codes": [
+							"YBE"
+						],
+						"except-codes": []
+					},
+					"専門科目(彫塑領域)": {
+						"codes": [
+							"Y22",
+							"YBF"
+						],
+						"except-codes": []
+					},
+					"専門科目(書領域)": {
+						"codes": [
+							"YBG"
+						],
+						"except-codes": []
+					},
+					"専門科目(クラフト領域)": {
+						"codes": [
+							"Y63",
+							"YBH"
+						],
+						"except-codes": []
+					},
+					"専門科目(総合造形領域)": {
+						"codes": [
+							"YBJ"
+						],
+						"except-codes": []
+					},
+					"専門科目(構成領域)": {
+						"codes": [
+							"YBK"
+						],
+						"except-codes": []
+					},
+					"専門科目(ビジュアルデザイン領域)": {
+						"codes": [
+							"YBL"
+						],
+						"except-codes": []
+					},
+					"専門科目(情報・プロダクトデザイン領域)": {
+						"codes": [
+							"YBN"
+						],
+						"except-codes": []
+					},
+					"専門科目(環境デザイン領域)": {
+						"codes": [
+							"YBP"
+						],
+						"except-codes": []
+					},
+					"専門科目(建築デザイン領域)": {
+						"codes": [
+							"Y71",
+							"YBQ"
+						],
+						"except-codes": []
+					},
+					"専門科目(共通)": {
+						"codes": [
+							"Y61",
+							"Y62",
+							"YBW",
+							"YBX"
+						],
+						"except-codes": []
+					}
+				}
+			},
+			"グローバル教育院 地球規模課題学位プログラム": {
+				"codes": [
+					"VB"
+				],
+				"except-codes": [],
+				"childs": {}
+			}
+		}
+	},
+	"外国人留学生等日本語研修コース": {
+		"codes": [
+			"XJ"
+		],
+		"except-codes": [],
+		"childs": {}
+	}
+}
