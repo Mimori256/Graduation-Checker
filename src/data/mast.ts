@@ -32,7 +32,7 @@ const mast = {
       "体育::2",
       "英語::4",
     ],
-    complusorySumUnit: 14,
+    complusorySumUnit: 50,
     select: [],
   },
 };
