@@ -1,3 +1,5 @@
+import SelectSubjectRequirement from "../SelectSubjectRequirement";
+
 const mast = {
   header: {
     department: "情報メディア創成学類",
@@ -33,7 +35,37 @@ const mast = {
       "英語::4",
     ],
     complusorySumUnit: 50,
-    select: [],
+    select: [
+      new SelectSubjectRequirement(["GC5", "GA4"], 20, 35, false, "GC5, GA4"),
+      new SelectSubjectRequirement(["GC2", "GA1"], 32, 47, false, "GC2, GA1"),
+      new SelectSubjectRequirement(
+        ["*学士基盤科目"],
+        1,
+        4,
+        false,
+        "学士基盤科目"
+      ),
+      new SelectSubjectRequirement(["*体育"], 0, 2, false, "体育"),
+      new SelectSubjectRequirement(["*外国語"], 0, 6, false, "外国語"),
+      new SelectSubjectRequirement(["*国語"], 0, 2, false, "国語"),
+      new SelectSubjectRequirement(["*芸術"], 0, 6, false, "芸術"),
+      new SelectSubjectRequirement(["GB", "GE"], 0, 9, false, "GB, GE"),
+      new SelectSubjectRequirement(
+        ["*博物館に関する科目"],
+        0,
+        9,
+        false,
+        "博物館に関する科目"
+      ),
+      new SelectSubjectRequirement(
+        ["GA", "GB", "GC", "GE", "*総合科目", "*教職に関する科目"],
+        6,
+        15,
+        true,
+        "他学群の授業科目"
+      ),
+    ],
+    selectMinimumUnit: 74,
   },
 };
 

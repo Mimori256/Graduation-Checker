@@ -56,11 +56,8 @@ const getCourseUnitFromName = (
 };
 
 const beginWithMatch = (code: string, codeList: string[]): boolean => {
-  console.log(code);
-  console.log(codeList);
   for (let i = 0; i < codeList.length; i++) {
     if (code.indexOf(codeList[i]) === 0) {
-      console.log("hit");
       return true;
     }
   }
@@ -78,7 +75,7 @@ const checkCompulsory = (courseList: Course[]) => {
   let courseTag;
   let unitNumber;
   let codes;
-  let except;
+  let except: string[];
   let sumUnit = 0;
   for (let i = 0; i < complusoryList.length; i++) {
     // リストの要素が授業名か科目かどうか確認する
@@ -92,7 +89,6 @@ const checkCompulsory = (courseList: Course[]) => {
           resultArray.push(courseName + "  " + "△");
         } else {
           let courseUnit = getCourseUnitFromName(courseName, courseList);
-          console.log(courseUnit);
           sumUnit += courseUnit;
           resultArray.push(
             courseName +
@@ -118,7 +114,10 @@ const checkCompulsory = (courseList: Course[]) => {
       except = codeType[courseTag as keyof typeof codeType].except;
       let unitCount = 0;
       for (let j = 0; j < courseIDList.length; j++) {
-        if (beginWithMatch(courseIDList[j], codes)) {
+        if (
+          beginWithMatch(courseIDList[j], codes) &&
+          !beginWithMatch(courseIDList[j], except)
+        ) {
           let unit = getCourseUnitFromID(courseIDList[j], courseList);
           unitCount += unit;
         }
@@ -152,11 +151,14 @@ const checkCompulsory = (courseList: Course[]) => {
   }
   resultArray.push(
     "<br>" +
+      "<h3>合計" +
       String(sumUnit) +
       "/" +
       String(mast.courses.complusorySumUnit) +
-      "単位"
+      "単位" +
+      "</h3>"
   );
+  resultArray.unshift("<h2>必修科目</h2>");
   const result = resultArray.join("<br>");
   document.getElementById("compulsory")!.innerHTML = result;
 };
