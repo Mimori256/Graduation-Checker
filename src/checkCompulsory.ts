@@ -1,4 +1,3 @@
-import React from "react";
 import Course from "./Course";
 import mast from "./data/mast";
 import codeType from "./data/courseCodeTypes";
@@ -85,11 +84,11 @@ const searchCourseFromName = (name: string, courseList: Course[]) => {
 };
 
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
-const checkCompulsory = (courseList: Course[]): Course[] => {
+const checkCompulsory = (courseList: Course[]): [Course[], number] => {
   const complusoryList: string[] = mast.courses.complusory;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
-  const courseGradeList: string[] = createElementList("grade", courseList);
+  //const courseGradeList: string[] = createElementList("grade", courseList);
   let excludeCourseList: Course[] = [];
   let resultArray: string[] = [];
   let courseName;
@@ -193,7 +192,7 @@ const checkCompulsory = (courseList: Course[]): Course[] => {
   const newCourseList = courseList.filter(
     (val) => !excludeCourseList.includes(val)
   );
-  return newCourseList;
+  return [newCourseList, sumUnit];
 };
 
 export default checkCompulsory;

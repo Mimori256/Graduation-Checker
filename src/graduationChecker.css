@@ -1,4 +1,30 @@
+body {
+  text-align: center;
+}
 #result div {
   float: left;
-  margin: 20px;
+  margin-left: 12%;
+  margin-top: 5%;
+  margin-bottom: 4%;
+}
+
+#sum {
+  float: left;
+  font-size: 1.5rem;
+  margin-top: 10%;
+  margin-left: 10%;
+}
+
+#footer {
+  clear: both;
+}
+
+@media screen and (max-width: 480px) {
+  #result div {
+    float: none;
+    margin-left: 7%;
+  }
+  #sum {
+    float: none;
+  }
 }

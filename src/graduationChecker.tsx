@@ -29,11 +29,25 @@ const GraduationChecker: React.FC = () => {
 
   const gradeCheck = (csv: Blob) => {
     const reader = new FileReader();
+    const minumumGraduationUnit = 124;
+    let sumUnit = 0;
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
-      const newCourseList = checkCompulsory(courseList);
-      checkSelect(newCourseList);
+      const tmpRes = checkCompulsory(courseList);
+      const newCourseList = tmpRes[0];
+      sumUnit += tmpRes[1];
+      sumUnit += checkSelect(newCourseList);
+      document.getElementById("sum")!.innerHTML +=
+        "合計" + sumUnit + "/" + minumumGraduationUnit;
+
+      if (sumUnit >= minumumGraduationUnit) {
+        document.getElementById("sum")!.innerHTML +=
+          "<font color='red'>◯</font>";
+      } else {
+        document.getElementById("sum")!.innerHTML +=
+          "<font color='blue'>✖</font>";
+      }
     };
   };
 
@@ -63,11 +77,38 @@ const GraduationChecker: React.FC = () => {
           accept=".csv"
           onChange={onFileStateChanged}
         />
-        <div id="result">
-          <div id="compulsory"></div>
-          <br />
-          <div id="select"></div>
-        </div>
+      </div>
+      <div id="result">
+        <div id="compulsory"></div>
+        <br />
+        <div id="select"></div>
+      </div>
+      <div id="sum"></div>
+      <div id="footer">
+        <p>
+          TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされるということはありません
+        </p>
+        <p>
+          現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
+        </p>
+        <p>
+          <a
+            href="https://github.com/Mimori256/Graduation-Checker"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source code is available on GitHub
+          </a>
+        </p>
+        Contributed by{" "}
+        <a
+          href="https:///github.com/Mimori256"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Mimori
+        </a>
+        <p></p>
       </div>
     </>
   );

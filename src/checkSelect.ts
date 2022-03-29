@@ -39,18 +39,6 @@ const createElementList = (element: string, courseList: Course[]): string[] => {
   return result;
 };
 
-const getCourseGradeFromName = (
-  courseName: string,
-  courseList: Course[]
-): string => {
-  for (let i = 0; i < courseList.length; i++) {
-    if (courseList[i].name === courseName) {
-      return courseList[i].grade;
-    }
-  }
-  return "null";
-};
-
 const getCourseUnitFromID = (
   courseID: string,
   courseList: Course[]
@@ -152,11 +140,11 @@ const countUnitFromCode = (
   return unitCount;
 };
 
-const checkSelect = (courseList: Course[]) => {
+const checkSelect = (courseList: Course[]): number => {
   const selectList: SelectSubjectRequirement[] = mast.courses.select;
   const courseIDList: string[] = createElementList("id", courseList);
-  const courseNameList: string[] = createElementList("name", courseList);
-  const courseGradeList: string[] = createElementList("grade", courseList);
+  //const courseNameList: string[] = createElementList("name", courseList);
+  //const courseGradeList: string[] = createElementList("grade", courseList);
   let resultArray: string[] = [];
   let unitCount;
   let sumUnit = 0;
@@ -218,6 +206,7 @@ const checkSelect = (courseList: Course[]) => {
   );
   const result = resultArray.join("<br>");
   document.getElementById("select")!.innerHTML = result;
+  return sumUnit;
 };
 
 export default checkSelect;
