@@ -127,25 +127,27 @@ const countUnitFromCode = (
     }
   } else {
     //除外するカウントの場合
+    let expandedExcludeList: string[] = [];
+    let expandedExceptList: string[] = [];
     for (let i = 0; i < codes.length; i++) {
-      // 科目のタグ表記ではない場合
       if (!codes[i].startsWith("*")) {
-        includedIDList = courseIDList.filter((id) => !id.startsWith(codes[i]));
-        unitCount += getUnitFromIDList(includedIDList, courseList);
-      }
-      // 科目タグの場合(アスタリスクで始める)
-      else {
+        expandedExcludeList.push(codes[i]);
+      } else {
+        //タグを展開してリストに追加
         let tag = codes[i].replace("*", "");
         tagCodes = codeType[tag as keyof typeof codeType].codes;
         tagExcept = codeType[tag as keyof typeof codeType].except;
-        for (let j = 0; j < tagCodes.length; j++) {
-          includedIDList = courseIDList.filter(
-            (id) => !id.startsWith(tagCodes[j]) && beginWithMatch(id, tagExcept)
-          );
-          unitCount += getUnitFromIDList(includedIDList, courseList);
-        }
+        expandedExcludeList = expandedExcludeList.concat(tagCodes);
+        expandedExceptList = expandedExceptList.concat(tagExcept);
       }
     }
+    includedIDList = courseIDList.filter(
+      (id) =>
+        !beginWithMatch(id, expandedExcludeList) ||
+        beginWithMatch(id, expandedExceptList)
+    );
+    console.log(includedIDList);
+    unitCount += getUnitFromIDList(includedIDList, courseList);
   }
   return unitCount;
 };
@@ -204,7 +206,7 @@ const checkSelect = (courseList: Course[]) => {
       );
     }
   }
-  resultArray.unshift("<h2>選択課目</h2>");
+  resultArray.unshift("<h2>選択科目</h2>");
   resultArray.push(
     "<br>" +
       "<h3>合計" +
