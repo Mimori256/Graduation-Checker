@@ -3,6 +3,8 @@ import Course from "./Course";
 import mast from "./data/mast";
 import codeType from "./data/courseCodeTypes";
 
+const ErrorCourse = new Course("Error", "Error", 0, "Error");
+
 const createElementList = (element: string, courseList: Course[]): string[] => {
   let result = [];
   for (let i = 0; i < courseList.length; i++) {
@@ -64,11 +66,31 @@ const beginWithMatch = (code: string, codeList: string[]): boolean => {
   return false;
 };
 
-const checkCompulsory = (courseList: Course[]) => {
+const searchCourseFromID = (id: string, courseList: Course[]) => {
+  for (let i = 0; i < courseList.length; i++) {
+    if (courseList[i].id === id) {
+      return courseList[i];
+    }
+  }
+  return ErrorCourse;
+};
+
+const searchCourseFromName = (name: string, courseList: Course[]) => {
+  for (let i = 0; i < courseList.length; i++) {
+    if (courseList[i].name === name) {
+      return courseList[i];
+    }
+  }
+  return ErrorCourse;
+};
+
+// HTML要素を変更して、必修課目を除外した新しい科目リストを返す
+const checkCompulsory = (courseList: Course[]): Course[] => {
   const complusoryList: string[] = mast.courses.complusory;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
   const courseGradeList: string[] = createElementList("grade", courseList);
+  let excludeCourseList: Course[] = [];
   let resultArray: string[] = [];
   let courseName;
   let courseGrade;
@@ -89,6 +111,7 @@ const checkCompulsory = (courseList: Course[]) => {
           resultArray.push(courseName + "  " + "△");
         } else {
           let courseUnit = getCourseUnitFromName(courseName, courseList);
+          excludeCourseList.push(searchCourseFromName(courseName, courseList));
           sumUnit += courseUnit;
           resultArray.push(
             courseName +
@@ -119,6 +142,9 @@ const checkCompulsory = (courseList: Course[]) => {
           !beginWithMatch(courseIDList[j], except)
         ) {
           let unit = getCourseUnitFromID(courseIDList[j], courseList);
+          excludeCourseList.push(
+            searchCourseFromID(courseIDList[j], courseList)
+          );
           unitCount += unit;
         }
       }
@@ -158,9 +184,16 @@ const checkCompulsory = (courseList: Course[]) => {
       "単位" +
       "</h3>"
   );
+  // HTML要素を変更
   resultArray.unshift("<h2>必修科目</h2>");
   const result = resultArray.join("<br>");
   document.getElementById("compulsory")!.innerHTML = result;
+
+  // 差集合をとる
+  const newCourseList = courseList.filter(
+    (val) => !excludeCourseList.includes(val)
+  );
+  return newCourseList;
 };
 
 export default checkCompulsory;

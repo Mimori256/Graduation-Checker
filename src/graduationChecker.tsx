@@ -3,8 +3,6 @@ import Course from "./Course";
 import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
-import mast from "./data/mast";
-import courseCodeType from "./data/courseCodeTypes";
 
 const GraduationChecker: React.FC = () => {
   const loadCSV = (csv: string): Course[] => {
@@ -34,8 +32,8 @@ const GraduationChecker: React.FC = () => {
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
-      checkCompulsory(courseList);
-      checkSelect(courseList);
+      const newCourseList = checkCompulsory(courseList);
+      checkSelect(newCourseList);
     };
   };
 
