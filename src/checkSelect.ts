@@ -80,17 +80,32 @@ const getUnitFromIDList = (idList: string[], courseList: Course[]): number => {
   return unit;
 };
 
+const getCourseListFromIDList = (
+  idList: string[],
+  courseList: Course[]
+): Course[] => {
+  let res: Course[] = [];
+  for (let i = 0; i < courseList.length; i++) {
+    if (idList.includes(courseList[i].id)) {
+      res.push(courseList[i]);
+    }
+  }
+  return res;
+};
+
+// 単位数と検出した科目リストを返す
 const countUnitFromCode = (
   selectSubject: SelectSubjectRequirement,
   courseIDList: string[],
   courseList: Course[]
-): number => {
+): [Course[], number] => {
   const isExclusive = selectSubject.isExcludeRequirement;
   const codes = selectSubject.codes;
   let unitCount = 0;
   let includedIDList: string[];
   let tagCodes: string[];
   let tagExcept: string[];
+  let excludeCourseList: Course[] = [];
 
   // 通常の条件のカウントの場合
   if (!isExclusive) {
@@ -98,6 +113,9 @@ const countUnitFromCode = (
       // 科目のタグ表記ではない場合
       if (!codes[i].startsWith("*")) {
         includedIDList = courseIDList.filter((id) => id.startsWith(codes[i]));
+        excludeCourseList = excludeCourseList.concat(
+          getCourseListFromIDList(includedIDList, courseList)
+        );
         unitCount += getUnitFromIDList(includedIDList, courseList);
       }
       // 科目タグの場合(アスタリスクで始める)
@@ -108,6 +126,9 @@ const countUnitFromCode = (
         for (let j = 0; j < tagCodes.length; j++) {
           includedIDList = courseIDList.filter(
             (id) => id.startsWith(tagCodes[j]) && !beginWithMatch(id, tagExcept)
+          );
+          excludeCourseList = excludeCourseList.concat(
+            getCourseListFromIDList(includedIDList, courseList)
           );
           unitCount += getUnitFromIDList(includedIDList, courseList);
         }
@@ -134,15 +155,19 @@ const countUnitFromCode = (
         !beginWithMatch(id, expandedExcludeList) ||
         beginWithMatch(id, expandedExceptList)
     );
-    console.log(includedIDList);
+    excludeCourseList = excludeCourseList.concat(
+      getCourseListFromIDList(includedIDList, courseList)
+    );
     unitCount += getUnitFromIDList(includedIDList, courseList);
   }
-  return unitCount;
+  return [excludeCourseList, unitCount];
 };
 
-const checkSelect = (courseList: Course[]): number => {
+const checkSelect = (courseList: Course[]): [Course[], number] => {
   const selectList: SelectSubjectRequirement[] = mast.courses.select;
   const courseIDList: string[] = createElementList("id", courseList);
+  let excludeCourseList: Course[] = [];
+  let tmp: [Course[], number];
   //const courseNameList: string[] = createElementList("name", courseList);
   //const courseGradeList: string[] = createElementList("grade", courseList);
   let resultArray: string[] = [];
@@ -150,7 +175,9 @@ const checkSelect = (courseList: Course[]): number => {
   let sumUnit = 0;
 
   for (let i = 0; i < selectList.length; i++) {
-    unitCount = countUnitFromCode(selectList[i], courseIDList, courseList);
+    tmp = countUnitFromCode(selectList[i], courseIDList, courseList);
+    unitCount = tmp[1];
+    excludeCourseList = excludeCourseList.concat(tmp[0]);
     if (unitCount >= selectList[i].maximum) {
       sumUnit += selectList[i].maximum;
       resultArray.push(
@@ -206,7 +233,12 @@ const checkSelect = (courseList: Course[]): number => {
   );
   const result = resultArray.join("<br>");
   document.getElementById("select")!.innerHTML = result;
-  return sumUnit;
+
+  // 差集合をとる
+  const newCourseList = courseList.filter(
+    (val) => !excludeCourseList.includes(val)
+  );
+  return [newCourseList, sumUnit];
 };
 
 export default checkSelect;

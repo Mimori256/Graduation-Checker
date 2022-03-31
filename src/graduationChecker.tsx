@@ -27,6 +27,21 @@ const GraduationChecker: React.FC = () => {
     return courseList;
   };
 
+  const showExceptCourses = (courseList: Course[]) => {
+    let element: string = "<h3>卒業要件外の科目</h3>";
+    if (courseList.length === 0) {
+      element += "なし";
+    } else {
+      element += "<ul>\n";
+      for (let i = 0; i < courseList.length; i++) {
+        element += "<li>" + courseList[i].name + "</li>\n";
+      }
+      element += "</ul>";
+    }
+
+    document.getElementById("except")!.innerHTML = element;
+  };
+
   const gradeCheck = (csv: Blob) => {
     const reader = new FileReader();
     const minumumGraduationUnit = 124;
@@ -34,10 +49,13 @@ const GraduationChecker: React.FC = () => {
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
-      const tmpRes = checkCompulsory(courseList);
-      const newCourseList = tmpRes[0];
+      let tmpRes = checkCompulsory(courseList);
+      let newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
-      sumUnit += checkSelect(newCourseList);
+      tmpRes = checkSelect(newCourseList);
+      newCourseList = tmpRes[0];
+      sumUnit += tmpRes[1];
+      showExceptCourses(newCourseList);
       document.getElementById("sum")!.innerHTML +=
         "合計" + sumUnit + "/" + minumumGraduationUnit;
 
@@ -82,11 +100,12 @@ const GraduationChecker: React.FC = () => {
         <div id="compulsory"></div>
         <br />
         <div id="select"></div>
+        <div id="except"></div>
       </div>
       <div id="sum"></div>
       <div id="footer">
         <p>
-          TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされるということはありません
+          TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
         </p>
         <p>
           現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
