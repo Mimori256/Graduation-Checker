@@ -83,6 +83,17 @@ const searchCourseFromName = (name: string, courseList: Course[]) => {
   return ErrorCourse;
 };
 
+const createDetail = (detectedCourses: Course[]): string => {
+  let res = "";
+  if (detectedCourses.length === 0) {
+    res += "該当なし";
+  }
+  for (let i = 0; i < detectedCourses.length; i++) {
+    res += detectedCourses[i].name + "   " + detectedCourses[i].grade + "<br>";
+  }
+  return res;
+};
+
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
 const checkCompulsory = (courseList: Course[]): [Course[], number] => {
   const complusoryList: string[] = mast.courses.complusory;
@@ -98,7 +109,10 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
   let codes;
   let except: string[];
   let sumUnit = 0;
+  let detectedCourses: Course[] = [];
+
   for (let i = 0; i < complusoryList.length; i++) {
+    detectedCourses = [];
     // リストの要素が授業名か科目かどうか確認する
     courseName = complusoryList[i];
     if (!courseName.includes("::")) {
@@ -141,6 +155,7 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
           !beginWithMatch(courseIDList[j], except)
         ) {
           let unit = getCourseUnitFromID(courseIDList[j], courseList);
+          detectedCourses.push(searchCourseFromID(courseIDList[j], courseList));
           excludeCourseList.push(
             searchCourseFromID(courseIDList[j], courseList)
           );
@@ -149,27 +164,36 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
       }
       // タグ付けされた科目の単位数が条件を満たしているか確認
       sumUnit += unitCount;
+      let courseDetail = createDetail(detectedCourses);
       if (unitCount === unitNumber) {
         resultArray.push(
-          courseTag +
+          "<details><summary>" +
+            courseTag +
             " " +
             "<font color='red'>〇</font>" +
             " " +
             unitCount +
             "/" +
             unitCount +
-            "単位"
+            "単位" +
+            "</summary>" +
+            courseDetail +
+            "</details>"
         );
       } else {
         resultArray.push(
-          courseTag +
+          "<details><summary>" +
+            courseTag +
             " " +
             "<font color='blue'>✖</font>" +
             " " +
             unitCount +
             "/" +
             unitNumber +
-            "単位"
+            "単位" +
+            "</summary>" +
+            courseDetail +
+            "</details>"
         );
       }
     }

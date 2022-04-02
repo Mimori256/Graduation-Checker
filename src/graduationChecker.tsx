@@ -101,8 +101,8 @@ const GraduationChecker: React.FC = () => {
         <br />
         <div id="select"></div>
         <div id="except"></div>
+        <div id="sum"></div>
       </div>
-      <div id="sum"></div>
       <div id="footer">
         <p>
           TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません

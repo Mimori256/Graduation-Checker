@@ -163,10 +163,19 @@ const countUnitFromCode = (
   return [excludeCourseList, unitCount];
 };
 
+const createDetail = (detectedCourses: Course[]): string => {
+  let res = "";
+  for (let i = 0; i < detectedCourses.length; i++) {
+    res += detectedCourses[i].name + "   " + detectedCourses[i].grade + "<br>";
+  }
+  return res;
+};
+
 const checkSelect = (courseList: Course[]): [Course[], number] => {
   const selectList: SelectSubjectRequirement[] = mast.courses.select;
   const courseIDList: string[] = createElementList("id", courseList);
   let excludeCourseList: Course[] = [];
+  let detectedCourses: Course[];
   let tmp: [Course[], number];
   //const courseNameList: string[] = createElementList("name", courseList);
   //const courseGradeList: string[] = createElementList("grade", courseList);
@@ -177,23 +186,29 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
   for (let i = 0; i < selectList.length; i++) {
     tmp = countUnitFromCode(selectList[i], courseIDList, courseList);
     unitCount = tmp[1];
-    excludeCourseList = excludeCourseList.concat(tmp[0]);
+    detectedCourses = tmp[0];
+    excludeCourseList = excludeCourseList.concat(detectedCourses);
     if (unitCount >= selectList[i].maximum) {
       sumUnit += selectList[i].maximum;
       resultArray.push(
-        selectList[i].message +
+        "<details><summary>" +
+          selectList[i].message +
           "  " +
           "<font color='red'>〇</font>" +
           " " +
           String(selectList[i].maximum) +
           "/" +
           String(selectList[i].maximum) +
-          "単位"
+          "単位" +
+          "</summary>" +
+          createDetail(detectedCourses) +
+          "</details>"
       );
     } else if (unitCount >= selectList[i].minimum) {
       sumUnit += unitCount;
       resultArray.push(
-        selectList[i].message +
+        "<details><summary>" +
+          selectList[i].message +
           "  " +
           "<font color='red'>〇</font>" +
           " " +
@@ -202,13 +217,17 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           String(selectList[i].minimum) +
           "~" +
           String(selectList[i].maximum) +
-          ")"
+          ")" +
+          "</summary>" +
+          createDetail(detectedCourses) +
+          "</details>"
       );
     } else {
       // 条件を満たしていない場合
       sumUnit += unitCount;
       resultArray.push(
-        selectList[i].message +
+        "<details><summary>" +
+          selectList[i].message +
           "  " +
           "<font color='blue'>✖</font>" +
           " " +
@@ -217,7 +236,10 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           String(selectList[i].minimum) +
           "~" +
           String(selectList[i].maximum) +
-          ")"
+          ")" +
+          "</summary>" +
+          createDetail(detectedCourses) +
+          "</details>"
       );
     }
   }
