@@ -43,6 +43,9 @@ const GraduationChecker: React.FC = () => {
   };
 
   const gradeCheck = (csv: Blob) => {
+    // 使い方の表示を消す
+    document.getElementById("usage")!.innerHTML = "";
+
     const reader = new FileReader();
     const minumumGraduationUnit = 124;
     let sumUnit = 0;
@@ -89,12 +92,22 @@ const GraduationChecker: React.FC = () => {
     <>
       <div className="menu">
         <p>TWINSの成績ファイルを選択してください</p>
+        <p>
+          履修中、または成績がDの科目は、必修科目の単位数にはカウントされませんが、選択科目の単位数にはカウントされます
+        </p>
         <input
           type="file"
           id="grade-csv"
           accept=".csv"
           onChange={onFileStateChanged}
         />
+      </div>
+      <div id="usage">
+        <h3>使い方</h3>
+        <p>
+          TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
+        </p>
+        <p>そのCSVファイルを上で選択する</p>
       </div>
       <div id="result">
         <div id="compulsory"></div>

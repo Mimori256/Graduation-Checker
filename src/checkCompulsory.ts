@@ -38,7 +38,11 @@ const getCourseUnitFromID = (
 ): number => {
   for (let i = 0; i < courseList.length; i++) {
     if (courseList[i].id === courseID) {
-      return courseList[i].unit;
+      if (courseList[i].grade !== "D" && courseList[i].grade !== "履修中") {
+        return courseList[i].unit;
+      } else {
+        return 0;
+      }
     }
   }
   return 0;
@@ -121,7 +125,8 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
         courseGrade = getCourseGradeFromName(courseName, courseList);
 
         if (courseGrade === "履修中" || courseGrade === "D") {
-          resultArray.push(courseName + "  " + "△");
+          resultArray.push(courseName + "  " + "△ (" + courseGrade + ")");
+          excludeCourseList.push(searchCourseFromName(courseName, courseList));
         } else {
           let courseUnit = getCourseUnitFromName(courseName, courseList);
           excludeCourseList.push(searchCourseFromName(courseName, courseList));

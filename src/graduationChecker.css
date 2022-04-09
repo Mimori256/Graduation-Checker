@@ -1,6 +1,11 @@
 body {
   text-align: center;
 }
+
+#usage {
+  margin-top: 5%;
+}
+
 #result div {
   margin-top: 5%;
   margin-bottom: 4%;
