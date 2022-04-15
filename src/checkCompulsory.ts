@@ -38,7 +38,8 @@ const getCourseUnitFromID = (
 ): number => {
   for (let i = 0; i < courseList.length; i++) {
     if (courseList[i].id === courseID) {
-      if (courseList[i].grade !== "D" && courseList[i].grade !== "履修中") {
+      //if (courseList[i].grade !== "D" && courseList[i].grade !== "履修中") {
+      if (courseList[i].grade !== "D") {
         return courseList[i].unit;
       } else {
         return 0;
@@ -114,6 +115,7 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
   let except: string[];
   let sumUnit = 0;
   let detectedCourses: Course[] = [];
+  let sign = "";
 
   for (let i = 0; i < complusoryList.length; i++) {
     detectedCourses = [];
@@ -124,17 +126,24 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
       if (courseNameList.includes(courseName)) {
         courseGrade = getCourseGradeFromName(courseName, courseList);
 
-        if (courseGrade === "履修中" || courseGrade === "D") {
+        //if (courseGrade === "履修中" || courseGrade === "D") {
+        if (courseGrade === "D") {
           resultArray.push(courseName + "  " + "△ (" + courseGrade + ")");
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
         } else {
+          if (courseGrade === "履修中") {
+            sign = "△";
+          }
+          else {
+            sign = "<font color='red'>〇</font>";
+          }
           let courseUnit = getCourseUnitFromName(courseName, courseList);
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
           sumUnit += courseUnit;
           resultArray.push(
             courseName +
               "  " +
-              "<font color='red'>〇</font> (" +
+              sign + "(" +
               courseGrade +
               ")" +
               " " +
