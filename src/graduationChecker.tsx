@@ -32,11 +32,9 @@ const GraduationChecker: React.FC = () => {
     if (courseList.length === 0) {
       element += "なし";
     } else {
-      element += "<ul>\n";
       for (let i = 0; i < courseList.length; i++) {
-        element += "<li>" + courseList[i].name + "</li>\n";
+        element += "<p> ・" + courseList[i].name + "</p>\n";
       }
-      element += "</ul>";
     }
 
     document.getElementById("except")!.innerHTML = element;
@@ -93,8 +91,9 @@ const GraduationChecker: React.FC = () => {
       <div className="menu">
         <p>TWINSの成績ファイルを選択してください</p>
         <p>
-          履修中、または成績がDの科目は、必修科目の単位数にはカウントされませんが、選択科目の単位数にはカウントされます
+          履修中の科目は、単位数にカウントされます
         </p>
+        <p>成績がDとなっている科目は、単位数にカウントされません</p>
         <input
           type="file"
           id="grade-csv"
