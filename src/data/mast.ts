@@ -32,7 +32,7 @@ const mast = {
       "学問への誘い",
       "情報::4",
       "体育::2",
-      "英語::4",
+      "必修英語::4",
     ],
     complusorySumUnit: 50,
     select: [

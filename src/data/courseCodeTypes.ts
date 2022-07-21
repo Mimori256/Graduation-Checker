@@ -51,6 +51,10 @@ const codeType = {
     codes: ["99"],
     except: [],
   },
+  必修英語: {
+    codes: ["31H", "31J", "31K", "31L"],
+    except: [],
+  },
 };
 
 export default codeType;
