@@ -1,4 +1,6 @@
 import SelectSubjectRequirement from "../SelectSubjectRequirement";
+import CourseGroup from "../CourseGroup";
+import Course from "../Course";
 
 const mast = {
   header: {
@@ -36,36 +38,59 @@ const mast = {
     ],
     complusorySumUnit: 50,
     select: [
-      new SelectSubjectRequirement(["GC5", "GA4"], 20, 35, false, "GC5, GA4"),
-      new SelectSubjectRequirement(["GC2", "GA1"], 32, 47, false, "GC2, GA1"),
+      new SelectSubjectRequirement(
+        ["GC5", "GA4"],
+        20,
+        35,
+        false,
+        "GC5, GA4",
+        0
+      ),
+      new SelectSubjectRequirement(
+        ["GC2", "GA1"],
+        32,
+        47,
+        false,
+        "GC2, GA1",
+        1
+      ),
       new SelectSubjectRequirement(
         ["*学士基盤科目"],
         1,
         4,
         false,
-        "学士基盤科目"
+        "学士基盤科目",
+        2
       ),
-      new SelectSubjectRequirement(["*体育"], 0, 2, false, "体育"),
-      new SelectSubjectRequirement(["*外国語"], 0, 6, false, "外国語"),
-      new SelectSubjectRequirement(["*国語"], 0, 2, false, "国語"),
-      new SelectSubjectRequirement(["*芸術"], 0, 6, false, "芸術"),
-      new SelectSubjectRequirement(["GB", "GE"], 0, 9, false, "GB, GE"),
+      new SelectSubjectRequirement(["*体育"], 0, 2, false, "体育", 2),
+      new SelectSubjectRequirement(["*外国語"], 0, 6, false, "外国語", 2),
+      new SelectSubjectRequirement(["*国語"], 0, 2, false, "国語", 2),
+      new SelectSubjectRequirement(["*芸術"], 0, 6, false, "芸術", 2),
+      new SelectSubjectRequirement(["GB", "GE"], 0, 9, false, "GB, GE", 3),
       new SelectSubjectRequirement(
         ["*博物館に関する科目"],
         0,
         9,
         false,
-        "博物館に関する科目"
+        "博物館に関する科目",
+        3
       ),
       new SelectSubjectRequirement(
         ["GA", "GB", "GC", "GE", "*総合科目", "*教職に関する科目"],
         6,
         15,
         true,
-        "他学群の授業科目"
+        "他学群の授業科目",
+        3
       ),
     ],
     selectMinimumUnit: 74,
+    groups: [
+      new CourseGroup(0, 20, 35, "専門科目選択"),
+      new CourseGroup(1, 32, 47, "専門基礎科目選択"),
+      new CourseGroup(2, 1, 10, "共通科目選択"),
+      new CourseGroup(3, 6, 15, "関連科目選択"),
+    ],
   },
 };
 

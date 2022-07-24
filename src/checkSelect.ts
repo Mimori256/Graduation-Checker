@@ -1,6 +1,8 @@
 import mast from "./data/mast";
 import Course from "./Course";
+import CourseGroup from "./CourseGroup";
 import codeType from "./data/courseCodeTypes";
+import { group } from "console";
 
 class SelectSubjectRequirement {
   codes: string[];
@@ -8,18 +10,21 @@ class SelectSubjectRequirement {
   maximum: number;
   isExcludeRequirement: boolean;
   message: string;
+  group: number;
   constructor(
     codes: string[],
     minimum: number,
     maximum: number,
     isExcludeRequirement: boolean,
-    message: string
+    message: string,
+    group: number
   ) {
     this.codes = codes;
     this.minimum = minimum;
     this.maximum = maximum;
     this.isExcludeRequirement = isExcludeRequirement;
     this.message = message;
+    this.group = group;
   }
 }
 
@@ -174,6 +179,9 @@ const createDetail = (detectedCourses: Course[]): string => {
 const checkSelect = (courseList: Course[]): [Course[], number] => {
   const selectList: SelectSubjectRequirement[] = mast.courses.select;
   const courseIDList: string[] = createElementList("id", courseList);
+  const courseGroupList: CourseGroup[] = mast.courses.groups;
+  let groupUnitList: { [key: number]: number } = { 0: 0, 1: 0, 2: 0, 3: 0 };
+  let groupid: number;
   let excludeCourseList: Course[] = [];
   let detectedCourses: Course[];
   let tmp: [Course[], number];
@@ -182,14 +190,16 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
   let resultArray: string[] = [];
   let unitCount;
   let sumUnit = 0;
+  let isCompleted = true;
 
   for (let i = 0; i < selectList.length; i++) {
+    groupid = selectList[i].group;
     tmp = countUnitFromCode(selectList[i], courseIDList, courseList);
     unitCount = tmp[1];
+    groupUnitList[groupid] += unitCount;
     detectedCourses = tmp[0];
     excludeCourseList = excludeCourseList.concat(detectedCourses);
     if (unitCount >= selectList[i].maximum) {
-      sumUnit += selectList[i].maximum;
       resultArray.push(
         "<details><summary>" +
           selectList[i].message +
@@ -205,7 +215,6 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           "</details>"
       );
     } else if (unitCount >= selectList[i].minimum) {
-      sumUnit += unitCount;
       resultArray.push(
         "<details><summary>" +
           selectList[i].message +
@@ -224,7 +233,6 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
       );
     } else {
       // 条件を満たしていない場合
-      sumUnit += unitCount;
       resultArray.push(
         "<details><summary>" +
           selectList[i].message +
@@ -243,7 +251,31 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
       );
     }
   }
-  resultArray.unshift("<h2>選択科目</h2>");
+  resultArray.unshift("<h2>選択科目の条件一覧</h2>");
+  let courseGroupUnit: number;
+  let marubatsu: string;
+  for (let i = 0; i < courseGroupList.length; i++) {
+    courseGroupUnit = groupUnitList[courseGroupList[i].id];
+    if (courseGroupUnit >= courseGroupList[i].minUnit) {
+      marubatsu = "<font color='red'>〇</font>";
+    } else {
+      marubatsu = "<font color='blue'>✖</font>";
+      isCompleted = false;
+    }
+    resultArray.push(
+      "<br><h4>" +
+        courseGroupList[i].name +
+        "</h4>" +
+        String(groupUnitList[i]) +
+        "/(" +
+        String(courseGroupList[i].minUnit) +
+        "~" +
+        String(courseGroupList[i].maxUnit) +
+        ")" +
+        marubatsu
+    );
+    sumUnit += Math.min(courseGroupUnit, courseGroupList[i].maxUnit);
+  }
   resultArray.push(
     "<br>" +
       "<h3>合計" +
