@@ -6,6 +6,7 @@ import "./graduationChecker.css";
 
 const GraduationChecker: React.FC = () => {
   const loadCSV = (csv: string): Course[] => {
+    document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
     const splitedCourseList: string[] = csv.split("\n");
     let splitedCourse: string[];
@@ -86,13 +87,14 @@ const GraduationChecker: React.FC = () => {
     }
   };
 
+  // 初めにresult要素を非表示に、CSVをロードしてから表示
+  document.getElementById("result")!.style.display = "none";
+
   return (
     <>
       <div className="menu">
         <p>TWINSの成績ファイルを選択してください</p>
-        <p>
-          履修中の科目は、単位数にカウントされます
-        </p>
+        <p>履修中の科目は、単位数にカウントされます</p>
         <p>成績がDとなっている科目は、単位数にカウントされません</p>
         <input
           type="file"
@@ -107,6 +109,9 @@ const GraduationChecker: React.FC = () => {
           TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
         </p>
         <p>そのCSVファイルを上で選択する</p>
+        <p>
+          科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
+        </p>
       </div>
       <div id="result">
         <div id="compulsory"></div>
@@ -116,12 +121,17 @@ const GraduationChecker: React.FC = () => {
         <div id="sum"></div>
       </div>
       <div id="footer">
-        <p>
-          TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
-        </p>
-        <p>
-          現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
-        </p>
+        <ul>
+          <li>
+            TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
+          </li>
+          <li>
+            現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
+          </li>
+          <li>
+            このツールの使用によって生じた不利益等について、開発者は一切の責任を負いません
+          </li>
+        </ul>
         <p>
           <a
             href="https://github.com/Mimori256/Graduation-Checker"

@@ -285,7 +285,9 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
       "単位" +
       "</h3>"
   );
-  const result = resultArray.join("<br>");
+  let result = resultArray.join("<br>");
+  // 最初の改行を削除
+  result = result.replace("<br>", "");
   document.getElementById("select")!.innerHTML = result;
 
   // 差集合をとる

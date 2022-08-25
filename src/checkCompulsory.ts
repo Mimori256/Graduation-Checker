@@ -133,8 +133,7 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
         } else {
           if (courseGrade === "履修中") {
             sign = "△";
-          }
-          else {
+          } else {
             sign = "<font color='red'>〇</font>";
           }
           let courseUnit = getCourseUnitFromName(courseName, courseList);
@@ -143,7 +142,8 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
           resultArray.push(
             courseName +
               "  " +
-              sign + "(" +
+              sign +
+              "(" +
               courseGrade +
               ")" +
               " " +
@@ -223,7 +223,9 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
   );
   // HTML要素を変更
   resultArray.unshift("<h2>必修科目</h2>");
-  const result = resultArray.join("<br>");
+  let result = resultArray.join("<br>");
+  // はじめの改行を削除
+  result = result.replace("<br>", "");
   document.getElementById("compulsory")!.innerHTML = result;
 
   // 差集合をとる
