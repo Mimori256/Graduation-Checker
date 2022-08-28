@@ -2,7 +2,6 @@ import mast from "./data/mast";
 import Course from "./Course";
 import CourseGroup from "./CourseGroup";
 import codeType from "./data/courseCodeTypes";
-import { group } from "console";
 
 class SelectSubjectRequirement {
   codes: string[];
@@ -171,7 +170,13 @@ const countUnitFromCode = (
 const createDetail = (detectedCourses: Course[]): string => {
   let res = "";
   for (let i = 0; i < detectedCourses.length; i++) {
-    res += detectedCourses[i].name + "   " + detectedCourses[i].grade + "<br>";
+    res +=
+      detectedCourses[i].name +
+      " (" +
+      detectedCourses[i].id +
+      ")    " +
+      detectedCourses[i].grade +
+      "<br>";
   }
   return res;
 };

@@ -34,7 +34,8 @@ const GraduationChecker: React.FC = () => {
       element += "なし";
     } else {
       for (let i = 0; i < courseList.length; i++) {
-        element += "<p> ・" + courseList[i].name + "</p>\n";
+        element +=
+          "<p> ・" + courseList[i].name + " (" + courseList[i].id + ") </p>\n";
       }
     }
 
@@ -87,15 +88,14 @@ const GraduationChecker: React.FC = () => {
     }
   };
 
-  // 初めにresult要素を非表示に、CSVをロードしてから表示
-  document.getElementById("result")!.style.display = "none";
-
   return (
     <>
       <div className="menu">
-        <p>TWINSの成績ファイルを選択してください</p>
-        <p>履修中の科目は、単位数にカウントされます</p>
-        <p>成績がDとなっている科目は、単位数にカウントされません</p>
+        <ul>
+          <li>TWINSの成績ファイルを選択してください</li>
+          <li>履修中の科目は、必修、選択に関わらず単位数にカウントされます</li>
+          <li>成績がDとなっている科目は、単位数にカウントされません</li>
+        </ul>
         <input
           type="file"
           id="grade-csv"
@@ -105,13 +105,17 @@ const GraduationChecker: React.FC = () => {
       </div>
       <div id="usage">
         <h3>使い方</h3>
-        <p>
-          TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
-        </p>
-        <p>そのCSVファイルを上で選択する</p>
-        <p>
-          科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
-        </p>
+        <ul>
+          <li>
+            TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
+          </li>
+          <li>
+            そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます。
+          </li>
+          <li>
+            科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
+          </li>
+        </ul>
       </div>
       <div id="result">
         <div id="compulsory"></div>
