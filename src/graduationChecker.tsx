@@ -133,6 +133,17 @@ const GraduationChecker: React.FC = () => {
             現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
           </li>
           <li>
+            卒業要件は、2021年度の
+            <a
+              href="https://www.tsukuba.ac.jp/education/ug-courses-directory/2021/pdf/5-2.pdf"
+              target="_blank"
+              rel="noopener"
+            >
+              学群等履修細則
+            </a>
+            に基づいています
+          </li>
+          <li>
             このツールの使用によって生じた不利益等について、開発者は一切の責任を負いません
           </li>
         </ul>
