@@ -27,6 +27,10 @@ class SelectSubjectRequirement {
   }
 }
 
+const addParen = (s: string): string => {
+  return "(" + s + ")";
+};
+
 const createElementList = (element: string, courseList: Course[]): string[] => {
   let result = [];
   for (let i = 0; i < courseList.length; i++) {
@@ -49,18 +53,6 @@ const getCourseUnitFromID = (
 ): number => {
   for (let i = 0; i < courseList.length; i++) {
     if (courseList[i].id === courseID) {
-      return courseList[i].unit;
-    }
-  }
-  return 0;
-};
-
-const getCourseUnitFromName = (
-  courseName: string,
-  courseList: Course[]
-): number => {
-  for (let i = 0; i < courseList.length; i++) {
-    if (courseList[i].name === courseName) {
       return courseList[i].unit;
     }
   }
@@ -167,21 +159,38 @@ const countUnitFromCode = (
   return [excludeCourseList, unitCount];
 };
 
-const createDetail = (detectedCourses: Course[]): string => {
+const createDetail = (
+  detectedCourses: Course[],
+  includeCourseYear: boolean
+): string => {
   let res = "";
   for (let i = 0; i < detectedCourses.length; i++) {
-    res +=
-      detectedCourses[i].name +
-      " (" +
-      detectedCourses[i].id +
-      ")    " +
-      detectedCourses[i].grade +
-      "<br>";
+    if (!includeCourseYear) {
+      res +=
+        detectedCourses[i].id +
+        " " +
+        detectedCourses[i].name +
+        ":     " +
+        detectedCourses[i].grade +
+        "<br>";
+    } else {
+      res +=
+        detectedCourses[i].id +
+        " " +
+        detectedCourses[i].name +
+        addParen(String(detectedCourses[i].year)) +
+        ":     " +
+        detectedCourses[i].grade +
+        "<br>";
+    }
   }
   return res;
 };
 
-const checkSelect = (courseList: Course[]): [Course[], number] => {
+const checkSelect = (
+  courseList: Course[],
+  includeCourseYear: boolean
+): [Course[], number] => {
   const selectList: SelectSubjectRequirement[] = mast.courses.select;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseGroupList: CourseGroup[] = mast.courses.groups;
@@ -216,7 +225,7 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           String(selectList[i].maximum) +
           "単位" +
           "</summary>" +
-          createDetail(detectedCourses) +
+          createDetail(detectedCourses, includeCourseYear) +
           "</details>"
       );
     } else if (unitCount >= selectList[i].minimum) {
@@ -233,7 +242,7 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           String(selectList[i].maximum) +
           ")" +
           "</summary>" +
-          createDetail(detectedCourses) +
+          createDetail(detectedCourses, includeCourseYear) +
           "</details>"
       );
     } else {
@@ -251,7 +260,7 @@ const checkSelect = (courseList: Course[]): [Course[], number] => {
           String(selectList[i].maximum) +
           ")" +
           "</summary>" +
-          createDetail(detectedCourses) +
+          createDetail(detectedCourses, includeCourseYear) +
           "</details>"
       );
     }

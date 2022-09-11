@@ -2,7 +2,11 @@ import Course from "./Course";
 import mast from "./data/mast";
 import codeType from "./data/courseCodeTypes";
 
-const ErrorCourse = new Course("Error", "Error", 0, "Error");
+const ErrorCourse = new Course("Error", "Error", 0, "Error", 0);
+
+const addParen = (s: string): string => {
+  return "(" + s + ")";
+};
 
 const createElementList = (element: string, courseList: Course[]): string[] => {
   let result = [];
@@ -61,6 +65,18 @@ const getCourseUnitFromName = (
   return 0;
 };
 
+const getCourseYearfromName = (
+  courseName: string,
+  courseList: Course[]
+): number => {
+  for (let i = 0; i < courseList.length; i++) {
+    if (courseList[i].name === courseName) {
+      return courseList[i].year;
+    }
+  }
+  return 0;
+};
+
 const beginWithMatch = (code: string, codeList: string[]): boolean => {
   for (let i = 0; i < codeList.length; i++) {
     if (code.indexOf(codeList[i]) === 0) {
@@ -88,19 +104,35 @@ const searchCourseFromName = (name: string, courseList: Course[]) => {
   return ErrorCourse;
 };
 
-const createDetail = (detectedCourses: Course[]): string => {
+const createDetail = (
+  detectedCourses: Course[],
+  includeCourseYear: boolean
+): string => {
   let res = "";
   if (detectedCourses.length === 0) {
     res += "該当なし";
   }
   for (let i = 0; i < detectedCourses.length; i++) {
-    res += detectedCourses[i].name + "   " + detectedCourses[i].grade + "<br>";
+    if (includeCourseYear) {
+      res +=
+        detectedCourses[i].name +
+        addParen(String(detectedCourses[i].year)) +
+        "   " +
+        detectedCourses[i].grade +
+        "<br>";
+    } else {
+      res +=
+        detectedCourses[i].name + "   " + detectedCourses[i].grade + "<br>";
+    }
   }
   return res;
 };
 
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
-const checkCompulsory = (courseList: Course[]): [Course[], number] => {
+const checkCompulsory = (
+  courseList: Course[],
+  includeCourseYear: boolean
+): [Course[], number] => {
   const complusoryList: string[] = mast.courses.complusory;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
@@ -128,7 +160,9 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
 
         //if (courseGrade === "履修中" || courseGrade === "D") {
         if (courseGrade === "D") {
-          resultArray.push(courseName + "  " + "△ (" + courseGrade + ")");
+          resultArray.push(
+            courseName + "  " + "△ " + addParen(String(courseGrade))
+          );
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
         } else {
           if (courseGrade === "履修中") {
@@ -137,19 +171,31 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
             sign = "<font color='red'>〇</font>";
           }
           let courseUnit = getCourseUnitFromName(courseName, courseList);
+          let courseYear = getCourseYearfromName(courseName, courseList);
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
           sumUnit += courseUnit;
-          resultArray.push(
-            courseName +
-              "  " +
-              sign +
-              "(" +
-              courseGrade +
-              ")" +
-              " " +
-              courseUnit +
-              "単位"
-          );
+          if (includeCourseYear) {
+            resultArray.push(
+              courseName +
+                addParen(String(courseYear)) +
+                "  " +
+                sign +
+                addParen(String(courseUnit)) +
+                " " +
+                courseUnit +
+                "単位"
+            );
+          } else {
+            resultArray.push(
+              courseName +
+                "  " +
+                sign +
+                addParen(String(courseUnit)) +
+                " " +
+                courseUnit +
+                "単位"
+            );
+          }
         }
       } else {
         // 必修科目がデータに存在していない場合
@@ -178,7 +224,7 @@ const checkCompulsory = (courseList: Course[]): [Course[], number] => {
       }
       // タグ付けされた科目の単位数が条件を満たしているか確認
       sumUnit += unitCount;
-      let courseDetail = createDetail(detectedCourses);
+      let courseDetail = createDetail(detectedCourses, includeCourseYear);
       if (unitCount === unitNumber) {
         resultArray.push(
           "<details><summary>" +

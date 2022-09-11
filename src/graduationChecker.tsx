@@ -15,6 +15,7 @@ const GraduationChecker: React.FC = () => {
     let name: string;
     let unit: number;
     let grade: string;
+    let year: number;
 
     for (let i = 1; i < splitedCourseList.length - 1; i++) {
       splitedCourse = splitedCourseList[i].split(",");
@@ -22,7 +23,8 @@ const GraduationChecker: React.FC = () => {
       name = splitedCourse[3];
       unit = parseFloat(splitedCourse[4].replace(" ", ""));
       grade = splitedCourse[7];
-      courseList.push(new Course(id, name, unit, grade));
+      year = Number(splitedCourse[9]);
+      courseList.push(new Course(id, name, unit, grade, year));
     }
 
     return courseList;
@@ -46,16 +48,27 @@ const GraduationChecker: React.FC = () => {
     // 使い方の表示を消す
     document.getElementById("usage")!.innerHTML = "";
 
+    let isChecked: boolean;
+    //チェックボックスの判定
+    const checkBox = document.querySelector(
+      "input[type='checkbox']"
+    ) as HTMLInputElement;
+
+    if (checkBox && checkBox.checked) {
+      isChecked = true;
+    } else {
+      isChecked = false;
+    }
     const reader = new FileReader();
     const minumumGraduationUnit = 124;
     let sumUnit = 0;
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
-      let tmpRes = checkCompulsory(courseList);
+      let tmpRes = checkCompulsory(courseList, isChecked);
       let newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
-      tmpRes = checkSelect(newCourseList);
+      tmpRes = checkSelect(newCourseList, isChecked);
       newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
       showExceptCourses(newCourseList);
@@ -96,12 +109,20 @@ const GraduationChecker: React.FC = () => {
           <li>履修中の科目は、必修、選択に関わらず単位数にカウントされます</li>
           <li>成績がDとなっている科目は、単位数にカウントされません</li>
         </ul>
+        <p>
+          <input
+            type="file"
+            id="grade-csv"
+            accept=".csv"
+            onChange={onFileStateChanged}
+          />
+        </p>
         <input
-          type="file"
-          id="grade-csv"
-          accept=".csv"
-          onChange={onFileStateChanged}
+          id="includeCourseYear"
+          type="checkbox"
+          name="includeCourseYear"
         />
+        <label htmlFor="includeCourseYear">各授業の履修年度も表示する</label>
       </div>
       <div id="usage">
         <h3>使い方</h3>
