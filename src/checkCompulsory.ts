@@ -170,6 +170,8 @@ const checkCompulsory = (
   let courseName;
   let courseGrade;
   let courseTag;
+  let courseUnit;
+  let courseYear;
   let unitNumber;
   let codes;
   let except: string[];
@@ -258,9 +260,7 @@ const checkCompulsory = (
 
         //if (courseGrade === "履修中" || courseGrade === "D") {
         if (courseGrade === "D") {
-          resultArray.push(
-            courseName + "  " + "△ " + addParen(String(courseGrade))
-          );
+          resultArray.push(courseName + "  △ " + addParen(String(courseGrade)));
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
         } else {
           if (courseGrade === "履修中") {
@@ -268,8 +268,8 @@ const checkCompulsory = (
           } else {
             sign = "<font color='red'>〇</font>";
           }
-          let courseUnit = getCourseUnitFromName(courseName, courseList);
-          let courseYear = getCourseYearfromName(courseName, courseList);
+          courseUnit = getCourseUnitFromName(courseName, courseList);
+          courseYear = getCourseYearfromName(courseName, courseList);
           excludeCourseList.push(searchCourseFromName(courseName, courseList));
           sumUnit += courseUnit;
           if (includeCourseYear) {
@@ -317,12 +317,14 @@ const checkCompulsory = (
           sign = "<font color='red'>〇</font>";
           validUnitCount = alternativeRequirement
             .map((c) => getCourseUnitFromName(c, courseList))
-            .reduce((a, b) => a + b);
+            .reduce((sum, unit) => sum + unit);
           sumUnit += validUnitCount;
         }
 
-        let courseUnit = getCourseUnitFromName(courseName, courseList);
-        let courseYear = getCourseYearfromName(courseName, courseList);
+        courseYear = getCourseYearfromName(
+          alternativeRequirement[0],
+          courseList
+        );
         if (includeCourseYear) {
           resultArray.push(
             courseName +
@@ -347,8 +349,7 @@ const checkCompulsory = (
     }
     //今までの条件にヒットしなかった場合
     if (!courseExists) {
-      let courseUnit = getCourseUnitFromName(courseName, courseList);
-      resultArray.push(courseName + " " + "<font color='blue'>✖</font>");
+      resultArray.push(courseName + " <font color='blue'>✖</font>");
     }
   }
 
