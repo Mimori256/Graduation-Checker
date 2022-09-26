@@ -10,12 +10,17 @@ const addParen = (s: string): string => {
 
 const createElementList = (element: string, courseList: Course[]): string[] => {
   let result = [];
+  let name = "";
   for (let i = 0; i < courseList.length; i++) {
     if (element === "id") {
       result.push(courseList[i].id);
     }
     if (element === "name") {
-      result.push(courseList[i].name);
+      name = courseList[i].name;
+      if (name.includes("//")) {
+        name = name.split("//")[0];
+      }
+      result.push(name);
     }
     if (element === "grade") {
       result.push(courseList[i].grade);
@@ -33,7 +38,7 @@ const getCourseGradeFromName = (
       return courseList[i].grade;
     }
   }
-  return "null";
+  return "";
 };
 
 const getCourseUnitFromID = (
@@ -128,6 +133,30 @@ const createDetail = (
   return res;
 };
 
+const checkAlternativeRequirement = (
+  courseNameList: string[],
+  alternativeRequirement: string[]
+): boolean => {
+  let res = true;
+  alternativeRequirement.forEach(function (requiredCourse) {
+    if (!courseNameList.includes(requiredCourse)) {
+      res = false;
+    }
+  });
+  return res;
+};
+
+const addExcludeFromList = (
+  excludeCourseList: Course[],
+  excludeList: string[],
+  courseList: Course[]
+): Course[] => {
+  excludeList.forEach((c) => {
+    excludeCourseList.push(searchCourseFromName(c, courseList));
+  });
+  return excludeCourseList;
+};
+
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
 const checkCompulsory = (
   courseList: Course[],
@@ -136,7 +165,6 @@ const checkCompulsory = (
   const complusoryList: string[] = mast.courses.complusory;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
-  //const courseGradeList: string[] = createElementList("grade", courseList);
   let excludeCourseList: Course[] = [];
   let resultArray: string[] = [];
   let courseName;
@@ -145,17 +173,87 @@ const checkCompulsory = (
   let unitNumber;
   let codes;
   let except: string[];
+  let alternativeRequirement: string[] = [];
   let sumUnit = 0;
   let detectedCourses: Course[] = [];
   let sign = "";
 
+  let courseExists: boolean;
+  let alternativeExists: boolean;
+
   for (let i = 0; i < complusoryList.length; i++) {
+    //初期化
     detectedCourses = [];
-    // リストの要素が授業名か科目かどうか確認する
     courseName = complusoryList[i];
-    if (!courseName.includes("::")) {
-      //科目名の場合
+    courseExists = false;
+    alternativeExists = false;
+
+    if (courseName.includes("//")) {
+      alternativeRequirement = eval(courseName.split("//")[1]);
+      courseName = courseName.split("//")[0];
+      alternativeExists = true;
+    }
+
+    //科目のタグの場合
+    if (courseName.includes("::")) {
+      courseExists = true;
+      courseTag = courseName.split("::")[0];
+      unitNumber = parseInt(courseName.split("::")[1]);
+      //タグの該当する科目番号のリストを取得
+      codes = codeType[courseTag as keyof typeof codeType].codes;
+      except = codeType[courseTag as keyof typeof codeType].except;
+      let unitCount = 0;
+      for (let j = 0; j < courseIDList.length; j++) {
+        if (
+          beginWithMatch(courseIDList[j], codes) &&
+          !beginWithMatch(courseIDList[j], except)
+        ) {
+          let unit = getCourseUnitFromID(courseIDList[j], courseList);
+          detectedCourses.push(searchCourseFromID(courseIDList[j], courseList));
+          excludeCourseList.push(
+            searchCourseFromID(courseIDList[j], courseList)
+          );
+          unitCount += unit;
+        }
+      }
+      // タグ付けされた科目の単位数が条件を満たしているか確認
+      sumUnit += unitCount;
+      let courseDetail = createDetail(detectedCourses, includeCourseYear);
+      if (unitCount >= unitNumber) {
+        resultArray.push(
+          "<details><summary>" +
+            courseTag +
+            " " +
+            "<font color='red'>〇</font>" +
+            " " +
+            unitCount +
+            "/" +
+            unitNumber +
+            "単位" +
+            "</summary>" +
+            courseDetail +
+            "</details>"
+        );
+      } else {
+        resultArray.push(
+          "<details><summary>" +
+            courseTag +
+            " " +
+            "<font color='blue'>✖</font>" +
+            " " +
+            unitCount +
+            "/" +
+            unitNumber +
+            "単位" +
+            "</summary>" +
+            courseDetail +
+            "</details>"
+        );
+      }
+    } else {
+      //科目名サーチ(互換なし)
       if (courseNameList.includes(courseName)) {
+        courseExists = true;
         courseGrade = getCourseGradeFromName(courseName, courseList);
 
         //if (courseGrade === "履修中" || courseGrade === "D") {
@@ -180,84 +278,80 @@ const checkCompulsory = (
                 addParen(String(courseYear)) +
                 "  " +
                 sign +
-                addParen(String(courseUnit)) +
                 " " +
                 courseUnit +
                 "単位"
             );
           } else {
             resultArray.push(
-              courseName +
-                "  " +
-                sign +
-                addParen(String(courseUnit)) +
-                " " +
-                courseUnit +
-                "単位"
+              courseName + "  " + sign + " " + courseUnit + "単位"
             );
           }
         }
-      } else {
-        // 必修科目がデータに存在していない場合
-        resultArray.push(courseName + "  " + "<font color='blue'>✖</font>");
       }
-    } else {
-      //科目のタグの場合
-      courseTag = courseName.split("::")[0];
-      unitNumber = parseInt(courseName.split("::")[1]);
-      //タグの該当する科目番号のリストを取得
-      codes = codeType[courseTag as keyof typeof codeType].codes;
-      except = codeType[courseTag as keyof typeof codeType].except;
-      let unitCount = 0;
-      for (let j = 0; j < courseIDList.length; j++) {
-        if (
-          beginWithMatch(courseIDList[j], codes) &&
-          !beginWithMatch(courseIDList[j], except)
-        ) {
-          let unit = getCourseUnitFromID(courseIDList[j], courseList);
-          detectedCourses.push(searchCourseFromID(courseIDList[j], courseList));
-          excludeCourseList.push(
-            searchCourseFromID(courseIDList[j], courseList)
-          );
-          unitCount += unit;
-        }
-      }
-      // タグ付けされた科目の単位数が条件を満たしているか確認
-      sumUnit += unitCount;
-      let courseDetail = createDetail(detectedCourses, includeCourseYear);
-      if (unitCount === unitNumber) {
-        resultArray.push(
-          "<details><summary>" +
-            courseTag +
-            " " +
-            "<font color='red'>〇</font>" +
-            " " +
-            unitCount +
-            "/" +
-            unitCount +
-            "単位" +
-            "</summary>" +
-            courseDetail +
-            "</details>"
+    }
+
+    //科目が見つからず、かつ互換がある場合
+    if (!courseExists && alternativeExists) {
+      courseExists = true;
+      let validUnitCount = 0;
+      if (checkAlternativeRequirement(courseNameList, alternativeRequirement)) {
+        let tmpArray: String[] = alternativeRequirement.map((x) =>
+          getCourseGradeFromName(x, courseList)
         );
-      } else {
-        resultArray.push(
-          "<details><summary>" +
-            courseTag +
-            " " +
-            "<font color='blue'>✖</font>" +
-            " " +
-            unitCount +
-            "/" +
-            unitNumber +
-            "単位" +
-            "</summary>" +
-            courseDetail +
-            "</details>"
+
+        // 要件を全く履修していない場合
+        if (tmpArray.every((grade) => grade === "")) {
+          sign = "<font color='blue'>✖</font>";
+        } else if (
+          //Dまたは履修中の科目が互換要件にある場合
+          tmpArray.some((grade) => grade === "D") ||
+          tmpArray.some((grade) => grade === "履修中")
+        ) {
+          sign = "△";
+          validUnitCount = tmpArray.filter(
+            (grade) => grade === "履修中"
+          ).length;
+          sumUnit += validUnitCount;
+        } else {
+          sign = "<font color='red'>〇</font>";
+          validUnitCount = alternativeRequirement
+            .map((c) => getCourseUnitFromName(c, courseList))
+            .reduce((a, b) => a + b);
+          sumUnit += validUnitCount;
+        }
+
+        let courseUnit = getCourseUnitFromName(courseName, courseList);
+        let courseYear = getCourseYearfromName(courseName, courseList);
+        if (includeCourseYear) {
+          resultArray.push(
+            courseName +
+              addParen(String(courseYear)) +
+              "  " +
+              sign +
+              " " +
+              validUnitCount +
+              "単位(単位互換)"
+          );
+        } else {
+          resultArray.push(
+            courseName + "  " + sign + " " + validUnitCount + "単位(単位互換)"
+          );
+        }
+        excludeCourseList = addExcludeFromList(
+          excludeCourseList,
+          alternativeRequirement,
+          courseList
         );
       }
     }
+    //今までの条件にヒットしなかった場合
+    if (!courseExists) {
+      let courseUnit = getCourseUnitFromName(courseName, courseList);
+      resultArray.push(courseName + " " + "<font color='blue'>✖</font>");
+    }
   }
+
   resultArray.push(
     "<br>" +
       "<h3>合計" +
