@@ -3,6 +3,7 @@ import Course from "./Course";
 import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
+import { Grade } from "./data/grade";
 
 const GraduationChecker: React.FC = () => {
   const loadCSV = (csv: string): Course[] => {
@@ -14,7 +15,7 @@ const GraduationChecker: React.FC = () => {
     let id: string;
     let name: string;
     let unit: number;
-    let grade: string;
+    let grade: Grade;
     let year: number;
 
     for (let i = 1; i < splitedCourseList.length - 1; i++) {
@@ -22,7 +23,7 @@ const GraduationChecker: React.FC = () => {
       id = splitedCourse[2];
       name = splitedCourse[3];
       unit = parseFloat(splitedCourse[4].replace(" ", ""));
-      grade = splitedCourse[7];
+      grade = splitedCourse[7] as Grade;
       year = Number(splitedCourse[9]);
       courseList.push(new Course(id, name, unit, grade, year));
     }
