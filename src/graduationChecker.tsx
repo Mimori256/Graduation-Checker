@@ -4,8 +4,10 @@ import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
 import { Grade } from "./data/grade";
+import { GradePieChart } from "./GradePieChart";
 
 const GraduationChecker: React.FC = () => {
+  const [courseList, setCourseList] = React.useState<Course[] | null>(null);
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
@@ -66,6 +68,7 @@ const GraduationChecker: React.FC = () => {
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
+      setCourseList(courseList);
       let tmpRes = checkCompulsory(courseList, isChecked);
       let newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
@@ -145,6 +148,7 @@ const GraduationChecker: React.FC = () => {
         <div id="select"></div>
         <div id="except"></div>
         <div id="sum"></div>
+        <GradePieChart courseList={courseList}></GradePieChart>
       </div>
       <div id="footer">
         <ul>
