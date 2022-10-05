@@ -37,16 +37,28 @@ li {
   margin-top: 10%;
 }
 
+#ratio {
+  width: 35% !important;
+  height: 35% !important;
+  margin: auto !important;
+}
+
 #footer {
   clear: both;
+  margin-top: 5%;
 }
 
 @media screen and (max-width: 480px) {
   #result div {
     float: none;
-    margin-left: 7%;
+    margin: auto;
   }
   #sum {
     float: none;
+  }
+  #ratio {
+    width: 80% !important;
+    height: 80% !important;
+    margin: auto !important;
   }
 }

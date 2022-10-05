@@ -46,6 +46,9 @@ export const GradePieChart: React.FC<PiechartComponentProps> = ({
         borderWidth: 1,
       },
     ],
+    options: {
+      responsive: true,
+    },
   };
 
   return (
