@@ -46,6 +46,7 @@ li {
 #footer {
   clear: both;
   margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 @media screen and (max-width: 480px) {

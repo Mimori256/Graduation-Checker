@@ -183,13 +183,23 @@ const GraduationChecker: React.FC = () => {
           </a>
         </p>
         Contributed by{" "}
-        <a
-          href="https:///github.com/Mimori256"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Mimori
-        </a>
+        <li>
+          <a
+            href="https:///github.com/Mimori256"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mimori
+          </a>
+          ,&thinsp;
+          <a
+            href="https://github.com/yudukikun5120"
+            target="_blank"
+            rel="noreferrer"
+          >
+            yudukikun5120
+          </a>
+        </li>
         <p></p>
       </div>
     </>
