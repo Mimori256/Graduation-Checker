@@ -1,14 +1,16 @@
+import { Grade } from "./data/grade";
+
 class Course {
   id: string;
   name: string;
   unit: number;
-  grade: string;
+  grade: Grade;
   year: number;
   constructor(
     id: string,
     name: string,
     unit: number,
-    grade: string,
+    grade: Grade,
     year: number
   ) {
     this.id = id;
