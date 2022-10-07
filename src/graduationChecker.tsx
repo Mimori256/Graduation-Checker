@@ -5,9 +5,25 @@ import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
 import { Grade } from "./data/grade";
 import { GradePieChart } from "./GradePieChart";
+import mast from "./data/mast";
+import klis_ksc from "./data/klis_ksc";
+import klis_kis from "./data/klis_kis";
+import klis_irm from "./data/klis_irm";
 
 const GraduationChecker: React.FC = () => {
   const [courseList, setCourseList] = React.useState<Course[] | null>(null);
+
+  const getRequirement = (major: string) => {
+    const majorDict: any = {
+      mast: mast,
+      "klis-ksc": klis_ksc,
+      "klis-kis": klis_kis,
+      "klis-irm": klis_irm,
+    };
+    const obj = majorDict[major];
+    return obj;
+  };
+
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
@@ -57,6 +73,11 @@ const GraduationChecker: React.FC = () => {
       "input[type='checkbox']"
     ) as HTMLInputElement;
 
+    const major = (document.getElementById("major-select") as HTMLInputElement)
+      .value;
+
+    const requirementObject = getRequirement(major);
+
     if (checkBox && checkBox.checked) {
       isChecked = true;
     } else {
@@ -69,12 +90,13 @@ const GraduationChecker: React.FC = () => {
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
       setCourseList(courseList);
-      let tmpRes = checkCompulsory(courseList, isChecked);
+      let tmpRes = checkCompulsory(courseList, isChecked, requirementObject);
       let newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
-      tmpRes = checkSelect(newCourseList, isChecked);
+      tmpRes = checkSelect(newCourseList, isChecked, requirementObject);
       newCourseList = tmpRes[0];
       sumUnit += tmpRes[1];
+      console.log(newCourseList);
       showExceptCourses(newCourseList);
       document.getElementById("sum")!.innerHTML +=
         "合計" + sumUnit + "/" + minumumGraduationUnit;
@@ -127,6 +149,17 @@ const GraduationChecker: React.FC = () => {
           name="includeCourseYear"
         />
         <label htmlFor="includeCourseYear">各授業の履修年度も表示する</label>
+        <p>
+          <b>チェックする学類と専攻</b>
+        </p>
+        <select name="major" id="major-select">
+          <option value="mast">情報メディア創成学類-メディア創成</option>
+          <option value="klis-ksc">知識情報・図書館学類-知識科学</option>
+          <option value="klis-kis">
+            知識情報・図書館学類-知識情報システム
+          </option>
+          <option value="klis-irm">知識情報・図書館学類-情報資源経営</option>
+        </select>
       </div>
       <div id="usage">
         <h3>使い方</h3>

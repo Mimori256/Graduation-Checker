@@ -55,6 +55,10 @@ const codeType = {
     codes: ["31H", "31J", "31K", "31L"],
     except: [],
   },
+  知識情報演習: {
+    codes: ["GE110", "GE111", "GE112"],
+    except: [],
+  },
 };
 
 export default codeType;

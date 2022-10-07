@@ -1,5 +1,4 @@
 import Course from "./Course";
-import mast from "./data/mast";
 import codeType from "./data/courseCodeTypes";
 
 const ErrorCourse = new Course("Error", "Error", 0, "Error", 0);
@@ -160,9 +159,10 @@ const addExcludeFromList = (
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
 const checkCompulsory = (
   courseList: Course[],
-  includeCourseYear: boolean
+  includeCourseYear: boolean,
+  requirementObject: any
 ): [Course[], number] => {
-  const complusoryList: string[] = mast.courses.complusory;
+  const complusoryList: string[] = requirementObject.courses.complusory;
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
   let excludeCourseList: Course[] = [];
@@ -358,7 +358,7 @@ const checkCompulsory = (
       "<h3>合計" +
       String(sumUnit) +
       "/" +
-      String(mast.courses.complusorySumUnit) +
+      String(requirementObject.courses.complusorySumUnit) +
       "単位" +
       "</h3>"
   );

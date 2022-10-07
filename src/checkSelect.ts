@@ -1,4 +1,3 @@
-import mast from "./data/mast";
 import Course from "./Course";
 import CourseGroup from "./CourseGroup";
 import codeType from "./data/courseCodeTypes";
@@ -189,11 +188,18 @@ const createDetail = (
 
 const checkSelect = (
   courseList: Course[],
-  includeCourseYear: boolean
+  includeCourseYear: boolean,
+  requirementObject: any
 ): [Course[], number] => {
-  const selectList: SelectSubjectRequirement[] = mast.courses.select;
+  const selectList: SelectSubjectRequirement[] =
+    requirementObject.courses.select.map(
+      (x: any) =>
+        new SelectSubjectRequirement(x[0], x[1], x[2], x[3], x[4], x[5])
+    );
   const courseIDList: string[] = createElementList("id", courseList);
-  const courseGroupList: CourseGroup[] = mast.courses.groups;
+  const courseGroupList: CourseGroup[] = requirementObject.courses.groups.map(
+    (x: any) => new CourseGroup(x[0], x[1], x[2], x[3])
+  );
   let groupUnitList: { [key: number]: number } = { 0: 0, 1: 0, 2: 0, 3: 0 };
   let groupid: number;
   let excludeCourseList: Course[] = [];
@@ -268,10 +274,15 @@ const checkSelect = (
   resultArray.unshift("<h2>選択科目の条件一覧</h2>");
   let courseGroupUnit: number;
   let marubatsu: string;
+  let exceedMessage: string;
   for (let i = 0; i < courseGroupList.length; i++) {
+    exceedMessage = "";
     courseGroupUnit = groupUnitList[courseGroupList[i].id];
     if (courseGroupUnit >= courseGroupList[i].minUnit) {
       marubatsu = "<font color='red'>〇</font>";
+      if (courseGroupUnit >= courseGroupList[i].maxUnit) {
+        exceedMessage = " (単位上限を超えています)";
+      }
     } else {
       marubatsu = "<font color='blue'>✖</font>";
       isCompleted = false;
@@ -286,7 +297,8 @@ const checkSelect = (
         "~" +
         String(courseGroupList[i].maxUnit) +
         ")" +
-        marubatsu
+        marubatsu +
+        exceedMessage
     );
     sumUnit += Math.min(courseGroupUnit, courseGroupList[i].maxUnit);
   }
@@ -295,7 +307,7 @@ const checkSelect = (
       "<h3>合計" +
       String(sumUnit) +
       "/" +
-      String(mast.courses.selectMinimumUnit) +
+      String(requirementObject.courses.selectMinimumUnit) +
       "単位" +
       "</h3>"
   );
