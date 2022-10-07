@@ -25,7 +25,7 @@ courses: {
     ],
     complusorySumUnit: 必修科目の単位の合計
     select: [
-      new SelectSubjectRequirement(条件の科目番号のリスト, 最低単位, 最高単位, リストの科目か、それ意外の科目か(bool), "ウェブページの表記"),
+    [条件の科目番号のリスト, 最低単位, 最高単位, リストの科目か、それ意外の科目か(bool), "ウェブページの表記" 科目グループ(専門科目選択、専門基礎科目選択など)]
       ...
     ],
     selectMinimumUnit: 選択科目の最低単位数,
