@@ -1,14 +1,10 @@
 class CourseGroup {
-  id: number;
-  minUnit: number;
-  maxUnit: number;
-  name: string;
-  constructor(id: number, minUnit: number, maxUnit: number, name: string) {
-    this.id = id;
-    this.minUnit = minUnit;
-    this.maxUnit = maxUnit;
-    this.name = name;
-  }
+  constructor(
+    public id: number,
+    public minUnit: number,
+    public maxUnit: number,
+    public name: string
+  ) {}
 }
 
 export default CourseGroup;
