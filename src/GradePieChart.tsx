@@ -1,6 +1,5 @@
 import calcUnitsPerGrades from "./calcUnitsPerGrades";
 import Course from "./Course";
-import { Grade } from "./data/grade";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 

@@ -3,7 +3,6 @@ import Course from "./Course";
 import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
-import { Grade } from "./data/grade";
 import { GradePieChart } from "./GradePieChart";
 import mast from "./data/mast";
 import klis_ksc from "./data/klis_ksc";

@@ -1,5 +1,4 @@
 import Course from "./Course";
-import type { Grade } from "./data/grade";
 
 export const calcUnitsPerGrades = (
   courses: Course[],

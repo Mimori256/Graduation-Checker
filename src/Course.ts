@@ -1,5 +1,3 @@
-import { Grade } from "./data/grade";
-
 class Course {
   constructor(
     public id: string,
