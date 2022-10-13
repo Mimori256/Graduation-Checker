@@ -11,6 +11,11 @@ import klis_irm from "./data/klis_irm.json";
 
 const GraduationChecker: React.FC = () => {
   const [courseList, setCourseList] = React.useState<Course[] | null>(null);
+  const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
+    null
+  );
+  const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
+  const majorSelect = React.useRef<HTMLSelectElement | null>(null);
 
   const getRequirement = (major: string) => {
     const majorDict: any = {
@@ -19,69 +24,39 @@ const GraduationChecker: React.FC = () => {
       "klis-kis": klis_kis,
       "klis-irm": klis_irm,
     };
-    const obj = majorDict[major];
-    return obj;
+    return majorDict[major];
   };
 
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
     const splitedCourseList: string[] = csv.split("\n");
-    let splitedCourse: string[];
-    let courseList: Course[] = [];
-    let id: string;
-    let name: string;
-    let unit: number;
-    let grade: Grade;
-    let year: number;
 
-    for (let i = 1; i < splitedCourseList.length - 1; i++) {
-      splitedCourse = splitedCourseList[i].split(",");
-      id = splitedCourse[2];
-      name = splitedCourse[3];
-      unit = parseFloat(splitedCourse[4].replace(" ", ""));
-      grade = splitedCourse[7] as Grade;
-      year = Number(splitedCourse[9]);
-      courseList.push(new Course(id, name, unit, grade, year));
-    }
-
-    return courseList;
-  };
-
-  const showExceptCourses = (courseList: Course[]) => {
-    let element: string = "<h3>卒業要件外の科目</h3>";
-    if (courseList.length === 0) {
-      element += "なし";
-    } else {
-      for (let i = 0; i < courseList.length; i++) {
-        element +=
-          "<p> ・" + courseList[i].name + " (" + courseList[i].id + ") </p>\n";
-      }
-    }
-
-    document.getElementById("except")!.innerHTML = element;
+    return splitedCourseList
+      .filter((_splitedCourse, i) => _splitedCourse && i !== 0)
+      .map((_splitedCourse) => {
+        const splitedCourse: string[] = _splitedCourse.split(",");
+        const [id, name, unit, grade, year] = [
+          splitedCourse[2],
+          splitedCourse[3],
+          parseFloat(splitedCourse[4].replace(" ", "")),
+          splitedCourse[7] as Grade,
+          Number(splitedCourse[9]),
+        ];
+        return new Course(id, name, unit, grade, year);
+      });
   };
 
   const gradeCheck = (csv: Blob) => {
     // 使い方の表示を消す
     document.getElementById("usage")!.innerHTML = "";
 
-    let isChecked: boolean;
     //チェックボックスの判定
-    const checkBox = document.querySelector(
-      "input[type='checkbox']"
-    ) as HTMLInputElement;
-
-    const major = (document.getElementById("major-select") as HTMLInputElement)
-      .value;
-
+    const checkBox = includeCourseYear.current;
+    const major = (majorSelect.current && majorSelect.current.value) || "mast";
     const requirementObject = getRequirement(major);
 
-    if (checkBox && checkBox.checked) {
-      isChecked = true;
-    } else {
-      isChecked = false;
-    }
+    const isChecked = (checkBox && checkBox.checked) || false;
     const reader = new FileReader();
     const minumumGraduationUnit = 124;
     let sumUnit = 0;
@@ -89,24 +64,22 @@ const GraduationChecker: React.FC = () => {
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
       setCourseList(courseList);
-      let tmpRes = checkCompulsory(courseList, isChecked, requirementObject);
-      let newCourseList = tmpRes[0];
-      sumUnit += tmpRes[1];
-      tmpRes = checkSelect(newCourseList, isChecked, requirementObject);
-      newCourseList = tmpRes[0];
-      sumUnit += tmpRes[1];
-      console.log(newCourseList);
-      showExceptCourses(newCourseList);
-      document.getElementById("sum")!.innerHTML +=
-        "合計" + sumUnit + "/" + minumumGraduationUnit;
+      const {
+        newCourseList: compulsoryCourseList,
+        sumUnit: compulsorySumUnit,
+      } = checkCompulsory(courseList, isChecked, requirementObject);
+      const { newCourseList: selectCourseList, sumUnit: selectSumUnit } =
+        checkSelect(compulsoryCourseList, isChecked, requirementObject);
+      sumUnit = selectSumUnit + compulsorySumUnit;
+      setExceptCourses(selectCourseList);
+      document.getElementById(
+        "sum"
+      )!.innerHTML += `合計${sumUnit}/${minumumGraduationUnit}`;
 
-      if (sumUnit >= minumumGraduationUnit) {
-        document.getElementById("sum")!.innerHTML +=
-          "<font color='red'>◯</font>";
-      } else {
-        document.getElementById("sum")!.innerHTML +=
-          "<font color='blue'>✖</font>";
-      }
+      document.getElementById("sum")!.innerHTML +=
+        sumUnit >= minumumGraduationUnit
+          ? "<font color='red'>◯</font>"
+          : "<font color='blue'>✖</font>";
     };
   };
 
@@ -146,12 +119,13 @@ const GraduationChecker: React.FC = () => {
           id="includeCourseYear"
           type="checkbox"
           name="includeCourseYear"
+          ref={includeCourseYear}
         />
         <label htmlFor="includeCourseYear">各授業の履修年度も表示する</label>
         <p>
           <b>チェックする学類と専攻</b>
         </p>
-        <select name="major" id="major-select">
+        <select name="major" id="major-select" ref={majorSelect}>
           <option value="mast">情報メディア創成学類-メディア創成</option>
           <option value="klis-ksc">知識情報・図書館学類-知識科学</option>
           <option value="klis-kis">
@@ -178,7 +152,20 @@ const GraduationChecker: React.FC = () => {
         <div id="compulsory"></div>
         <br />
         <div id="select"></div>
-        <div id="except"></div>
+        <div id="except">
+          <h3>卒業要件外の科目</h3>
+          {exceptCourses ? (
+            <ul>
+              {exceptCourses.map((exceptCourse) => (
+                <li>
+                  ${exceptCourse.name}(${exceptCourse.id})
+                </li>
+              ))}
+            </ul>
+          ) : (
+            `なし`
+          )}
+        </div>
         <div id="sum"></div>
         <GradePieChart courseList={courseList}></GradePieChart>
       </div>
