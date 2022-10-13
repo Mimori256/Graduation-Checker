@@ -4,10 +4,10 @@ import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
 import { GradePieChart } from "./GradePieChart";
-import mast from "./data/mast";
-import klis_ksc from "./data/klis_ksc";
-import klis_kis from "./data/klis_kis";
-import klis_irm from "./data/klis_irm";
+import mast from "./data/mast.json";
+import klis_ksc from "./data/klis_ksc.json";
+import klis_kis from "./data/klis_kis.json";
+import klis_irm from "./data/klis_irm.json";
 
 const GraduationChecker: React.FC = () => {
   const [courseList, setCourseList] = React.useState<Course[] | null>(null);
