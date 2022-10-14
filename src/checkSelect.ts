@@ -3,90 +3,40 @@ import CourseGroup from "./CourseGroup";
 import codeType from "./data/courseCodeTypes";
 
 class SelectSubjectRequirement {
-  codes: string[];
-  minimum: number;
-  maximum: number;
-  isExcludeRequirement: boolean;
-  message: string;
-  group: number;
   constructor(
-    codes: string[],
-    minimum: number,
-    maximum: number,
-    isExcludeRequirement: boolean,
-    message: string,
-    group: number
-  ) {
-    this.codes = codes;
-    this.minimum = minimum;
-    this.maximum = maximum;
-    this.isExcludeRequirement = isExcludeRequirement;
-    this.message = message;
-    this.group = group;
-  }
+    public codes: string[],
+    public minimum: number,
+    public maximum: number,
+    public isExcludeRequirement: boolean,
+    public message: string,
+    public group: number
+  ) {}
 }
 
-const addParen = (s: string): string => {
-  return "(" + s + ")";
-};
-
-const createElementList = (element: string, courseList: Course[]): string[] => {
-  let result = [];
-  for (let i = 0; i < courseList.length; i++) {
-    if (element === "id") {
-      result.push(courseList[i].id);
-    }
-    if (element === "name") {
-      result.push(courseList[i].name);
-    }
-    if (element === "grade") {
-      result.push(courseList[i].grade);
-    }
-  }
-  return result;
-};
+const createElementList = (
+  element: "id" | "name" | "grade",
+  courseList: Course[]
+): string[] => courseList.map((course) => course[element]);
 
 const getCourseUnitFromID = (
   courseID: string,
   courseList: Course[]
 ): number => {
-  for (let i = 0; i < courseList.length; i++) {
-    if (courseList[i].id === courseID) {
-      return courseList[i].unit;
-    }
-  }
-  return 0;
+  const targetCourse = courseList.find((course) => course.id === courseID);
+
+  return targetCourse ? targetCourse.unit : 0;
 };
 
-const beginWithMatch = (code: string, codeList: string[]): boolean => {
-  for (let i = 0; i < codeList.length; i++) {
-    if (code.indexOf(codeList[i]) === 0) {
-      return true;
-    }
-  }
-  return false;
-};
+const beginWithMatch = (code: string, codeList: string[]): boolean =>
+  codeList.some((c) => code.startsWith(c));
 
-const getUnitFromIDList = (idList: string[], courseList: Course[]): number => {
-  let unit = 0;
-  for (let i = 0; i < idList.length; i++) {
-    unit += getCourseUnitFromID(idList[i], courseList);
-  }
-  return unit;
-};
+const getUnitFromIDList = (idList: string[], courseList: Course[]): number =>
+  idList.reduce((acc, id) => acc + getCourseUnitFromID(id, courseList), 0);
 
 const getCourseListFromIDList = (
   idList: string[],
   courseList: Course[]
-): Course[] => {
-  let res: Course[] = [];
-  for (let i = 0; i < courseList.length; i++) {
-    if (idList.includes(courseList[i].id)) {
-      res.push(courseList[i]);
-    }
-  }
-  return res;
-};
+): Course[] => courseList.filter((course) => idList.includes(course.id));
 
 // 単位数と検出した科目リストを返す
 const countUnitFromCode = (
@@ -104,10 +54,10 @@ const countUnitFromCode = (
 
   // 通常の条件のカウントの場合
   if (!isExclusive) {
-    for (let i = 0; i < codes.length; i++) {
+    codes.map((code) => {
       // 科目のタグ表記ではない場合
-      if (!codes[i].startsWith("*")) {
-        includedIDList = courseIDList.filter((id) => id.startsWith(codes[i]));
+      if (!code.startsWith("*")) {
+        includedIDList = courseIDList.filter((id) => id.startsWith(code));
         excludeCourseList = excludeCourseList.concat(
           getCourseListFromIDList(includedIDList, courseList)
         );
@@ -115,36 +65,36 @@ const countUnitFromCode = (
       }
       // 科目タグの場合(アスタリスクで始める)
       else {
-        let tag = codes[i].replace("*", "");
+        let tag = code.replace("*", "");
         tagCodes = codeType[tag as keyof typeof codeType].codes;
         tagExcept = codeType[tag as keyof typeof codeType].except;
-        for (let j = 0; j < tagCodes.length; j++) {
+        tagCodes.map((tagCode) => {
           includedIDList = courseIDList.filter(
-            (id) => id.startsWith(tagCodes[j]) && !beginWithMatch(id, tagExcept)
+            (id) => id.startsWith(tagCode) && !beginWithMatch(id, tagExcept)
           );
           excludeCourseList = excludeCourseList.concat(
             getCourseListFromIDList(includedIDList, courseList)
           );
           unitCount += getUnitFromIDList(includedIDList, courseList);
-        }
+        });
       }
-    }
+    });
   } else {
     //除外するカウントの場合
     let expandedExcludeList: string[] = [];
     let expandedExceptList: string[] = [];
-    for (let i = 0; i < codes.length; i++) {
-      if (!codes[i].startsWith("*")) {
-        expandedExcludeList.push(codes[i]);
+    codes.map((code) => {
+      if (!code.startsWith("*")) {
+        expandedExcludeList.push(code);
       } else {
         //タグを展開してリストに追加
-        let tag = codes[i].replace("*", "");
+        let tag = code.replace("*", "");
         tagCodes = codeType[tag as keyof typeof codeType].codes;
         tagExcept = codeType[tag as keyof typeof codeType].except;
         expandedExcludeList = expandedExcludeList.concat(tagCodes);
         expandedExceptList = expandedExceptList.concat(tagExcept);
       }
-    }
+    });
     includedIDList = courseIDList.filter(
       (id) =>
         !beginWithMatch(id, expandedExcludeList) ||
@@ -161,36 +111,17 @@ const countUnitFromCode = (
 const createDetail = (
   detectedCourses: Course[],
   includeCourseYear: boolean
-): string => {
-  let res = "";
-  for (let i = 0; i < detectedCourses.length; i++) {
-    if (!includeCourseYear) {
-      res +=
-        detectedCourses[i].id +
-        " " +
-        detectedCourses[i].name +
-        ":     " +
-        detectedCourses[i].grade +
-        "<br>";
-    } else {
-      res +=
-        detectedCourses[i].id +
-        " " +
-        detectedCourses[i].name +
-        addParen(String(detectedCourses[i].year)) +
-        ":     " +
-        detectedCourses[i].grade +
-        "<br>";
-    }
-  }
-  return res;
-};
+): string[] =>
+  detectedCourses.map((course) => {
+    const year = includeCourseYear ? `(${course.year}年度)` : "";
+    return `${course.id} ${course.name} ${year}: ${course.grade}`;
+  });
 
 const checkSelect = (
   courseList: Course[],
   includeCourseYear: boolean,
   requirementObject: any
-): [Course[], number] => {
+): { newCourseList: Course[]; sumUnit: number } => {
   const selectList: SelectSubjectRequirement[] =
     requirementObject.courses.select.map(
       (x: any) =>
@@ -212,115 +143,87 @@ const checkSelect = (
   let sumUnit = 0;
   let isCompleted = true;
 
-  for (let i = 0; i < selectList.length; i++) {
-    groupid = selectList[i].group;
-    tmp = countUnitFromCode(selectList[i], courseIDList, courseList);
+  selectList.map((selectSubject) => {
+    groupid = selectSubject.group;
+    tmp = countUnitFromCode(selectSubject, courseIDList, courseList);
     unitCount = tmp[1];
     groupUnitList[groupid] += unitCount;
     detectedCourses = tmp[0];
     excludeCourseList = excludeCourseList.concat(detectedCourses);
-    if (unitCount >= selectList[i].maximum) {
+    if (unitCount >= selectSubject.maximum) {
+      resultArray.push(`<details>
+          <summary>
+            ${selectSubject.message}  <font color='red'>〇</font> ${
+        selectSubject.maximum
+      }/${selectSubject.maximum}単位
+          </summary>
+          <ul>
+          ${createDetail(detectedCourses, includeCourseYear).map(
+            (course) => `<li>${course}</li>`
+          )}
+          </ul>
+        </details>`);
+    } else if (unitCount >= selectSubject.minimum) {
       resultArray.push(
-        "<details><summary>" +
-          selectList[i].message +
-          "  " +
-          "<font color='red'>〇</font>" +
-          " " +
-          String(selectList[i].maximum) +
-          "/" +
-          String(selectList[i].maximum) +
-          "単位" +
-          "</summary>" +
-          createDetail(detectedCourses, includeCourseYear) +
-          "</details>"
-      );
-    } else if (unitCount >= selectList[i].minimum) {
-      resultArray.push(
-        "<details><summary>" +
-          selectList[i].message +
-          "  " +
-          "<font color='red'>〇</font>" +
-          " " +
-          unitCount +
-          "(" +
-          String(selectList[i].minimum) +
-          "~" +
-          String(selectList[i].maximum) +
-          ")" +
-          "</summary>" +
-          createDetail(detectedCourses, includeCourseYear) +
-          "</details>"
+        `<details>
+          <summary>
+          ${selectSubject.message}  <font color='red'>〇</font> ${unitCount}(${
+          selectSubject.minimum
+        }~${selectSubject.maximum})
+          </summary>
+          ${createDetail(detectedCourses, includeCourseYear)}
+        </details>`
       );
     } else {
       // 条件を満たしていない場合
       resultArray.push(
         "<details><summary>" +
-          selectList[i].message +
+          selectSubject.message +
           "  " +
           "<font color='blue'>✖</font>" +
           " " +
           unitCount +
           "(" +
-          String(selectList[i].minimum) +
+          String(selectSubject.minimum) +
           "~" +
-          String(selectList[i].maximum) +
+          String(selectSubject.maximum) +
           ")" +
           "</summary>" +
           createDetail(detectedCourses, includeCourseYear) +
           "</details>"
       );
     }
-  }
+  });
   resultArray.unshift("<h2>選択科目の条件一覧</h2>");
   let courseGroupUnit: number;
   let marubatsu: string;
   let exceedMessage: string;
-  for (let i = 0; i < courseGroupList.length; i++) {
+  courseGroupList.map((courseGroup, index) => {
     exceedMessage = "";
-    courseGroupUnit = groupUnitList[courseGroupList[i].id];
-    if (courseGroupUnit >= courseGroupList[i].minUnit) {
+    courseGroupUnit = groupUnitList[courseGroup.id];
+    if (courseGroupUnit >= courseGroup.minUnit) {
       marubatsu = "<font color='red'>〇</font>";
-      if (courseGroupUnit >= courseGroupList[i].maxUnit) {
+      if (courseGroupUnit >= courseGroup.maxUnit) {
         exceedMessage = " (単位上限を超えています)";
       }
     } else {
       marubatsu = "<font color='blue'>✖</font>";
       isCompleted = false;
     }
-    resultArray.push(
-      "<br><h4>" +
-        courseGroupList[i].name +
-        "</h4>" +
-        String(groupUnitList[i]) +
-        "/(" +
-        String(courseGroupList[i].minUnit) +
-        "~" +
-        String(courseGroupList[i].maxUnit) +
-        ")" +
-        marubatsu +
-        exceedMessage
-    );
-    sumUnit += Math.min(courseGroupUnit, courseGroupList[i].maxUnit);
-  }
-  resultArray.push(
-    "<br>" +
-      "<h3>合計" +
-      String(sumUnit) +
-      "/" +
-      String(requirementObject.courses.selectMinimumUnit) +
-      "単位" +
-      "</h3>"
-  );
-  let result = resultArray.join("<br>");
-  // 最初の改行を削除
-  result = result.replace("<br>", "");
-  document.getElementById("select")!.innerHTML = result;
+    resultArray.push(`<h4>${courseGroup.name}</h4>
+      ${groupUnitList[index]}/(${courseGroup.minUnit}~${courseGroup.maxUnit})${marubatsu}${exceedMessage}`);
+    sumUnit += Math.min(courseGroupUnit, courseGroup.maxUnit);
+  });
+  resultArray.push(`<h3>
+      合計${sumUnit}/${requirementObject.courses.selectMinimumUnit}単位
+    </h3>`);
+  document.getElementById("select")!.innerHTML = String(resultArray);
 
   // 差集合をとる
   const newCourseList = courseList.filter(
     (val) => !excludeCourseList.includes(val)
   );
-  return [newCourseList, sumUnit];
+  return { newCourseList: newCourseList, sumUnit: sumUnit };
 };
 
 export default checkSelect;

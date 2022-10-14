@@ -1,4 +1,4 @@
-export type Grade =
+type Grade =
   | "A+"
   | "A"
   | "B"

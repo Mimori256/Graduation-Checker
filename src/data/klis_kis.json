@@ -1,18 +1,17 @@
-//知識情報図書館学類 情報資源経営(Knlwledge Resources Management)
-const klis_irm = {
-  header: {
-    department: "知識情報図書館学類",
-    major: "情報資源経営",
-    enrollYear: 2021,
+{
+  "header": {
+    "department": "知識情報図書館学類",
+    "major": "知識情報システム",
+    "enrollYear": 2021
   },
 
-  courses: {
-    complusory: [
+  "courses": {
+    "complusory": [
       "卒業研究",
       "専門英語B",
       "専門英語C",
-      "情報資源経営実習A",
-      "情報資源経営実習B",
+      "知識情報システム実習A",
+      "知識情報システム実習B",
       "知識情報概論",
       "アカデミックスキルズ",
       "プログラミング入門A",
@@ -27,12 +26,12 @@ const klis_irm = {
       "学問への誘い",
       "情報::4",
       "体育::2",
-      "必修英語::4",
+      "必修英語::4"
     ],
-    complusorySumUnit: 50,
-    select: [
-      [["GE8"], 16, 128, false, "GE8", 0],
-      [["GA4", "GE4", "GE6", "GE7"], 8, 128, false, "GA4, GE4, GE6, GE7", 0],
+    "complusorySumUnit": 50,
+    "select": [
+      [["GE7"], 16, 128, false, "GE7", 0],
+      [["GA4", "GE4", "GE6", "GE8"], 8, 128, false, "GA4, GE4, GE6, GE8", 0],
       [["GA1", "GE2", "GE3"], 32, 52, false, "GA1, GE2, GE3", 1],
       [["*学士基盤科目"], 1, 4, false, "学士基盤科目", 2],
       [
@@ -41,7 +40,7 @@ const klis_irm = {
         128,
         false,
         "体育, 外国語, 国語, 芸術",
-        2,
+        2
       ],
       [["GB", "GC"], 0, 128, false, "GB, GC", 3],
       [
@@ -50,17 +49,15 @@ const klis_irm = {
         128,
         true,
         "他学群の授業科目",
-        3,
-      ],
+        3
+      ]
     ],
-    selectMinimumUnit: 74,
-    groups: [
+    "selectMinimumUnit": 74,
+    "groups": [
       [0, 24, 44, "専門科目選択"],
       [1, 32, 52, "専門基礎科目選択"],
       [2, 1, 21, "共通科目選択"],
-      [3, 6, 26, "関連科目選択"],
-    ],
-  },
-};
-
-export default klis_irm;
+      [3, 6, 26, "関連科目選択"]
+    ]
+  }
+}

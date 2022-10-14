@@ -1,13 +1,12 @@
-//知識情報図書館学類 知識科学主専攻(Knlwledge Sciences Course)
-const klis_ksc = {
-  header: {
-    department: "知識情報図書館学類",
-    major: "知識科学",
-    enrollYear: 2021,
+{
+  "header": {
+    "department": "知識情報図書館学類",
+    "major": "知識科学",
+    "enrollYear": 2021
   },
 
-  courses: {
-    complusory: [
+  "courses": {
+    "complusory": [
       "卒業研究",
       "専門英語B",
       "専門英語C",
@@ -27,10 +26,10 @@ const klis_ksc = {
       "学問への誘い",
       "情報::4",
       "体育::2",
-      "必修英語::4",
+      "必修英語::4"
     ],
-    complusorySumUnit: 50,
-    select: [
+    "complusorySumUnit": 50,
+    "select": [
       [["GE6"], 16, 128, false, "GE6", 0],
       [["GA4", "GE4", "GE7", "GE8"], 8, 128, false, "GA4, GE4, GE7, GE8", 0],
       [["GA1", "GE2", "GE3"], 32, 52, false, "GA1, GE2, GE3", 1],
@@ -41,7 +40,7 @@ const klis_ksc = {
         128,
         false,
         "体育, 外国語, 国語, 芸術",
-        2,
+        2
       ],
       [["GB", "GC"], 0, 128, false, "GB, GC", 3],
       [
@@ -50,17 +49,15 @@ const klis_ksc = {
         128,
         true,
         "他学群の授業科目",
-        3,
-      ],
+        3
+      ]
     ],
-    selectMinimumUnit: 74,
-    groups: [
+    "selectMinimumUnit": 74,
+    "groups": [
       [0, 24, 44, "専門科目選択"],
       [1, 32, 52, "専門基礎科目選択"],
       [2, 1, 21, "共通科目選択"],
-      [3, 6, 26, "関連科目選択"],
-    ],
-  },
-};
-
-export default klis_ksc;
+      [3, 6, 26, "関連科目選択"]
+    ]
+  }
+}
