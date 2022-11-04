@@ -85,6 +85,23 @@ const addExcludeFromList = (
     excludeList.map((c) => searchCourseFromName(c, courseList))
   );
 
+const checkCourseCertificate = (courseList: Course[]): Course[] => {
+  const complusoryEnglishDict: { [key: string]: string } = {
+    "English Reading Skills I": "31H",
+    "English Presentation Skills I": "31J",
+    "English Reading Skills II": "31K",
+    "English Presentation Skills II": "31L",
+  };
+
+  courseList.map((c) => {
+    if (c.grade == "認" && complusoryEnglishDict[c.name] != undefined) {
+      c.id = complusoryEnglishDict[c.name];
+    }
+  });
+
+  return courseList;
+};
+
 // HTML要素を変更して、必修課目を除外した新しい科目リストを返す
 const checkCompulsory = (
   courseList: Course[],
@@ -92,6 +109,10 @@ const checkCompulsory = (
   requirementObject: any
 ): { newCourseList: Course[]; sumUnit: number } => {
   const complusoryList: string[] = requirementObject.courses.complusory;
+
+  //単位認定科目(必修英語)の前処理
+  courseList = checkCourseCertificate(courseList);
+
   const courseIDList: string[] = createElementList("id", courseList);
   const courseNameList: string[] = createElementList("name", courseList);
   let excludeCourseList: Course[] = [];
