@@ -1,4 +1,4 @@
-type Grade =
+declare type Grade =
   | "A+"
   | "A"
   | "B"
@@ -9,3 +9,5 @@ type Grade =
   | "認"
   | "履修中"
   | "Error";
+
+declare type Major = "mast" | "klis-ksc" | "klis-kis" | "klis-irm";
