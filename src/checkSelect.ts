@@ -153,15 +153,13 @@ const checkSelect = (
     if (unitCount >= selectSubject.maximum) {
       resultArray.push(`<details>
           <summary>
-            ${selectSubject.message}  <font color='red'>〇</font> ${
-        selectSubject.maximum
-      }/${selectSubject.maximum}単位
+          ${selectSubject.message}  <font color='red'>〇</font> ${unitCount}(${
+        selectSubject.minimum
+      }~${selectSubject.maximum})  (上限を超えています)
           </summary>
-          <ul>
           ${createDetail(detectedCourses, includeCourseYear).map(
             (course) => `<li>${course}</li>`
           )}
-          </ul>
         </details>`);
     } else if (unitCount >= selectSubject.minimum) {
       resultArray.push(
