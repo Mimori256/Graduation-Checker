@@ -1,5 +1,6 @@
 import React from "react";
 import Course from "./Course";
+import { gradRequirement, GradRequirement } from "./data/gradRequirement";
 import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
 import "./graduationChecker.css";
@@ -9,6 +10,16 @@ import klis_ksc from "./data/klis_ksc.json";
 import klis_kis from "./data/klis_kis.json";
 import klis_irm from "./data/klis_irm.json";
 
+const getRequirement = (major: Major): GradRequirement =>
+  gradRequirement.parse(
+    {
+      mast: mast,
+      "klis-ksc": klis_ksc,
+      "klis-kis": klis_kis,
+      "klis-irm": klis_irm,
+    }[major]
+  );
+
 const GraduationChecker: React.FC = () => {
   const [courseList, setCourseList] = React.useState<Course[] | null>(null);
   const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
@@ -16,17 +27,6 @@ const GraduationChecker: React.FC = () => {
   );
   const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
-
-  const getRequirement = (major: string) => {
-    const majorDict: any = {
-      mast: mast,
-      "klis-ksc": klis_ksc,
-      "klis-kis": klis_kis,
-      "klis-irm": klis_irm,
-    };
-    return majorDict[major];
-  };
-
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
@@ -53,7 +53,7 @@ const GraduationChecker: React.FC = () => {
 
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
-    const major = (majorSelect.current && majorSelect.current.value) || "mast";
+    const major = (majorSelect.current?.value as Major) || "mast";
     const requirementObject = getRequirement(major);
 
     const isChecked = (checkBox && checkBox.checked) || false;
