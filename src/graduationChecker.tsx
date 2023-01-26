@@ -9,6 +9,7 @@ import mast from "./data/mast.json";
 import klis_ksc from "./data/klis_ksc.json";
 import klis_kis from "./data/klis_kis.json";
 import klis_irm from "./data/klis_irm.json";
+import { TotalGPA } from "./totalGPA";
 
 const getRequirement = (major: Major): GradRequirement =>
   gradRequirement.parse(
@@ -167,6 +168,7 @@ const GraduationChecker: React.FC = () => {
           )}
         </div>
         <div id="sum"></div>
+        <TotalGPA courses={courseList}></TotalGPA>
         <GradePieChart courseList={courseList}></GradePieChart>
       </div>
       <div id="footer">
