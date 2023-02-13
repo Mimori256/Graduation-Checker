@@ -3,6 +3,7 @@ import Course from "./Course";
 import { gradRequirement, GradRequirement } from "./data/gradRequirement";
 import checkCompulsory from "./checkCompulsory";
 import checkSelect from "./checkSelect";
+import showRequirements from "./showRequirements";
 import "./graduationChecker.css";
 import { GradePieChart } from "./GradePieChart";
 import mast from "./data/mast.json";
@@ -46,6 +47,12 @@ const GraduationChecker: React.FC = () => {
         ];
         return new Course(id, name, unit, grade, year);
       });
+  };
+
+  const checkRequirements = () => {
+    const major = (majorSelect.current?.value as Major) || "mast";
+    const majorRequirements = getRequirement(major);
+    showRequirements(majorRequirements);
   };
 
   const gradeCheck = (csv: Blob) => {
@@ -134,6 +141,15 @@ const GraduationChecker: React.FC = () => {
           </option>
           <option value="klis-irm">知識情報・図書館学類-情報資源経営</option>
         </select>
+        <p>
+          <button
+            type="button"
+            id="showRequirements"
+            onClick={checkRequirements}
+          >
+            卒業要件を表示
+          </button>
+        </p>
       </div>
       <div id="usage">
         <h3>使い方</h3>
@@ -142,10 +158,13 @@ const GraduationChecker: React.FC = () => {
             TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
           </li>
           <li>
-            そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます。
+            そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
           </li>
           <li>
             科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
+          </li>
+          <li>
+            また、「卒業要件を表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
           </li>
         </ul>
       </div>
@@ -177,7 +196,7 @@ const GraduationChecker: React.FC = () => {
             TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
           </li>
           <li>
-            現在は2021年の情報学群メディア創成学類の卒業要件のみに対応しています
+            現在は2021年の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
           </li>
           <li>
             卒業要件は、2021年度の
