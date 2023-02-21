@@ -15,7 +15,7 @@ const showComplusory = (majorRequirement: GradRequirement) => {
       course = course.replace("::", " ");
       course += "単位";
     }
-    output += "<li style='margin-right: 10%'>" + course + "</li>";
+    output += "<li style='margin-right: 7%'>" + course + "</li>";
   });
   output += "</ul>";
   output +=
@@ -25,17 +25,22 @@ const showComplusory = (majorRequirement: GradRequirement) => {
 
 const showSelect = (majorRequirement: GradRequirement) => {
   let output = "<h2>選択科目</h2>";
-  let majorCourseOutput = "<h3>専門科目</h3><ul>";
-  let majorBasicCourseOutput = "<h3>専門基礎科目</h3><ul>";
-  let fundamentalCourseOutput = "<h3>共通科目</h3><ul>";
-  let relatedCourseOutput = "<h3>関連科目</h3><ul>";
+  let couruseGroupOutputList = [
+    "<h3>専門科目</h3>",
+    "<h3>専門基礎科目</h3>",
+    "<h3>共通科目</h3>",
+    "<h3>関連科目</h3>",
+  ];
   majorRequirement.courses.select.forEach((select) => {
     const minimumUnit = String(select[1]);
-    const maximumUnit = String(select[2]);
+    let maximumUnit = String(select[2]);
     const courseName = select[4];
     const courseGroup = select[5];
+
+    maximumUnit = maximumUnit === "128" ? "" : maximumUnit;
+
     const tmpOutput =
-      "<li style='margin-right: 10%'>" +
+      "<li style='margin-right: 1%'>" +
       courseName +
       "(" +
       minimumUnit +
@@ -43,44 +48,20 @@ const showSelect = (majorRequirement: GradRequirement) => {
       maximumUnit +
       ")</li>";
 
-    if (courseGroup === 0) {
-      majorCourseOutput += tmpOutput;
-    } else if (courseGroup === 1) {
-      majorBasicCourseOutput += tmpOutput;
-    } else if (courseGroup === 2) {
-      fundamentalCourseOutput += tmpOutput;
-    } else {
-      relatedCourseOutput += tmpOutput;
-    }
+    couruseGroupOutputList[courseGroup] += tmpOutput;
   });
 
-  majorCourseOutput += "</ul>";
-  majorBasicCourseOutput += "</ul>";
-  fundamentalCourseOutput += "</ul>";
-  relatedCourseOutput += "</ul>";
+  couruseGroupOutputList = couruseGroupOutputList.map((x) => x + "</ul>");
 
-  majorCourseOutput = addUnitSum(
-    majorCourseOutput,
-    majorRequirement.courses.groups[0]
-  );
-  majorBasicCourseOutput = addUnitSum(
-    majorBasicCourseOutput,
-    majorRequirement.courses.groups[1]
-  );
-  fundamentalCourseOutput = addUnitSum(
-    fundamentalCourseOutput,
-    majorRequirement.courses.groups[2]
-  );
-  relatedCourseOutput = addUnitSum(
-    relatedCourseOutput,
-    majorRequirement.courses.groups[3]
-  );
+  for (let i = 0; i < couruseGroupOutputList.length; i++) {
+    couruseGroupOutputList[i] = addUnitSum(
+      couruseGroupOutputList[i],
+      majorRequirement.courses.groups[i]
+    );
+  }
 
-  output +=
-    majorCourseOutput +
-    majorBasicCourseOutput +
-    fundamentalCourseOutput +
-    relatedCourseOutput;
+  output += couruseGroupOutputList.join("");
+
   document.getElementById("select")!.innerHTML = output;
 };
 
