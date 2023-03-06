@@ -50,9 +50,24 @@ li {
 }
 
 @media screen and (max-width: 480px) {
+  body {
+    text-align: center;
+  }
+
+  .menu ul {
+    margin-right: 5% !important;
+  }
+
+  #usage li {
+    padding-right: 5% !important;
+  }
+
+  h1 {
+    padding-left: 5% !important;
+  }
+
   #result div {
     float: none;
-    margin: auto;
   }
   #sum {
     float: none;
@@ -61,5 +76,19 @@ li {
     width: 80% !important;
     height: 80% !important;
     margin: auto !important;
+  }
+
+  #compulsory {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+  }
+
+  #select {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+  }
+
+  #footer ul {
+    margin-right: 6% !important;
   }
 }
