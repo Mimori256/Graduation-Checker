@@ -136,8 +136,6 @@ const checkSelect = (
   let excludeCourseList: Course[] = [];
   let detectedCourses: Course[];
   let tmp: [Course[], number];
-  //const courseNameList: string[] = createElementList("name", courseList);
-  //const courseGradeList: string[] = createElementList("grade", courseList);
   let resultArray: string[] = [];
   let unitCount;
   let sumUnit = 0;
@@ -215,7 +213,7 @@ const checkSelect = (
   resultArray.push(`<h3>
       合計${sumUnit}/${requirementObject.courses.selectMinimumUnit}単位
     </h3>`);
-  document.getElementById("select")!.innerHTML = String(resultArray);
+  document.getElementById("select")!.innerHTML = resultArray.join("<br>");
 
   // 差集合をとる
   const newCourseList = courseList.filter(
