@@ -6,19 +6,27 @@ import checkSelect from "./checkSelect";
 import showRequirements from "./showRequirements";
 import "./graduationChecker.css";
 import { GradePieChart } from "./GradePieChart";
-import mast from "./data/mast.json";
-import klis_ksc from "./data/klis_ksc.json";
-import klis_kis from "./data/klis_kis.json";
-import klis_irm from "./data/klis_irm.json";
+import mast21 from "./data/mast21.json";
+import klis_ksc21 from "./data/klis_ksc21.json";
+import klis_kis21 from "./data/klis_kis21.json";
+import klis_irm21 from "./data/klis_irm21.json";
+import mast22 from "./data/mast22.json";
+import klis_ksc22 from "./data/klis_ksc22.json";
+import klis_kis22 from "./data/klis_kis22.json";
+import klis_irm22 from "./data/klis_irm22.json";
 import { TotalGPA } from "./totalGPA";
 
 const getRequirement = (major: Major): GradRequirement =>
   gradRequirement.parse(
     {
-      mast: mast,
-      "klis-ksc": klis_ksc,
-      "klis-kis": klis_kis,
-      "klis-irm": klis_irm,
+      mast21: mast21,
+      "klis-ksc21": klis_ksc21,
+      "klis-kis21": klis_kis21,
+      "klis-irm21": klis_irm21,
+      mast22: mast22,
+      "klis-ksc22": klis_ksc22,
+      "klis-kis22": klis_kis22,
+      "klis-irm22": klis_irm22,
     }[major]
   );
 
@@ -29,6 +37,7 @@ const GraduationChecker: React.FC = () => {
   );
   const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
+  const enrollYear = React.useRef<HTMLSelectElement | null>(null);
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
@@ -50,7 +59,8 @@ const GraduationChecker: React.FC = () => {
   };
 
   const checkRequirements = () => {
-    const major = (majorSelect.current?.value as Major) || "mast";
+    const tmpMajor = majorSelect.current!.value + enrollYear.current!.value;
+    const major = (tmpMajor as Major) || "mast21";
     const majorRequirements = getRequirement(major);
     showRequirements(majorRequirements);
   };
@@ -61,7 +71,8 @@ const GraduationChecker: React.FC = () => {
 
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
-    const major = (majorSelect.current?.value as Major) || "mast";
+    const tmpMajor = majorSelect.current!.value + enrollYear.current!.value;
+    const major = (tmpMajor as Major) || "mast21";
     const requirementObject = getRequirement(major);
 
     const isChecked = (checkBox && checkBox.checked) || false;
@@ -131,7 +142,7 @@ const GraduationChecker: React.FC = () => {
         />
         <label htmlFor="includeCourseYear">各授業の履修年度も表示する</label>
         <p>
-          <b>チェックする学類と専攻</b>
+          <b>チェックする学類と専攻、年度</b>
         </p>
         <select name="major" id="major-select" ref={majorSelect}>
           <option value="mast">情報メディア創成学類-メディア創成</option>
@@ -140,6 +151,12 @@ const GraduationChecker: React.FC = () => {
             知識情報・図書館学類-知識情報システム
           </option>
           <option value="klis-irm">知識情報・図書館学類-情報資源経営</option>
+        </select>
+        <br />
+        <br />
+        <select name="enrollYear" id="enroll-year" ref={enrollYear}>
+          <option value="21">2021年度</option>
+          <option value="22">2022年度</option>
         </select>
         <p>
           <button

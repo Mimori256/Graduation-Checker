@@ -10,4 +10,12 @@ declare type Grade =
   | "履修中"
   | "Error";
 
-declare type Major = "mast" | "klis-ksc" | "klis-kis" | "klis-irm";
+declare type Major =
+  | "mast21"
+  | "klis-ksc21"
+  | "klis-kis21"
+  | "klis-irm21"
+  | "mast22"
+  | "klis-ksc22"
+  | "klis-kis22"
+  | "klis-irm22";
