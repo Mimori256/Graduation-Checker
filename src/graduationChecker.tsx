@@ -68,6 +68,8 @@ const GraduationChecker: React.FC = () => {
   const gradeCheck = (csv: Blob) => {
     // 使い方の表示を消す
     document.getElementById("usage")!.innerHTML = "";
+    // 合計の表示をリセット
+    document.getElementById("sum")!.innerHTML = "";
 
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
@@ -213,12 +215,12 @@ const GraduationChecker: React.FC = () => {
             TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
           </li>
           <li>
-            現在は2021年の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
+            現在は2021度、2022年度入学の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
           </li>
           <li>
-            卒業要件は、2021年度の
+            卒業要件は、
             <a
-              href="https://www.tsukuba.ac.jp/education/ug-courses-directory/2021/pdf/5-2.pdf"
+              href="https://www.tsukuba.ac.jp/education/ug-courses-directory/index.html"
               target="_blank"
               rel="noopener"
             >
