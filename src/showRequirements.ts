@@ -1,9 +1,111 @@
 import { GradRequirement } from "./data/gradRequirement";
+import { kdb, Kdb } from "./data/kdb";
+import kdbJson from "./data/kdb.json";
 
 const addUnitSum = (s: string, group: any): string => {
   const minimum = String(group[1]);
   const maximum = String(group[2]);
   return s + "<h4>合計 (" + minimum + "～" + maximum + ")</h4>";
+};
+
+const createLink = (s: string): string => {
+  const id = s.split(" ")[0];
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  let nendo;
+
+  if (month < 4) {
+    nendo = year - 1;
+  } else {
+    nendo = year;
+  }
+
+  return (
+    "<a href = https://kdb.tsukuba.ac.jp/syllabi/" +
+    nendo.toFixed() +
+    "/" +
+    id +
+    "/jpn target=_'blank' rel='noopener'>" +
+    s +
+    "</a>"
+  );
+};
+
+const removeAlternatives = (complusoryCourses: string[]): string[] => {
+  for (let i = 0; i < complusoryCourses.length; i++) {
+    if (complusoryCourses[i].includes("//")) {
+      complusoryCourses[i] = complusoryCourses[i].slice(
+        0,
+        complusoryCourses[i].indexOf("//")
+      );
+    }
+  }
+
+  return complusoryCourses;
+};
+
+const isShowingCoursesAvailable = (
+  courses: string[],
+  isExcludeCourse: boolean
+): boolean => {
+  let tmp = true;
+  if (isExcludeCourse) {
+    return false;
+  }
+
+  courses.forEach((course) => {
+    console.log(course);
+    if (course.startsWith("*")) {
+      console.log("out");
+      tmp = false;
+    }
+  });
+
+  return tmp;
+};
+
+const searchCourses = (
+  courseCode: string,
+  kdbCourses: Kdb,
+  complusoryCourses: string[]
+): string[] => {
+  const courses = kdbCourses["courses"];
+  let validCourses: string[] = [];
+  for (let i = 0; i < courses.length; i++) {
+    if (
+      courses[i].id.startsWith(courseCode) &&
+      !complusoryCourses.includes(courses[i].name)
+    ) {
+      validCourses.push(
+        createLink(
+          [
+            courses[i].id,
+            courses[i].name,
+            courses[i].modules,
+            courses[i].period,
+            courses[i].credits + "単位",
+          ].join(" ")
+        )
+      );
+    }
+  }
+  return validCourses;
+};
+
+const addAvailabeCoursesDetail = (
+  courses: string[],
+  complusoryCourses: string[]
+): string => {
+  const kdbCourses = kdb.parse(kdbJson);
+  let output = "";
+
+  courses.forEach((course) => {
+    output += searchCourses(course, kdbCourses, complusoryCourses).join("<br>");
+    output += "<br>";
+  });
+
+  return output;
 };
 
 const showComplusory = (majorRequirement: GradRequirement) => {
@@ -25,6 +127,9 @@ const showComplusory = (majorRequirement: GradRequirement) => {
 
 const showSelect = (majorRequirement: GradRequirement) => {
   let output = "<h2>選択科目</h2>";
+  const complusoryCourses = removeAlternatives(
+    majorRequirement.courses.complusory
+  );
   let couruseGroupOutputList = [
     "<h3>専門科目</h3>",
     "<h3>専門基礎科目</h3>",
@@ -32,21 +137,42 @@ const showSelect = (majorRequirement: GradRequirement) => {
     "<h3>関連科目</h3>",
   ];
   majorRequirement.courses.select.forEach((select) => {
+    const courses: string[] = select[0];
     const minimumUnit = String(select[1]);
     let maximumUnit = String(select[2]);
+    const isExcludeCourse = select[3];
     const courseName = select[4];
     const courseGroup = select[5];
+    let tmpOutput = "";
 
     maximumUnit = maximumUnit === "128" ? "" : maximumUnit;
 
-    const tmpOutput =
-      "<li style='margin-right: 1%'>" +
-      courseName +
-      "(" +
-      minimumUnit +
-      "～" +
-      maximumUnit +
-      ")</li>";
+    if (isShowingCoursesAvailable(courses, isExcludeCourse)) {
+      tmpOutput =
+        "<li style='margin-right: 1%'>" +
+        "<details>" +
+        "<summary>" +
+        courseName +
+        "(" +
+        minimumUnit +
+        "～" +
+        maximumUnit +
+        ")</summary>" +
+        addAvailabeCoursesDetail(courses, complusoryCourses) +
+        "</details>" +
+        "</li>";
+    } else {
+      console.log("else");
+      tmpOutput =
+        "<li style='margin-right: 1%'>" +
+        courseName +
+        "(" +
+        minimumUnit +
+        "～" +
+        maximumUnit +
+        ")" +
+        "</li>";
+    }
 
     couruseGroupOutputList[courseGroup] += tmpOutput;
   });
