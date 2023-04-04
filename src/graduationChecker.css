@@ -47,6 +47,10 @@ li {
   margin: auto !important;
 }
 
+.warn {
+  color: crimson;
+}
+
 #footer {
   clear: both;
   margin-top: 5%;

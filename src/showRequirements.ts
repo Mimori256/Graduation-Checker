@@ -55,11 +55,31 @@ const isShowingCoursesAvailable = (
   }
 
   courses.forEach((course) => {
-    console.log(course);
     if (course.startsWith("*")) {
-      console.log("out");
       tmp = false;
     }
+  });
+
+  return tmp;
+};
+
+const isValidCourse = (courseName: string): boolean => {
+  const exceptionCourses = [
+    "卒業研究",
+    "専門英語",
+    "専門語学",
+    "実験A",
+    "実験B",
+    "実習A",
+    "実習B",
+    "知識情報演習",
+    "アカデミックスキルズ",
+  ];
+
+  let tmp = true;
+
+  exceptionCourses.forEach((c) => {
+    if (courseName.includes(c)) tmp = false;
   });
 
   return tmp;
@@ -75,7 +95,8 @@ const searchCourses = (
   for (let i = 0; i < courses.length; i++) {
     if (
       courses[i].id.startsWith(courseCode) &&
-      !complusoryCourses.includes(courses[i].name)
+      !complusoryCourses.includes(courses[i].name) &&
+      isValidCourse(courses[i].name)
     ) {
       validCourses.push(
         createLink(
@@ -162,7 +183,6 @@ const showSelect = (majorRequirement: GradRequirement) => {
         "</details>" +
         "</li>";
     } else {
-      console.log("else");
       tmpOutput =
         "<li style='margin-right: 1%'>" +
         courseName +
