@@ -158,7 +158,7 @@ const GraduationChecker: React.FC = () => {
         <br />
         <select name="enrollYear" id="enroll-year" ref={enrollYear}>
           <option value="21">2021年度</option>
-          <option value="22">2022年度</option>
+          <option value="22">2022/2023年度</option>
         </select>
         <p>
           <button
@@ -190,7 +190,7 @@ const GraduationChecker: React.FC = () => {
           </li>
           <li>
             <span className="warn">
-              所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
+              今年度開講しない科目や、所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
             </span>
           </li>
         </ul>
@@ -223,7 +223,7 @@ const GraduationChecker: React.FC = () => {
             TWINSの成績ファイルはローカルで処理され、サーバーにアップロードされることはありません
           </li>
           <li>
-            現在は2021度、2022年度入学の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
+            現在は2021、2022、2023年度入学の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
           </li>
           <li>
             卒業要件は、
