@@ -28,5 +28,5 @@ jobs:
             git config --global user.name "GitHub Action"
             git pull
             git commit -m "update JSON: $(date +%Y%m%d)"
-            git push -f origin main
+            git push -f origin master
           fi
