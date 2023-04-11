@@ -1,0 +1,32 @@
+name: JSON scheduled update
+
+on:
+  schedule:
+  - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: update JSON file
+      
+        run: |
+          cd ./src/data
+          curl https://raw.githubusercontent.com/Mimori256/kdb-parse/main/kdb_gradcheck.json > kdb.json
+
+      - name: Commit and Push
+        run: |
+          git add .
+          if git diff --exit-code --quiet
+          then
+            git config --global user.email "action@github.com"
+            git config --global user.name "GitHub Action"
+            git pull
+            git commit -m "update JSON: $(date +%Y%m%d)"
+            git push -f origin main
+          fi
