@@ -106,6 +106,7 @@ const searchCourses = (
             courses[i].modules,
             courses[i].period,
             courses[i].credits + "単位",
+            courses[i].registerYear + "年次",
           ].join(" ")
         )
       );

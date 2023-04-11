@@ -6,6 +6,7 @@ const kdb = z.object({
       id: z.string(),
       name: z.string(),
       credits: z.string(),
+      registerYear: z.string(),
       modules: z.string(),
       period: z.string(),
     })
