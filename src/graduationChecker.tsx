@@ -80,7 +80,10 @@ const GraduationChecker: React.FC = () => {
     const isChecked = (checkBox && checkBox.checked) || false;
     const reader = new FileReader();
     const minumumGraduationUnit = 124;
+    const compulsoryRequirementUnit =
+      requirementObject.courses.complusorySumUnit;
     let sumUnit = 0;
+    let isCompulsoryCompleted = false;
     reader.readAsText(csv);
     reader.onload = () => {
       const courseList: Course[] = loadCSV(reader.result as string);
@@ -89,6 +92,9 @@ const GraduationChecker: React.FC = () => {
         newCourseList: compulsoryCourseList,
         sumUnit: compulsorySumUnit,
       } = checkCompulsory(courseList, isChecked, requirementObject);
+
+      isCompulsoryCompleted = compulsorySumUnit === compulsoryRequirementUnit;
+
       const { newCourseList: selectCourseList, sumUnit: selectSumUnit } =
         checkSelect(compulsoryCourseList, isChecked, requirementObject);
       sumUnit = selectSumUnit + compulsorySumUnit;
@@ -98,9 +104,14 @@ const GraduationChecker: React.FC = () => {
       )!.innerHTML += `合計${sumUnit}/${minumumGraduationUnit}`;
 
       document.getElementById("sum")!.innerHTML +=
-        sumUnit >= minumumGraduationUnit
+        sumUnit >= minumumGraduationUnit && isCompulsoryCompleted
           ? "<font color='red'>◯</font>"
           : "<font color='blue'>✖</font>";
+
+      document.getElementById("sum")!.innerHTML +=
+        sumUnit >= minumumGraduationUnit && !isCompulsoryCompleted
+          ? "<p>(必修科目に不足があります！)</p>"
+          : "";
     };
   };
 
@@ -230,7 +241,7 @@ const GraduationChecker: React.FC = () => {
             <a
               href="https://www.tsukuba.ac.jp/education/ug-courses-directory/index.html"
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
             >
               学群等履修細則
             </a>
