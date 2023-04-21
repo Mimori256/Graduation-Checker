@@ -114,7 +114,7 @@ const createDetail = (
 ): string[] =>
   detectedCourses.map((course) => {
     const year = includeCourseYear ? `(${course.year}年度)` : "";
-    return `${course.id} ${course.name} ${year}: ${course.grade}`;
+    return `${course.id} ${course.name} ${year}: ${course.grade} <br />`;
   });
 
 const checkSelect = (
@@ -210,6 +210,9 @@ const checkSelect = (
       ${groupUnitList[index]}/(${courseGroup.minUnit}~${courseGroup.maxUnit})${marubatsu}${exceedMessage}`);
     sumUnit += Math.min(courseGroupUnit, courseGroup.maxUnit);
   });
+
+  sumUnit = Math.min(sumUnit, requirementObject.courses.selectMinimumUnit);
+
   resultArray.push(`<h3>
       合計${sumUnit}/${requirementObject.courses.selectMinimumUnit}単位
     </h3>`);
