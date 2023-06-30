@@ -114,6 +114,7 @@ const createDetail = (
 ): string[] =>
   detectedCourses.map((course) => {
     const year = includeCourseYear ? `(${course.year}年度)` : "";
+    console.log(`${course.id} ${course.name} ${year}: ${course.grade} <br />`);
     return `${course.id} ${course.name} ${year}: ${course.grade} <br />`;
   });
 
@@ -167,7 +168,7 @@ const checkSelect = (
           selectSubject.minimum
         }~${selectSubject.maximum})
           </summary>
-          ${createDetail(detectedCourses, includeCourseYear)}
+          ${createDetail(detectedCourses, includeCourseYear).join("")}
         </details>`
       );
     } else {
@@ -185,11 +186,12 @@ const checkSelect = (
           String(selectSubject.maximum) +
           ")" +
           "</summary>" +
-          createDetail(detectedCourses, includeCourseYear) +
+          createDetail(detectedCourses, includeCourseYear).join("") +
           "</details>"
       );
     }
   });
+  console.log(resultArray);
   resultArray.unshift("<h2>選択科目の条件一覧</h2>");
   let courseGroupUnit: number;
   let marubatsu: string;
