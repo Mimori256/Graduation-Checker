@@ -23,8 +23,11 @@ const getCourseUnitFromID = (
   courseList: Course[]
 ): number => {
   const targetCourse = courseList.find((course) => course.id === courseID);
-
-  return targetCourse ? targetCourse.unit : 0;
+  if (targetCourse?.grade !== "D") {
+    return targetCourse ? targetCourse.unit : 0;
+  } else {
+    return 0;
+  }
 };
 
 const beginWithMatch = (code: string, codeList: string[]): boolean =>
