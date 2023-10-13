@@ -57,7 +57,7 @@ const countUnitFromCode = (
 
   // 通常の条件のカウントの場合
   if (!isExclusive) {
-    codes.map((code) => {
+    codes.forEach((code) => {
       // 科目のタグ表記ではない場合
       if (!code.startsWith("*")) {
         includedIDList = courseIDList.filter((id) => id.startsWith(code));
@@ -71,7 +71,7 @@ const countUnitFromCode = (
         let tag = code.replace("*", "");
         tagCodes = codeType[tag as keyof typeof codeType].codes;
         tagExcept = codeType[tag as keyof typeof codeType].except;
-        tagCodes.map((tagCode) => {
+        tagCodes.forEach((tagCode) => {
           includedIDList = courseIDList.filter(
             (id) => id.startsWith(tagCode) && !beginWithMatch(id, tagExcept)
           );
@@ -86,12 +86,12 @@ const countUnitFromCode = (
     //除外するカウントの場合
     let expandedExcludeList: string[] = [];
     let expandedExceptList: string[] = [];
-    codes.map((code) => {
+    codes.forEach((code) => {
       if (!code.startsWith("*")) {
         expandedExcludeList.push(code);
       } else {
         //タグを展開してリストに追加
-        let tag = code.replace("*", "");
+        const tag = code.replace("*", "");
         tagCodes = codeType[tag as keyof typeof codeType].codes;
         tagExcept = codeType[tag as keyof typeof codeType].except;
         expandedExcludeList = expandedExcludeList.concat(tagCodes);
