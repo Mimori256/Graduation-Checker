@@ -36,6 +36,12 @@ const GraduationChecker: React.FC = () => {
     null
   );
   const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
+  const [sumUnit, setSumUnit] = React.useState<number>(0);
+  const [minumumGraduationUnit, setMinumumGraduationUnit] =
+    React.useState<number>(124);
+  const [isCompulsoryCompleted, setIsCompulsoryCompleted] =
+    React.useState<boolean>(false);
+
   const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
   const enrollYear = React.useRef<HTMLSelectElement | null>(null);
@@ -68,9 +74,6 @@ const GraduationChecker: React.FC = () => {
 
   const gradeCheck = (csv: Blob) => {
     // 使い方の表示を消す
-    // 合計の表示をリセット
-    document.getElementById("sum")!.innerHTML = "";
-
     setUsageVisible(false);
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
@@ -99,20 +102,10 @@ const GraduationChecker: React.FC = () => {
       const { newCourseList: selectCourseList, sumUnit: selectSumUnit } =
         checkSelect(compulsoryCourseList, isChecked, requirementObject);
       sumUnit = selectSumUnit + compulsorySumUnit;
+      setSumUnit(sumUnit);
+      setMinumumGraduationUnit(minumumGraduationUnit);
+      setIsCompulsoryCompleted(isCompulsoryCompleted);
       setExceptCourses(selectCourseList);
-      document.getElementById(
-        "sum"
-      )!.innerHTML += `合計${sumUnit}/${minumumGraduationUnit}`;
-
-      document.getElementById("sum")!.innerHTML +=
-        sumUnit >= minumumGraduationUnit && isCompulsoryCompleted
-          ? "<font color='red'>◯</font>"
-          : "<font color='blue'>✖</font>";
-
-      document.getElementById("sum")!.innerHTML +=
-        sumUnit >= minumumGraduationUnit && !isCompulsoryCompleted
-          ? "<p>(必修科目に不足があります！)</p>"
-          : "";
     };
   };
 
@@ -201,7 +194,11 @@ const GraduationChecker: React.FC = () => {
             `なし`
           )}
         </div>
-        <div id="sum"></div>
+        <Sum
+          sumUnit={sumUnit}
+          minumumGraduationUnit={minumumGraduationUnit}
+          isCompulsoryCompleted={isCompulsoryCompleted}
+        ></Sum>
         <TotalGPA courses={courseList}></TotalGPA>
         <GradePieChart courseList={courseList}></GradePieChart>
       </div>
@@ -269,6 +266,32 @@ const Usage = () => (
       </li>
     </ul>
   </div>
+);
+
+const Sum = ({
+  sumUnit,
+  minumumGraduationUnit,
+  isCompulsoryCompleted,
+}: {
+  sumUnit: number;
+  minumumGraduationUnit: number;
+  isCompulsoryCompleted: boolean;
+}) => (
+  <>
+    <p>
+      合計{sumUnit}/{minumumGraduationUnit}
+    </p>
+    <p>
+      {sumUnit >= minumumGraduationUnit && isCompulsoryCompleted ? (
+        <span color="red">◯</span>
+      ) : (
+        <span color="blue">✖</span>
+      )}
+    </p>
+    {sumUnit >= minumumGraduationUnit && !isCompulsoryCompleted && (
+      <p>(必修科目に不足があります！)</p>
+    )}
+  </>
 );
 
 const Contributors = () => (
