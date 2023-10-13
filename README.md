@@ -1,6 +1,6 @@
 # Graduation Checker
 
-https://mimori256.github.io/Graduation-Checker/
+<https://mimori256.github.io/Graduation-Checker/>
 
 ## 概要
 
