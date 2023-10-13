@@ -37,7 +37,7 @@ const GraduationChecker: React.FC = () => {
   );
   const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
   const [sumUnit, setSumUnit] = React.useState<number>(0);
-  const [minumumGraduationUnit, setMinumumGraduationUnit] =
+  const [minimumGraduationUnit, setMinimumGraduationUnit] =
     React.useState<number>(124);
   const [isCompulsoryCompleted, setIsCompulsoryCompleted] =
     React.useState<boolean>(false);
@@ -48,18 +48,18 @@ const GraduationChecker: React.FC = () => {
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
-    const splitedCourseList: string[] = csv.split("\n");
+    const splitCourseList: string[] = csv.split("\n");
 
-    return splitedCourseList
-      .filter((_splitedCourse, i) => _splitedCourse && i !== 0)
-      .map((_splitedCourse) => {
-        const splitedCourse: string[] = _splitedCourse.split(",");
+    return splitCourseList
+      .filter((_splitCourse, i) => _splitCourse && i !== 0)
+      .map((_splitCourse) => {
+        const splitCourse: string[] = _splitCourse.split(",");
         const [id, name, unit, grade, year] = [
-          splitedCourse[2],
-          splitedCourse[3],
-          parseFloat(splitedCourse[4].replace(" ", "")),
-          splitedCourse[7] as Grade,
-          Number(splitedCourse[9]),
+          splitCourse[2],
+          splitCourse[3],
+          parseFloat(splitCourse[4].replace(" ", "")),
+          splitCourse[7] as Grade,
+          Number(splitCourse[9]),
         ];
         return new Course(id, name, unit, grade, year);
       });
@@ -83,9 +83,9 @@ const GraduationChecker: React.FC = () => {
 
     const isChecked = (checkBox && checkBox.checked) || false;
     const reader = new FileReader();
-    const minumumGraduationUnit = 124;
+    const minimumGraduationUnit = 124;
     const compulsoryRequirementUnit =
-      requirementObject.courses.complusorySumUnit;
+      requirementObject.courses.compulsorySumUnit;
     let sumUnit = 0;
     let isCompulsoryCompleted = false;
     reader.readAsText(csv);
@@ -103,7 +103,7 @@ const GraduationChecker: React.FC = () => {
         checkSelect(compulsoryCourseList, isChecked, requirementObject);
       sumUnit = selectSumUnit + compulsorySumUnit;
       setSumUnit(sumUnit);
-      setMinumumGraduationUnit(minumumGraduationUnit);
+      setMinimumGraduationUnit(minimumGraduationUnit);
       setIsCompulsoryCompleted(isCompulsoryCompleted);
       setExceptCourses(selectCourseList);
     };
@@ -199,7 +199,7 @@ const GraduationChecker: React.FC = () => {
         </div>
         <Sum
           sumUnit={sumUnit}
-          minumumGraduationUnit={minumumGraduationUnit}
+          minimumGraduationUnit={minimumGraduationUnit}
           isCompulsoryCompleted={isCompulsoryCompleted}
         ></Sum>
         <TotalGPA courses={courseList}></TotalGPA>
@@ -273,25 +273,25 @@ const Usage = () => (
 
 const Sum = ({
   sumUnit,
-  minumumGraduationUnit,
+  minimumGraduationUnit,
   isCompulsoryCompleted,
 }: {
   sumUnit: number;
-  minumumGraduationUnit: number;
+  minimumGraduationUnit: number;
   isCompulsoryCompleted: boolean;
 }) => (
   <>
     <p>
-      合計{sumUnit}/{minumumGraduationUnit}
+      合計{sumUnit}/{minimumGraduationUnit}
     </p>
     <p>
-      {sumUnit >= minumumGraduationUnit && isCompulsoryCompleted ? (
+      {sumUnit >= minimumGraduationUnit && isCompulsoryCompleted ? (
         <span color="red">◯</span>
       ) : (
         <span color="blue">✖</span>
       )}
     </p>
-    {sumUnit >= minumumGraduationUnit && !isCompulsoryCompleted && (
+    {sumUnit >= minimumGraduationUnit && !isCompulsoryCompleted && (
       <p>(必修科目に不足があります！)</p>
     )}
   </>

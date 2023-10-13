@@ -7,8 +7,8 @@ const gradRequirement = z.object({
     enrollYear: z.number(),
   }),
   courses: z.object({
-    complusory: z.array(z.string()),
-    complusorySumUnit: z.number(),
+    compulsory: z.array(z.string()),
+    compulsorySumUnit: z.number(),
     select: z.array(
       z.tuple([
         z.array(z.string()),

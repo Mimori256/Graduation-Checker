@@ -32,17 +32,17 @@ const createLink = (s: string): string => {
   );
 };
 
-const removeAlternatives = (complusoryCourses: string[]): string[] => {
-  for (let i = 0; i < complusoryCourses.length; i++) {
-    if (complusoryCourses[i].includes("//")) {
-      complusoryCourses[i] = complusoryCourses[i].slice(
+const removeAlternatives = (compulsoryCourses: string[]): string[] => {
+  for (let i = 0; i < compulsoryCourses.length; i++) {
+    if (compulsoryCourses[i].includes("//")) {
+      compulsoryCourses[i] = compulsoryCourses[i].slice(
         0,
-        complusoryCourses[i].indexOf("//")
+        compulsoryCourses[i].indexOf("//")
       );
     }
   }
 
-  return complusoryCourses;
+  return compulsoryCourses;
 };
 
 const isShowingCoursesAvailable = (
@@ -88,14 +88,14 @@ const isValidCourse = (courseName: string): boolean => {
 const searchCourses = (
   courseCode: string,
   kdbCourses: Kdb,
-  complusoryCourses: string[]
+  compulsoryCourses: string[]
 ): string[] => {
   const courses = kdbCourses["courses"];
   let validCourses: string[] = [];
   for (let i = 0; i < courses.length; i++) {
     if (
       courses[i].id.startsWith(courseCode) &&
-      !complusoryCourses.includes(courses[i].name) &&
+      !compulsoryCourses.includes(courses[i].name) &&
       isValidCourse(courses[i].name)
     ) {
       validCourses.push(
@@ -117,22 +117,22 @@ const searchCourses = (
 
 const addAvailabeCoursesDetail = (
   courses: string[],
-  complusoryCourses: string[]
+  compulsoryCourses: string[]
 ): string => {
   const kdbCourses = kdb.parse(kdbJson);
   let output = "";
 
   courses.forEach((course) => {
-    output += searchCourses(course, kdbCourses, complusoryCourses).join("<br>");
+    output += searchCourses(course, kdbCourses, compulsoryCourses).join("<br>");
     output += "<br>";
   });
 
   return output;
 };
 
-const showComplusory = (majorRequirement: GradRequirement) => {
+const showcompulsory = (majorRequirement: GradRequirement) => {
   let output = "<h2>必修科目</h2><ul>";
-  majorRequirement.courses.complusory.forEach((course: string) => {
+  majorRequirement.courses.compulsory.forEach((course: string) => {
     if (course.includes("//")) {
       course = course.replace("//", " 互換: ");
     } else if (course.includes("::")) {
@@ -143,14 +143,14 @@ const showComplusory = (majorRequirement: GradRequirement) => {
   });
   output += "</ul>";
   output +=
-    "<h3>合計" + majorRequirement.courses.complusorySumUnit + "単位</h3>";
+    "<h3>合計" + majorRequirement.courses.compulsorySumUnit + "単位</h3>";
   document.getElementById("compulsory")!.innerHTML = output;
 };
 
 const showSelect = (majorRequirement: GradRequirement) => {
   let output = "<h2>選択科目</h2>";
-  const complusoryCourses = removeAlternatives(
-    majorRequirement.courses.complusory
+  const compulsoryCourses = removeAlternatives(
+    majorRequirement.courses.compulsory
   );
   let couruseGroupOutputList = [
     "<h3>専門科目</h3>",
@@ -180,7 +180,7 @@ const showSelect = (majorRequirement: GradRequirement) => {
         "～" +
         maximumUnit +
         ")</summary>" +
-        addAvailabeCoursesDetail(courses, complusoryCourses) +
+        addAvailabeCoursesDetail(courses, compulsoryCourses) +
         "</details>" +
         "</li>";
     } else {
@@ -213,7 +213,7 @@ const showSelect = (majorRequirement: GradRequirement) => {
 };
 
 const showRequirements = (majorRequirement: GradRequirement) => {
-  showComplusory(majorRequirement);
+  showcompulsory(majorRequirement);
   showSelect(majorRequirement);
 };
 

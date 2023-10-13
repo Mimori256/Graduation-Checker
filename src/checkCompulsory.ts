@@ -86,7 +86,7 @@ const addExcludeFromList = (
   );
 
 const checkCourseCertificate = (courseList: Course[]): Course[] => {
-  const complusoryEnglishDict: { [key: string]: string } = {
+  const compulsoryEnglishDict: { [key: string]: string } = {
     "English Reading Skills I": "31H",
     "English Presentation Skills I": "31J",
     "English Reading Skills II": "31K",
@@ -94,8 +94,8 @@ const checkCourseCertificate = (courseList: Course[]): Course[] => {
   };
 
   courseList.map((c) => {
-    if (c.grade == "認" && complusoryEnglishDict[c.name] != undefined) {
-      c.id = complusoryEnglishDict[c.name];
+    if (c.grade == "認" && compulsoryEnglishDict[c.name] != undefined) {
+      c.id = compulsoryEnglishDict[c.name];
     }
   });
 
@@ -108,7 +108,7 @@ const checkCompulsory = (
   includeCourseYear: boolean,
   requirementObject: any
 ): { newCourseList: Course[]; sumUnit: number } => {
-  const complusoryList: string[] = requirementObject.courses.complusory;
+  const compulsoryList: string[] = requirementObject.courses.compulsory;
 
   //単位認定科目(必修英語)の前処理
   courseList = checkCourseCertificate(courseList);
@@ -133,10 +133,10 @@ const checkCompulsory = (
   let courseExists: boolean;
   let alternativeExists: boolean;
 
-  complusoryList.map((complusory) => {
+  compulsoryList.map((compulsory) => {
     //初期化
     detectedCourses = [];
-    courseName = complusory;
+    courseName = compulsory;
     courseExists = false;
     alternativeExists = false;
 
@@ -259,7 +259,7 @@ const checkCompulsory = (
 
   resultArray.push(
     `<br>
-      <h3>合計${sumUnit}/${requirementObject.courses.complusorySumUnit}単位</h3>`
+      <h3>合計${sumUnit}/${requirementObject.courses.compulsorySumUnit}単位</h3>`
   );
   // HTML要素を変更
   resultArray.unshift("<h2>必修科目</h2>");
