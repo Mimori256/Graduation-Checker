@@ -35,6 +35,7 @@ const GraduationChecker: React.FC = () => {
   const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
     null
   );
+  const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
   const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
   const enrollYear = React.useRef<HTMLSelectElement | null>(null);
@@ -67,10 +68,10 @@ const GraduationChecker: React.FC = () => {
 
   const gradeCheck = (csv: Blob) => {
     // 使い方の表示を消す
-    document.getElementById("usage")!.innerHTML = "";
     // 合計の表示をリセット
     document.getElementById("sum")!.innerHTML = "";
 
+    setUsageVisible(false);
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
     const tmpMajor = majorSelect.current!.value + enrollYear.current!.value;
@@ -181,31 +182,7 @@ const GraduationChecker: React.FC = () => {
           </button>
         </p>
       </div>
-      <div id="usage">
-        <h3>使い方</h3>
-        <ul>
-          <li>
-            TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
-          </li>
-          <li>
-            そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
-          </li>
-          <li>
-            科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
-          </li>
-          <li>
-            また、「卒業要件を表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
-          </li>
-          <li>
-            卒業要件を表示した後、一部の選択科目は、折りたたみメニューを表示することで、条件を満たす科目一覧を表示できます。各科目をクリックすることで、シラバスを見ることができます
-          </li>
-          <li>
-            <span className="warn">
-              今年度開講しない科目や、所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
-            </span>
-          </li>
-        </ul>
-      </div>
+      {usageVisible && <Usage />}
       <div id="result">
         <div id="compulsory"></div>
         <br />
@@ -265,6 +242,34 @@ const GraduationChecker: React.FC = () => {
     </>
   );
 };
+
+const Usage = () => (
+  <div id="usage">
+    <h3>使い方</h3>
+    <ul>
+      <li>
+        TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
+      </li>
+      <li>
+        そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
+      </li>
+      <li>
+        科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
+      </li>
+      <li>
+        また、「卒業要件を表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
+      </li>
+      <li>
+        卒業要件を表示した後、一部の選択科目は、折りたたみメニューを表示することで、条件を満たす科目一覧を表示できます。各科目をクリックすることで、シラバスを見ることができます
+      </li>
+      <li>
+        <span className="warn">
+          今年度開講しない科目や、所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
+        </span>
+      </li>
+    </ul>
+  </div>
+);
 
 const Contributors = () => (
   <div>
