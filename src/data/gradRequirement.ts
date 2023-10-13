@@ -16,7 +16,7 @@ const gradRequirement = z.object({
         z.number(),
         z.boolean(),
         z.string(),
-        z.number(),
+        z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
       ])
     ),
     selectMinimumUnit: z.number(),

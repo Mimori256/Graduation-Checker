@@ -2,7 +2,7 @@ import React from "react";
 import Course from "./Course";
 import { gradRequirement, GradRequirement } from "./data/gradRequirement";
 import checkCompulsory from "./checkCompulsory";
-import checkSelect from "./checkSelect";
+import { checkSelect } from "./checkSelect";
 import showRequirements from "./showRequirements";
 import "./graduationChecker.css";
 import { GradePieChart } from "./GradePieChart";
@@ -15,6 +15,7 @@ import klis_ksc22 from "./data/klis_ksc22.json";
 import klis_kis22 from "./data/klis_kis22.json";
 import klis_irm22 from "./data/klis_irm22.json";
 import { TotalGPA } from "./totalGPA";
+import { Select } from "./SelectCourses";
 
 const getRequirement = (major: Major): GradRequirement =>
   gradRequirement.parse(
@@ -35,16 +36,21 @@ const GraduationChecker: React.FC = () => {
   const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
     null
   );
+  const [includeCourseYear, setIncludeCourseYear] =
+    React.useState<boolean>(false);
   const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
   const [sumUnit, setSumUnit] = React.useState<number>(0);
   const [minimumGraduationUnit, setMinimumGraduationUnit] =
     React.useState<number>(124);
   const [isCompulsoryCompleted, setIsCompulsoryCompleted] =
     React.useState<boolean>(false);
+  const [gradRequirement, setGradRequirement] = React.useState<GradRequirement>(
+    getRequirement("mast21")
+  );
 
-  const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
   const enrollYear = React.useRef<HTMLSelectElement | null>(null);
+
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
@@ -76,16 +82,13 @@ const GraduationChecker: React.FC = () => {
     // 使い方の表示を消す
     setUsageVisible(false);
     //チェックボックスの判定
-    const checkBox = includeCourseYear.current;
     const tmpMajor = majorSelect.current!.value + enrollYear.current!.value;
     const major = (tmpMajor as Major) || "mast21";
-    const requirementObject = getRequirement(major);
+    setGradRequirement(getRequirement(major));
 
-    const isChecked = (checkBox && checkBox.checked) || false;
     const reader = new FileReader();
     const minimumGraduationUnit = 124;
-    const compulsoryRequirementUnit =
-      requirementObject.courses.compulsorySumUnit;
+    const compulsoryRequirementUnit = gradRequirement.courses.compulsorySumUnit;
     let sumUnit = 0;
     let isCompulsoryCompleted = false;
     reader.readAsText(csv);
@@ -95,12 +98,12 @@ const GraduationChecker: React.FC = () => {
       const {
         newCourseList: compulsoryCourseList,
         sumUnit: compulsorySumUnit,
-      } = checkCompulsory(courseList, isChecked, requirementObject);
+      } = checkCompulsory(courseList, includeCourseYear, gradRequirement);
 
       isCompulsoryCompleted = compulsorySumUnit === compulsoryRequirementUnit;
 
       const { newCourseList: selectCourseList, sumUnit: selectSumUnit } =
-        checkSelect(compulsoryCourseList, isChecked, requirementObject);
+        checkSelect(compulsoryCourseList, gradRequirement);
       sumUnit = selectSumUnit + compulsorySumUnit;
       setSumUnit(sumUnit);
       setMinimumGraduationUnit(minimumGraduationUnit);
@@ -146,7 +149,7 @@ const GraduationChecker: React.FC = () => {
           id="includeCourseYear"
           type="checkbox"
           name="includeCourseYear"
-          ref={includeCourseYear}
+          onChange={(e) => setIncludeCourseYear(e.target.checked)}
         />
         <label htmlFor="includeCourseYear">各授業の履修年度も表示する</label>
         <p>
@@ -182,7 +185,13 @@ const GraduationChecker: React.FC = () => {
       <div id="result">
         <div id="compulsory"></div>
         <br />
-        <div id="select"></div>
+        {courseList && (
+          <Select
+            courseList={courseList}
+            includeCourseYear={includeCourseYear}
+            gradRequirement={gradRequirement}
+          ></Select>
+        )}
         <div id="except">
           <h3>卒業要件外の科目</h3>
           {exceptCourses ? (
@@ -286,9 +295,9 @@ const Sum = ({
     </p>
     <p>
       {sumUnit >= minimumGraduationUnit && isCompulsoryCompleted ? (
-        <span color="red">◯</span>
+        <span>◯</span>
       ) : (
-        <span color="blue">✖</span>
+        <span>✖</span>
       )}
     </p>
     {sumUnit >= minimumGraduationUnit && !isCompulsoryCompleted && (
