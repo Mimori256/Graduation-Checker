@@ -260,28 +260,35 @@ const GraduationChecker: React.FC = () => {
             Source code is available on GitHub
           </a>
         </p>
-        Contributed by{" "}
-        <li>
-          <a
-            href="https:///github.com/Mimori256"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Mimori
-          </a>
-          ,&thinsp;
-          <a
-            href="https://github.com/yudukikun5120"
-            target="_blank"
-            rel="noreferrer"
-          >
-            yudukikun5120
-          </a>
-        </li>
-        <p></p>
+        <Contributors></Contributors>
       </div>
     </>
   );
 };
+
+const Contributors = () => (
+  <div>
+    Contributed by{" "}
+    <address className="contributor">
+      <a
+        href="https:///github.com/Mimori256"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Mimori
+      </a>
+    </address>
+    ,&thinsp;
+    <address className="contributor">
+      <a
+        href="https://github.com/yudukikun5120"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        yudukikun5120
+      </a>
+    </address>
+  </div>
+);
 
 export default GraduationChecker;
