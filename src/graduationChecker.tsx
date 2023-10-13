@@ -134,6 +134,7 @@ const GraduationChecker: React.FC = () => {
           <li>成績がDとなっている科目は、単位数にカウントされません</li>
         </ul>
         <p>
+          <label htmlFor="grade-csv">TWINSの成績ファイル</label>
           <input
             type="file"
             id="grade-csv"
@@ -151,6 +152,7 @@ const GraduationChecker: React.FC = () => {
         <p>
           <b>チェックする学類と専攻、年度</b>
         </p>
+        <label htmlFor="major-select">学類と専攻</label>
         <select name="major" id="major-select" ref={majorSelect}>
           <option value="mast">情報メディア創成学類-メディア創成</option>
           <option value="klis-ksc">知識情報・図書館学類-知識科学</option>
@@ -161,6 +163,7 @@ const GraduationChecker: React.FC = () => {
         </select>
         <br />
         <br />
+        <label htmlFor="enroll-year">入学年度</label>
         <select name="enrollYear" id="enroll-year" ref={enrollYear}>
           <option value="21">2021年度</option>
           <option value="22">2022/2023年度</option>
@@ -215,7 +218,6 @@ const GraduationChecker: React.FC = () => {
             <a
               href="https://www.tsukuba.ac.jp/education/ug-courses-directory/index.html"
               target="_blank"
-              rel="noreferrer"
               rel="noreferrer noopener"
             >
               学群等履修細則
@@ -230,7 +232,6 @@ const GraduationChecker: React.FC = () => {
           <a
             href="https://github.com/Mimori256/Graduation-Checker"
             target="_blank"
-            rel="noreferrer"
             rel="noreferrer noopener"
           >
             Source code is available on GitHub
