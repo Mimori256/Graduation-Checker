@@ -216,6 +216,7 @@ const GraduationChecker: React.FC = () => {
               href="https://www.tsukuba.ac.jp/education/ug-courses-directory/index.html"
               target="_blank"
               rel="noreferrer"
+              rel="noreferrer noopener"
             >
               学群等履修細則
             </a>
@@ -230,6 +231,7 @@ const GraduationChecker: React.FC = () => {
             href="https://github.com/Mimori256/Graduation-Checker"
             target="_blank"
             rel="noreferrer"
+            rel="noreferrer noopener"
           >
             Source code is available on GitHub
           </a>
