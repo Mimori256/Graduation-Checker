@@ -6,7 +6,7 @@
   },
 
   "courses": {
-    "complusory": [
+    "compulsory": [
       "卒業研究A",
       "卒業研究B",
       "情報メディア実験A",
@@ -32,7 +32,7 @@
       "体育::2",
       "必修英語::4"
     ],
-    "complusorySumUnit": 50,
+    "compulsorySumUnit": 50,
     "select": [
       [["GC5", "GA4"], 20, 35, false, "GC5, GA4", 0],
       [["GC2", "GA1"], 32, 47, false, "GC2, GA1", 1],

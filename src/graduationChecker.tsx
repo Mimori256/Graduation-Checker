@@ -35,24 +35,31 @@ const GraduationChecker: React.FC = () => {
   const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
     null
   );
+  const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
+  const [sumUnit, setSumUnit] = React.useState<number>(0);
+  const [minimumGraduationUnit, setMinimumGraduationUnit] =
+    React.useState<number>(124);
+  const [isCompulsoryCompleted, setIsCompulsoryCompleted] =
+    React.useState<boolean>(false);
+
   const includeCourseYear = React.useRef<HTMLInputElement | null>(null);
   const majorSelect = React.useRef<HTMLSelectElement | null>(null);
   const enrollYear = React.useRef<HTMLSelectElement | null>(null);
   const loadCSV = (csv: string): Course[] => {
     document.getElementById("result")!.style.display = "block";
     csv = csv.replaceAll('"', "");
-    const splitedCourseList: string[] = csv.split("\n");
+    const splitCourseList: string[] = csv.split("\n");
 
-    return splitedCourseList
-      .filter((_splitedCourse, i) => _splitedCourse && i !== 0)
-      .map((_splitedCourse) => {
-        const splitedCourse: string[] = _splitedCourse.split(",");
+    return splitCourseList
+      .filter((_splitCourse, i) => _splitCourse && i !== 0)
+      .map((_splitCourse) => {
+        const splitCourse: string[] = _splitCourse.split(",");
         const [id, name, unit, grade, year] = [
-          splitedCourse[2],
-          splitedCourse[3],
-          parseFloat(splitedCourse[4].replace(" ", "")),
-          splitedCourse[7] as Grade,
-          Number(splitedCourse[9]),
+          splitCourse[2],
+          splitCourse[3],
+          parseFloat(splitCourse[4].replace(" ", "")),
+          splitCourse[7] as Grade,
+          Number(splitCourse[9]),
         ];
         return new Course(id, name, unit, grade, year);
       });
@@ -67,10 +74,7 @@ const GraduationChecker: React.FC = () => {
 
   const gradeCheck = (csv: Blob) => {
     // 使い方の表示を消す
-    document.getElementById("usage")!.innerHTML = "";
-    // 合計の表示をリセット
-    document.getElementById("sum")!.innerHTML = "";
-
+    setUsageVisible(false);
     //チェックボックスの判定
     const checkBox = includeCourseYear.current;
     const tmpMajor = majorSelect.current!.value + enrollYear.current!.value;
@@ -79,9 +83,9 @@ const GraduationChecker: React.FC = () => {
 
     const isChecked = (checkBox && checkBox.checked) || false;
     const reader = new FileReader();
-    const minumumGraduationUnit = 124;
+    const minimumGraduationUnit = 124;
     const compulsoryRequirementUnit =
-      requirementObject.courses.complusorySumUnit;
+      requirementObject.courses.compulsorySumUnit;
     let sumUnit = 0;
     let isCompulsoryCompleted = false;
     reader.readAsText(csv);
@@ -98,20 +102,10 @@ const GraduationChecker: React.FC = () => {
       const { newCourseList: selectCourseList, sumUnit: selectSumUnit } =
         checkSelect(compulsoryCourseList, isChecked, requirementObject);
       sumUnit = selectSumUnit + compulsorySumUnit;
+      setSumUnit(sumUnit);
+      setMinimumGraduationUnit(minimumGraduationUnit);
+      setIsCompulsoryCompleted(isCompulsoryCompleted);
       setExceptCourses(selectCourseList);
-      document.getElementById(
-        "sum"
-      )!.innerHTML += `合計${sumUnit}/${minumumGraduationUnit}`;
-
-      document.getElementById("sum")!.innerHTML +=
-        sumUnit >= minumumGraduationUnit && isCompulsoryCompleted
-          ? "<font color='red'>◯</font>"
-          : "<font color='blue'>✖</font>";
-
-      document.getElementById("sum")!.innerHTML +=
-        sumUnit >= minumumGraduationUnit && !isCompulsoryCompleted
-          ? "<p>(必修科目に不足があります！)</p>"
-          : "";
     };
   };
 
@@ -140,6 +134,7 @@ const GraduationChecker: React.FC = () => {
           <li>成績がDとなっている科目は、単位数にカウントされません</li>
         </ul>
         <p>
+          <label htmlFor="grade-csv">TWINSの成績ファイル</label>
           <input
             type="file"
             id="grade-csv"
@@ -157,6 +152,7 @@ const GraduationChecker: React.FC = () => {
         <p>
           <b>チェックする学類と専攻、年度</b>
         </p>
+        <label htmlFor="major-select">学類と専攻</label>
         <select name="major" id="major-select" ref={majorSelect}>
           <option value="mast">情報メディア創成学類-メディア創成</option>
           <option value="klis-ksc">知識情報・図書館学類-知識科学</option>
@@ -167,6 +163,7 @@ const GraduationChecker: React.FC = () => {
         </select>
         <br />
         <br />
+        <label htmlFor="enroll-year">入学年度</label>
         <select name="enrollYear" id="enroll-year" ref={enrollYear}>
           <option value="21">2021年度</option>
           <option value="22">2022/2023年度</option>
@@ -181,31 +178,7 @@ const GraduationChecker: React.FC = () => {
           </button>
         </p>
       </div>
-      <div id="usage">
-        <h3>使い方</h3>
-        <ul>
-          <li>
-            TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
-          </li>
-          <li>
-            そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
-          </li>
-          <li>
-            科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
-          </li>
-          <li>
-            また、「卒業要件を表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
-          </li>
-          <li>
-            卒業要件を表示した後、一部の選択科目は、折りたたみメニューを表示することで、条件を満たす科目一覧を表示できます。各科目をクリックすることで、シラバスを見ることができます
-          </li>
-          <li>
-            <span className="warn">
-              今年度開講しない科目や、所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
-            </span>
-          </li>
-        </ul>
-      </div>
+      {usageVisible && <Usage />}
       <div id="result">
         <div id="compulsory"></div>
         <br />
@@ -224,7 +197,11 @@ const GraduationChecker: React.FC = () => {
             `なし`
           )}
         </div>
-        <div id="sum"></div>
+        <Sum
+          sumUnit={sumUnit}
+          minimumGraduationUnit={minimumGraduationUnit}
+          isCompulsoryCompleted={isCompulsoryCompleted}
+        ></Sum>
         <TotalGPA courses={courseList}></TotalGPA>
         <GradePieChart courseList={courseList}></GradePieChart>
       </div>
@@ -241,7 +218,7 @@ const GraduationChecker: React.FC = () => {
             <a
               href="https://www.tsukuba.ac.jp/education/ug-courses-directory/index.html"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               学群等履修細則
             </a>
@@ -255,33 +232,94 @@ const GraduationChecker: React.FC = () => {
           <a
             href="https://github.com/Mimori256/Graduation-Checker"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             Source code is available on GitHub
           </a>
         </p>
-        Contributed by{" "}
-        <li>
-          <a
-            href="https:///github.com/Mimori256"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Mimori
-          </a>
-          ,&thinsp;
-          <a
-            href="https://github.com/yudukikun5120"
-            target="_blank"
-            rel="noreferrer"
-          >
-            yudukikun5120
-          </a>
-        </li>
-        <p></p>
+        <Contributors></Contributors>
       </div>
     </>
   );
 };
+
+const Usage = () => (
+  <div id="usage">
+    <h3>使い方</h3>
+    <ul>
+      <li>
+        TWINSにログインして、成績をクリック、ページ下部にあるダウンロード→出力をクリックしてCSVファイルをダウンロードする
+      </li>
+      <li>
+        そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
+      </li>
+      <li>
+        科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
+      </li>
+      <li>
+        また、「卒業要件を表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
+      </li>
+      <li>
+        卒業要件を表示した後、一部の選択科目は、折りたたみメニューを表示することで、条件を満たす科目一覧を表示できます。各科目をクリックすることで、シラバスを見ることができます
+      </li>
+      <li>
+        <span className="warn">
+          今年度開講しない科目や、所属する学類によっては、受講ができない科目も存在するので、受講ができるかどうかは、シラバスをよく確認してください
+        </span>
+      </li>
+    </ul>
+  </div>
+);
+
+const Sum = ({
+  sumUnit,
+  minimumGraduationUnit,
+  isCompulsoryCompleted,
+}: {
+  sumUnit: number;
+  minimumGraduationUnit: number;
+  isCompulsoryCompleted: boolean;
+}) => (
+  <>
+    <p>
+      合計{sumUnit}/{minimumGraduationUnit}
+    </p>
+    <p>
+      {sumUnit >= minimumGraduationUnit && isCompulsoryCompleted ? (
+        <span color="red">◯</span>
+      ) : (
+        <span color="blue">✖</span>
+      )}
+    </p>
+    {sumUnit >= minimumGraduationUnit && !isCompulsoryCompleted && (
+      <p>(必修科目に不足があります！)</p>
+    )}
+  </>
+);
+
+const Contributors = () => (
+  <div>
+    Contributed by{" "}
+    <address className="contributor">
+      <a
+        href="https:///github.com/Mimori256"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Mimori
+      </a>
+    </address>
+    ,&thinsp;
+    <address className="contributor">
+      <a
+        href="https://github.com/yudukikun5120"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        yudukikun5120
+      </a>
+    </address>
+  </div>
+);
 
 export default GraduationChecker;

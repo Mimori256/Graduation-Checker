@@ -100,3 +100,7 @@ li {
     margin-right: 6% !important;
   }
 }
+
+.contributor {
+  display: inline;
+}
