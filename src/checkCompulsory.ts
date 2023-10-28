@@ -93,8 +93,8 @@ const checkCourseCertificate = (courseList: Course[]): Course[] => {
     "English Presentation Skills II": "31L",
   };
 
-  courseList.map((c) => {
-    if (c.grade == "認" && compulsoryEnglishDict[c.name] != undefined) {
+  courseList.forEach((c) => {
+    if (c.grade === "認" && compulsoryEnglishDict[c.name] !== undefined) {
       c.id = compulsoryEnglishDict[c.name];
     }
   });
@@ -133,7 +133,7 @@ const checkCompulsory = (
   let courseExists: boolean;
   let alternativeExists: boolean;
 
-  compulsoryList.map((compulsory) => {
+  compulsoryList.forEach((compulsory) => {
     //初期化
     detectedCourses = [];
     courseName = compulsory;
@@ -160,7 +160,7 @@ const checkCompulsory = (
           (courseID) =>
             beginWithMatch(courseID, codes) && !beginWithMatch(courseID, except)
         )
-        .map((courseID) => {
+        .forEach((courseID) => {
           const unit = getCourseUnitFromID(courseID, courseList);
           detectedCourses.push(searchCourseFromID(courseID, courseList));
           excludeCourseList.push(searchCourseFromID(courseID, courseList));

@@ -5,7 +5,7 @@ class SelectSubjectRequirement {
     public maximum: number,
     public isExcludeRequirement: boolean,
     public message: string,
-    public group: number
+    public group: 0 | 1 | 2 | 3
   ) {}
 }
 
