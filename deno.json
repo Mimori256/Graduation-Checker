@@ -23,5 +23,14 @@
       "build/**/*",
       "coverage/**/*"
     ]
+  },
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "dom"
+    ],
+    "types": [
+      "./src/types/global.d.ts"
+    ]
   }
 }
