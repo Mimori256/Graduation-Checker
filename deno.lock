@@ -2,6 +2,9 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:chart.js": "npm:chart.js@4.4.0",
+      "npm:react": "npm:react@18.2.0",
+      "npm:react-chartjs-2": "npm:react-chartjs-2@5.2.0_chart.js@4.4.0_react@18.2.0",
       "npm:vite@4.5.0": "npm:vite@4.5.0"
     },
     "npm": {
@@ -93,6 +96,16 @@
         "integrity": "sha512-kTdfRcSiDfQca/y9QIkng02avJ+NCaQvrMejlsB3RRv5sE9rRoeBPISaZpKxHELzRxZyLvNts1P27W3wV+8geQ==",
         "dependencies": {}
       },
+      "@kurkle/color@0.3.2": {
+        "integrity": "sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==",
+        "dependencies": {}
+      },
+      "chart.js@4.4.0": {
+        "integrity": "sha512-vQEj6d+z0dcsKLlQvbKIMYFHd3t8W/7L2vfJIbYcfyPcRx92CsHqECpueN8qVGNlKyDcr5wBrYAYKnfu/9Q1hQ==",
+        "dependencies": {
+          "@kurkle/color": "@kurkle/color@0.3.2"
+        }
+      },
       "esbuild@0.18.20": {
         "integrity": "sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==",
         "dependencies": {
@@ -124,6 +137,16 @@
         "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
         "dependencies": {}
       },
+      "js-tokens@4.0.0": {
+        "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+        "dependencies": {}
+      },
+      "loose-envify@1.4.0": {
+        "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+        "dependencies": {
+          "js-tokens": "js-tokens@4.0.0"
+        }
+      },
       "nanoid@3.3.6": {
         "integrity": "sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==",
         "dependencies": {}
@@ -138,6 +161,19 @@
           "nanoid": "nanoid@3.3.6",
           "picocolors": "picocolors@1.0.0",
           "source-map-js": "source-map-js@1.0.2"
+        }
+      },
+      "react-chartjs-2@5.2.0_chart.js@4.4.0_react@18.2.0": {
+        "integrity": "sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==",
+        "dependencies": {
+          "chart.js": "chart.js@4.4.0",
+          "react": "react@18.2.0"
+        }
+      },
+      "react@18.2.0": {
+        "integrity": "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==",
+        "dependencies": {
+          "loose-envify": "loose-envify@1.4.0"
         }
       },
       "rollup@3.29.4": {
