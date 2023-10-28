@@ -1,4 +1,10 @@
 {
+  "tasks": {
+    "dev": "deno run -A --node-modules-dir npm:vite",
+    "build": "deno run -A --node-modules-dir npm:vite build",
+    "preview": "deno run -A --node-modules-dir npm:vite preview",
+    "deploy": "deno task build && deno run -A npm:gh-pages -d build"
+  },
   "lint": {
     "exclude": [
       "node_modules/**/*",
