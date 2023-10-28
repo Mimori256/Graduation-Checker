@@ -1,0 +1,21 @@
+{
+  "lint": {
+    "exclude": [
+      "node_modules/**/*",
+      "build/**/*",
+      "coverage/**/*",
+      "test/**/*"
+    ]
+  },
+  "fmt": {
+    "include": [
+      "src/**/*",
+      "test/**/*"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      "build/**/*",
+      "coverage/**/*"
+    ]
+  }
+}
