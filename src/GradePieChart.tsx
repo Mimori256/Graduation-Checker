@@ -1,7 +1,9 @@
-import calcUnitsPerGrades from "./calcUnitsPerGrades";
-import Course from "./Course";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import React from "npm:react";
+
+import calcUnitsPerGrades from "./calcUnitsPerGrades.ts";
+import Course from "./Course.ts";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "npm:chart.js";
+import { Pie } from "npm:react-chartjs-2";
 
 const targetGrades: Grade[] = ["A+", "A", "B", "C", "D", "P", "F", "認"];
 

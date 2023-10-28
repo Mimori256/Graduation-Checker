@@ -1,5 +1,5 @@
-import Course from "./Course";
-import codeType from "./data/courseCodeTypes";
+import Course from "./Course.ts";
+import codeType from "./data/courseCodeTypes.ts";
 
 const ErrorCourse = new Course("Error", "Error", 0, "Error", 0);
 

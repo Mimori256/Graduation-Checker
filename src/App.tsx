@@ -1,5 +1,5 @@
-import React from "react";
-import GraduationChecker from "./graduationChecker";
+import React from "npm:react";
+import GraduationChecker from "./graduationChecker.tsx";
 
 function App() {
   return (

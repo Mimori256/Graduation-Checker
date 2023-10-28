@@ -1,4 +1,4 @@
-import Course from "./Course";
+import Course from "./Course.ts";
 
 const calcUnitsPerGrades = (courses: Course[], targetGrades: Grade[]) => {
   const ratioPerGrade = targetGrades

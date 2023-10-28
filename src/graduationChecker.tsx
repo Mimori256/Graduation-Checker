@@ -1,20 +1,21 @@
-import React from "react";
-import Course from "./Course";
-import { gradRequirement, GradRequirement } from "./data/gradRequirement";
-import checkCompulsory from "./checkCompulsory";
-import checkSelect from "./checkSelect";
-import showRequirements from "./showRequirements";
-import "./graduationChecker.css";
-import { GradePieChart } from "./GradePieChart";
-import mast21 from "./data/mast21.json";
-import klis_ksc21 from "./data/klis_ksc21.json";
-import klis_kis21 from "./data/klis_kis21.json";
-import klis_irm21 from "./data/klis_irm21.json";
-import mast22 from "./data/mast22.json";
-import klis_ksc22 from "./data/klis_ksc22.json";
-import klis_kis22 from "./data/klis_kis22.json";
-import klis_irm22 from "./data/klis_irm22.json";
-import { TotalGPA } from "./totalGPA";
+// @deno-types="npm:@types/react"
+import React, { useState } from "npm:react";
+
+import Course from "./Course.ts";
+import { gradRequirement, GradRequirement } from "./data/gradRequirement.ts";
+import checkCompulsory from "./checkCompulsory.ts";
+import checkSelect from "./checkSelect.ts";
+import showRequirements from "./showRequirements.ts";
+import { GradePieChart } from "./GradePieChart.tsx";
+import mast21 from "./data/mast21.json" assert { type: "json" };
+import klis_ksc21 from "./data/klis_ksc21.json" assert { type: "json" };
+import klis_kis21 from "./data/klis_kis21.json" assert { type: "json" };
+import klis_irm21 from "./data/klis_irm21.json" assert { type: "json" };
+import mast22 from "./data/mast22.json" assert { type: "json" };
+import klis_ksc22 from "./data/klis_ksc22.json" assert { type: "json" };
+import klis_kis22 from "./data/klis_kis22.json" assert { type: "json" };
+import klis_irm22 from "./data/klis_irm22.json" assert { type: "json" };
+import { TotalGPA } from "./totalGPA.tsx";
 
 const getRequirement = (major: Major): GradRequirement =>
   gradRequirement.parse(
@@ -31,12 +32,12 @@ const getRequirement = (major: Major): GradRequirement =>
   );
 
 const GraduationChecker: React.FC = () => {
-  const [courseList, setCourseList] = React.useState<Course[] | null>(null);
-  const [exceptCourses, setExceptCourses] = React.useState<Course[] | null>(
+  const [courseList, setCourseList] = useState<Course[] | null>(null);
+  const [exceptCourses, setExceptCourses] = useState<Course[] | null>(
     null
   );
-  const [usageVisible, setUsageVisible] = React.useState<boolean>(true);
-  const [sumUnit, setSumUnit] = React.useState<number>(0);
+  const [usageVisible, setUsageVisible] = useState<boolean>(true);
+  const [sumUnit, setSumUnit] = useState<number>(0);
   const [minimumGraduationUnit, setMinimumGraduationUnit] =
     React.useState<number>(124);
   const [isCompulsoryCompleted, setIsCompulsoryCompleted] =

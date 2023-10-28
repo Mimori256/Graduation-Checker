@@ -1,5 +1,7 @@
-import Course from "./Course";
-import calcUnitsPerGrades from "./calcUnitsPerGrades";
+import React from "npm:react";
+
+import Course from "./Course.ts";
+import calcUnitsPerGrades from "./calcUnitsPerGrades.ts";
 
 type GradesIncludedInGPA = Exclude<
   Grade,

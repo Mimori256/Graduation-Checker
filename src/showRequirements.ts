@@ -1,6 +1,6 @@
-import { GradRequirement } from "./data/gradRequirement";
-import { kdb, Kdb } from "./data/kdb";
-import kdbJson from "./data/kdb.json";
+import { GradRequirement } from "./data/gradRequirement.ts";
+import { kdb, Kdb } from "./data/kdb.ts";
+import kdbJson from "./data/kdb.json" assert { type: "json" };
 
 const addUnitSum = (s: string, group: any): string => {
   const minimum = String(group[1]);

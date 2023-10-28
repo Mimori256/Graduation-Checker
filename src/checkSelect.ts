@@ -1,6 +1,6 @@
-import Course from "./Course";
-import CourseGroup from "./CourseGroup";
-import codeType from "./data/courseCodeTypes";
+import Course from "./Course.ts";
+import CourseGroup from "./CourseGroup.ts";
+import codeType from "./data/courseCodeTypes.ts";
 
 class SelectSubjectRequirement {
   constructor(
