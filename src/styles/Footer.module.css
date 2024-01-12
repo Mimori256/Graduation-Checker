@@ -1,0 +1,18 @@
+.footer {
+  clear: both;
+  margin-block: 5%;
+}
+
+.warn {
+  color: crimson;
+}
+
+.contributor {
+  display: inline;
+}
+
+@media screen and (max-width: 480px) {
+  .footer ul {
+    margin-inline-end: 6% !important;
+  }
+}

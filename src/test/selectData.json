@@ -1,0 +1,340 @@
+{
+  "sample": [
+    {
+      "id": "GC50501",
+      "name": "通信ネットワーク",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC51401",
+      "name": "システム運用・管理",
+      "unit": 1,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC53401",
+      "name": "ディジタルドキュメント",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC55201",
+      "name": "Human Information Interaction",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC55301",
+      "name": "Machine Learning and Information Retrieval",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC55401",
+      "name": "Human-computer Interaction",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC22201",
+      "name": "プログラム言語論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC23401",
+      "name": "パターン認識",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC51901",
+      "name": "マークアップ言語",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2023
+    },
+    {
+      "id": "GC52001",
+      "name": "データベースシステムI",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GB37001",
+      "name": "情報システム特別講義A",
+      "unit": 1,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC53601",
+      "name": "視覚情報科学",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC54091",
+      "name": "情報可視化",
+      "unit": 2,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "BC50131",
+      "name": "国際学III",
+      "unit": 1,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GA10101",
+      "name": "情報社会と法制度",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GA10201",
+      "name": "知的財産概論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC21501",
+      "name": "情報数学B",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC22101",
+      "name": "Webプログラミング",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC23201",
+      "name": "情報理論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC24101",
+      "name": "情報デザインI",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC24501",
+      "name": "コンテンツ流通基盤概論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC26101",
+      "name": "人間計測の方法",
+      "unit": 1,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC27202",
+      "name": "情報メディア特別演習I",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "8050001",
+      "name": "TSUKUBAポスト・コロナ学",
+      "unit": 1,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC25301",
+      "name": "コンピュータネットワーク",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC26201",
+      "name": "認知科学",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC53901",
+      "name": "知識・自然言語処理",
+      "unit": 1,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GE21101",
+      "name": "データベース概説",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2022
+    },
+    {
+      "id": "1207011",
+      "name": "ピア・サポートを学ぶ~支えあいの大学のために",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA12301",
+      "name": "システムと情報科学",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA13501",
+      "name": "コンテンツ入門",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA14121",
+      "name": "知識情報概論",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA14301",
+      "name": "図書館概論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GB13024",
+      "name": "オブジェクト指向プログラミング",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GE21201",
+      "name": "コンピュータシステムとネットワーク",
+      "unit": 2,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "5108011",
+      "name": "国語I",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "AB50A11",
+      "name": "哲学・宗教学入門",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "BB05011",
+      "name": "社会学の最前線",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "BC50121",
+      "name": "国際学II",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "FA011D1",
+      "name": "数学リテラシー1",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "FA012E1",
+      "name": "数学リテラシー2",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "FCB1401",
+      "name": "物理学概論",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA12111",
+      "name": "知能と情報科学",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA12201",
+      "name": "計算と情報科学",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA12401",
+      "name": "情報科学概論",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA13401",
+      "name": "情報メディア入門",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA14201",
+      "name": "知識情報システム概説",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "YAX2011",
+      "name": "アート&デザイン入門",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    }
+  ]
+}
