@@ -1,0 +1,229 @@
+{
+  "sample": [
+    {
+      "id": "GC48708",
+      "name": "卒業研究A",
+      "unit": 3,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC48908",
+      "name": "卒業研究B",
+      "unit": 3,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC42102",
+      "name": "専門英語A",
+      "unit": 1,
+      "grade": "A",
+      "year": 2024
+    },
+    {
+      "id": "GC42202",
+      "name": "専門英語B",
+      "unit": 1,
+      "grade": "A",
+      "year": 2024
+    },
+    {
+      "id": "GC41203",
+      "name": "情報メディア実験B",
+      "unit": 3,
+      "grade": "A",
+      "year": 2023
+    },
+    {
+      "id": "GC41103",
+      "name": "情報メディア実験A",
+      "unit": 3,
+      "grade": "A+",
+      "year": 2023
+    },
+    {
+      "id": "2233213",
+      "name": "応用体育ニュースポーツ(秋)",
+      "unit": 0.5,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC12401",
+      "name": "データ構造とアルゴリズム",
+      "unit": 2,
+      "grade": "B",
+      "year": 2022
+    },
+    {
+      "id": "GC12403",
+      "name": "データ構造とアルゴリズム実習",
+      "unit": 1,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "2233203",
+      "name": "応用体育ニュースポーツ(春)",
+      "unit": 0.5,
+      "grade": "A+",
+      "year": 2022
+    },
+    {
+      "id": "GC11601",
+      "name": "確率と統計",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC11701",
+      "name": "微分積分B",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC11801",
+      "name": "線形代数B",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC12701",
+      "name": "プログラミング",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC13101",
+      "name": "コンピュータシステムとOS",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+    {
+      "id": "GC13201",
+      "name": "データ工学概論",
+      "unit": 2,
+      "grade": "A",
+      "year": 2022
+    },
+
+    {
+      "id": "2116133",
+      "name": "基礎体育ジョグ&ウォーク(秋)",
+      "unit": 0.5,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "31KC012",
+      "name": "English Reading Skills II",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "31LC012",
+      "name": "English Presentation Skills II",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "6509202",
+      "name": "データサイエンス",
+      "unit": 2,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA15321",
+      "name": "微分積分A",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA18212",
+      "name": "プログラミング入門A",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "GA18312",
+      "name": "プログラミング入門B",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "1130152",
+      "name": "フレッシュマン・セミナー",
+      "unit": 1,
+      "grade": "P",
+      "year": 2021
+    },
+    {
+      "id": "1228441",
+      "name": "学問への誘い",
+      "unit": 1,
+      "grade": "P",
+      "year": 2021
+    },
+    {
+      "id": "2122163",
+      "name": "基礎体育卓球(春)",
+      "unit": 0.5,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "31HC012",
+      "name": "English Reading Skills I",
+      "unit": 1,
+      "grade": "A+",
+      "year": 2021
+    },
+    {
+      "id": "31JC012",
+      "name": "English Presentation Skills I",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "6111101",
+      "name": "情報リテラシー(講義)",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "6409202",
+      "name": "情報リテラシー(演習)",
+      "unit": 1,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA15121",
+      "name": "情報数学A",
+      "unit": 2,
+      "grade": "A",
+      "year": 2021
+    },
+    {
+      "id": "GA15221",
+      "name": "線形代数A",
+      "unit": 2,
+      "grade": "A+",
+      "year": 2021
+    }
+  ]
+}

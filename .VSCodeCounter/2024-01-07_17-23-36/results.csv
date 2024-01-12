@@ -1,0 +1,50 @@
+"filename", "language", "JSON", "TypeScript", "JSON with Comments", "Markdown", "YAML", "XML", "TypeScript JSX", "CSS", "HTML", "comment", "blank", "total"
+"c:\Users\taker\code\web\grad-new\.github\workflows\main.yml", "YAML", 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 5, 33
+"c:\Users\taker\code\web\grad-new\README.md", "Markdown", 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 11, 39
+"c:\Users\taker\code\web\grad-new\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 1, 13
+"c:\Users\taker\code\web\grad-new\package-lock.json", "JSON", 2405, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2406
+"c:\Users\taker\code\web\grad-new\package.json", "JSON", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 24
+"c:\Users\taker\code\web\grad-new\public\vite.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\taker\code\web\grad-new\src\App.module.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 14
+"c:\Users\taker\code\web\grad-new\src\app.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\taker\code\web\grad-new\src\app.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 10, 106
+"c:\Users\taker\code\web\grad-new\src\assets\preact.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\taker\code\web\grad-new\src\components\Compulsory.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 109, 0, 0, 0, 11, 120
+"c:\Users\taker\code\web\grad-new\src\components\GradeChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 4, 37
+"c:\Users\taker\code\web\grad-new\src\components\GraduationChecker.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 7, 54
+"c:\Users\taker\code\web\grad-new\src\components\OptionSelector.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 5, 52
+"c:\Users\taker\code\web\grad-new\src\consts\const.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 4, 27
+"c:\Users\taker\code\web\grad-new\src\consts\courseCodeTypes.ts", "TypeScript", 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 1, 63
+"c:\Users\taker\code\web\grad-new\src\data\kdb.json", "JSON", 133204, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 133204
+"c:\Users\taker\code\web\grad-new\src\data\klis_irm21.json", "JSON", 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 63
+"c:\Users\taker\code\web\grad-new\src\data\klis_irm22.json", "JSON", 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 65
+"c:\Users\taker\code\web\grad-new\src\data\klis_kis21.json", "JSON", 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 64
+"c:\Users\taker\code\web\grad-new\src\data\klis_kis22.json", "JSON", 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 65
+"c:\Users\taker\code\web\grad-new\src\data\klis_ksc21.json", "JSON", 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 64
+"c:\Users\taker\code\web\grad-new\src\data\klis_ksc22.json", "JSON", 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 65
+"c:\Users\taker\code\web\grad-new\src\data\major.json", "JSON", 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 509
+"c:\Users\taker\code\web\grad-new\src\data\mast21.json", "JSON", 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 64
+"c:\Users\taker\code\web\grad-new\src\data\mast22.json", "JSON", 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 64
+"c:\Users\taker\code\web\grad-new\src\features\checkCompulsory.ts", "TypeScript", 0, 135, 0, 0, 0, 0, 0, 0, 0, 8, 14, 157
+"c:\Users\taker\code\web\grad-new\src\features\checkSelect.ts", "TypeScript", 0, 106, 0, 0, 0, 0, 0, 0, 0, 5, 7, 118
+"c:\Users\taker\code\web\grad-new\src\features\loadCSV.ts", "TypeScript", 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 3, 27
+"c:\Users\taker\code\web\grad-new\src\features\utils.ts", "TypeScript", 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 6, 49
+"c:\Users\taker\code\web\grad-new\src\index.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\taker\code\web\grad-new\src\main.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 6
+"c:\Users\taker\code\web\grad-new\src\styles\Compulsory.module.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 6, 31
+"c:\Users\taker\code\web\grad-new\src\styles\OptionSelector.module.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 3, 12
+"c:\Users\taker\code\web\grad-new\src\test\compulsory.test.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 7, 30
+"c:\Users\taker\code\web\grad-new\src\test\compulsoryData.json", "JSON", 228, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 230
+"c:\Users\taker\code\web\grad-new\src\test\compulsoryData.ts", "TypeScript", 0, 29, 0, 0, 0, 0, 0, 0, 0, 1, 4, 34
+"c:\Users\taker\code\web\grad-new\src\types\CompulsoryResult.ts", "TypeScript", 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 2, 12
+"c:\Users\taker\code\web\grad-new\src\types\Course.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 1, 19
+"c:\Users\taker\code\web\grad-new\src\types\CourseGroup.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\taker\code\web\grad-new\src\types\GradRequirement.ts", "TypeScript", 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 2, 19
+"c:\Users\taker\code\web\grad-new\src\types\Major.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10
+"c:\Users\taker\code\web\grad-new\src\types\SelectRequirement.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9
+"c:\Users\taker\code\web\grad-new\src\types\SelectResult.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"c:\Users\taker\code\web\grad-new\src\vite-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"c:\Users\taker\code\web\grad-new\tsconfig.json", "JSON with Comments", 0, 0, 26, 0, 0, 0, 0, 0, 0, 2, 3, 31
+"c:\Users\taker\code\web\grad-new\tsconfig.node.json", "JSON", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11
+"c:\Users\taker\code\web\grad-new\vite.config.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 2, 8
+"Total", "-", 136870, 524, 26, 28, 28, 2, 336, 45, 12, 18, 160, 138049

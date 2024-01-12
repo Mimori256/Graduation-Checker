@@ -1,0 +1,25 @@
+.app {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.app li {
+  list-style: none;
+  margin-block: 0.5rem;
+}
+
+.app p {
+  margin-block: 0.3rem;
+}
+
+.usage li {
+  margin-block: 0.5rem;
+}
+
+.warning {
+  color: crimson;
+}
+
+.button {
+  margin-block-start: 40px;
+}

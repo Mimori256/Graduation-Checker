@@ -1,0 +1,38 @@
+.content {
+  width: 50%;
+  background-color: #ddd;
+  margin: 0 auto;
+  padding-block-start: 10px;
+  padding-block-end: 20px;
+}
+
+.content div {
+  margin-block: 2px;
+}
+
+.passed {
+  color: red;
+  margin-inline-start: 1%;
+}
+
+.failed {
+  color: blue;
+  margin-inline-start: 1%;
+}
+
+.taking {
+  color: black;
+  margin-inline-start: 1%;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-block-start: 30px;
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    width: 100% !important;
+  }
+}

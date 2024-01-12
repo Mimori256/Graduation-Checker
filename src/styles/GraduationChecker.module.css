@@ -1,0 +1,42 @@
+.title {
+  font-size: 1.1rem;
+  margin-block-start: 30px;
+}
+
+.total {
+  font-size: 1.3rem;
+  margin-block: 5%;
+}
+
+.passed {
+  color: red;
+  margin-inline-start: 1%;
+}
+
+.failed {
+  color: blue;
+  margin-inline-start: 1%;
+}
+
+.taking {
+  color: black;
+  margin-inline-start: 1%;
+}
+
+.ratio {
+  width: 35% !important;
+  height: 35% !important;
+  margin: auto !important;
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    float: none;
+  }
+
+  .ratio {
+    width: 80% !important;
+    height: 80% !important;
+    margin: auto !important;
+  }
+}
