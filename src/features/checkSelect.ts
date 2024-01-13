@@ -2,13 +2,13 @@ import type { Course } from "../types/Course";
 import type { SelectRequirement } from "../types/SelectRequirement";
 import type { SelectResult } from "../types/SelectResult";
 
-import { createElementList, beginWithMatch, searchCourse } from "./utils";
+import { beginWithMatch, createElementList, searchCourse } from "./utils";
 
 import { codeType } from "../consts/courseCodeTypes";
 
 interface CheckSelectResult {
-  selectResultList: SelectResult[];
-  leftCourseList: Course[];
+  readonly selectResultList: SelectResult[];
+  readonly leftCourseList: Course[];
 }
 
 const findCourseFromCode = (
@@ -80,11 +80,9 @@ const findCourseFromCode = (
 
 export const checkSelect = (
   courseList: Course[],
-  // biome-ignore lint/suspicious/noExplicitAny:
   requirementObject: any,
 ): CheckSelectResult => {
   const requirements: SelectRequirement[] =
-    // biome-ignore lint/suspicious/noExplicitAny:
     requirementObject.courses.select.map((x: any) => {
       return {
         codes: x[0],
@@ -112,5 +110,5 @@ export const checkSelect = (
   return {
     selectResultList: selectResultList,
     leftCourseList: newCourseList,
-  };
+  } as const;
 };

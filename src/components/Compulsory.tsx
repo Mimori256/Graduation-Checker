@@ -7,14 +7,14 @@ import { Details } from "./Details";
 import styles from "../styles/Compulsory.module.css";
 
 interface CompulsoryProps {
-  compulsoryResultList: CompulsoryResult[];
-  includeCourseYear: boolean;
-  minimumUnit: number;
+  readonly compulsoryResultList: CompulsoryResult[];
+  readonly includeCourseYear: boolean;
+  readonly minimumUnit: number;
 }
 
 interface SubjectProps {
-  compulsoryResult: CompulsoryResult;
-  includeCourseYear: boolean;
+  readonly compulsoryResult: CompulsoryResult;
+  readonly includeCourseYear: boolean;
 }
 
 export const Subject = ({

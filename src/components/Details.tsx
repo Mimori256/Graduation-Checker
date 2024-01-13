@@ -2,8 +2,8 @@ import type { CompulsoryResult } from "../types/CompulsoryResult";
 import type { SelectResult } from "../types/SelectResult";
 
 interface DetailProps {
-  result: CompulsoryResult | SelectResult;
-  includeCourseYear: boolean;
+  readonly result: CompulsoryResult | SelectResult;
+  readonly includeCourseYear: boolean;
 }
 
 export const Details = ({ result, includeCourseYear }: DetailProps) => {

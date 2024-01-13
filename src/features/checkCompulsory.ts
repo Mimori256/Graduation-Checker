@@ -60,7 +60,9 @@ export const checkCompulsory = (
 
     // Check if the requirement has alternative courses
     if (courseName.includes("//")) {
-      alternativeRequirement = eval(courseName.split("//")[1]);
+      alternativeRequirement = JSON.parse(
+        courseName.split("//")[1].replace(/'/g, '"'),
+      );
       courseName = courseName.split("//")[0];
       alternativeExists = true;
     }

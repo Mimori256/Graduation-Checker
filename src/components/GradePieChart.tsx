@@ -8,7 +8,7 @@ import { calcUnitsPerGrades } from "../features/calcGPA";
 const targetGrades: Grade[] = ["A+", "A", "B", "C", "D", "P", "F", "認"];
 
 type PiechartComponentProps = {
-  courseList: Course[] | null;
+  readonly courseList: Course[] | null;
 };
 
 export const GradePieChart = ({ courseList }: PiechartComponentProps) => {

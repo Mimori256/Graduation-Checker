@@ -3,13 +3,13 @@ import type { Group } from "../types/Group";
 import styles from "../styles/Select.module.css";
 
 interface GroupProps {
-  groupCount: { [key: string]: number };
-  requirement: any;
+  readonly groupCount: { [key: string]: number };
+  readonly requirement: any;
 }
 
 interface GroupSectionProps {
-  groupCount: { [key: string]: number };
-  courseGroup: any;
+  readonly groupCount: { [key: string]: number };
+  readonly courseGroup: any;
 }
 
 const totalUnitCount = (

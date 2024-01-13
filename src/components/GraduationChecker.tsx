@@ -15,23 +15,23 @@ import requirements from "../data/major.json";
 import styles from "../styles/GraduationChecker.module.css";
 
 interface GraduationCheckerProps {
-  requirementType: Major;
-  courseList: Course[];
-  includeCourseYear: boolean;
+  readonly requirementType: Major;
+  readonly courseList: Course[];
+  readonly includeCourseYear: boolean;
 }
 
 interface LeftCoursesProps {
-  leftCourseList: Course[];
+  readonly leftCourseList: Course[];
 }
 
 interface TotalCountProps {
-  groupCount: { [key: string]: number };
-  groups: any[];
-  compulsoryUnitCount: number;
+  readonly groupCount: { [key: string]: number };
+  readonly groups: any[];
+  readonly compulsoryUnitCount: number;
 }
 
 interface GpaSectionProps {
-  courses: Course[];
+  readonly courses: Course[];
 }
 
 const LeftCourses = ({ leftCourseList }: LeftCoursesProps) => {

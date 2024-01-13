@@ -12,14 +12,14 @@ import { GroupCheck } from "./GroupCheck";
 import styles from "../styles/Select.module.css";
 
 interface ResultProps {
-  selectResultList: SelectResult[];
-  includeCourseYear: boolean;
-  requirement: any;
+  readonly selectResultList: SelectResult[];
+  readonly includeCourseYear: boolean;
+  readonly requirement: any;
 }
 
 interface RequirementProps {
-  selectResult: SelectResult;
-  includeCourseYear: boolean;
+  readonly selectResult: SelectResult;
+  readonly includeCourseYear: boolean;
 }
 
 const Requirement = ({ selectResult, includeCourseYear }: RequirementProps) => {

@@ -21,6 +21,6 @@ export const loadCSV = async (csvFile: Blob): Promise<Course[]> => {
         splitCourse[7] as Grade,
         Number(splitCourse[9]),
       ];
-      return { id, name, unit, grade, year };
+      return { id, name, unit, grade, year } as const;
     });
 };

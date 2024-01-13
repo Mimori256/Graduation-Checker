@@ -102,16 +102,11 @@ export const selectResultUnitCount = (selectResultList: SelectResult[]) => {
 };
 
 export const countByGroup = (selectResults: SelectResult[]) => {
-  const res: { [key: string]: number } = {};
-  for (const selectResult of selectResults) {
+  return selectResults.reduce((res, selectResult) => {
     const group = selectResult.requirement.group.toString();
-    if (res[group] === undefined) {
-      res[group] = selectResultUnitCount([selectResult]);
-    } else {
-      res[group] += selectResultUnitCount([selectResult]);
-    }
-  }
-  return res;
+    res[group] = (res[group] || 0) + selectResultUnitCount([selectResult]);
+    return res;
+  }, {} as { [key: string]: number });
 };
 
 export const searchCourseFromKdb = (
