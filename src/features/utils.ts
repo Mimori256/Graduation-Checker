@@ -129,6 +129,30 @@ export const countByGroup = (selectResults: SelectResult[]) => {
   );
 };
 
+const isAvailableSelectCourse = (courseName: string) => {
+  const exceptionCourses = [
+    "卒業研究",
+    "専門英語",
+    "専門語学",
+    "実験A",
+    "実験B",
+    "実習A",
+    "実習B",
+    "知識情報演習",
+    "アカデミックスキルズ",
+  ];
+
+  let res = true;
+
+  for (const exceptionCourse of exceptionCourses) {
+    if (courseName.includes(exceptionCourse)) {
+      res = false;
+    }
+  }
+
+  return res;
+};
+
 export const searchCourseFromKdb = (
   idList: string[],
   kdbData: KdbCourse[],
@@ -138,7 +162,10 @@ export const searchCourseFromKdb = (
   for (const course of kdbData) {
     if (
       idList.some(
-        (id) => course.id.includes(id) && !compulsoryList.includes(course.name),
+        (id) =>
+          course.id.includes(id) &&
+          !compulsoryList.includes(course.name) &&
+          isAvailableSelectCourse(course.name),
       )
     ) {
       res.push(course);
