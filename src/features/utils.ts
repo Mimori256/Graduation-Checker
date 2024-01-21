@@ -55,12 +55,11 @@ export const getSignAndStatus = (result: CompulsoryResult | SelectResult) => {
 
   // if the type is select
   const unitCount = selectResultUnitCount([result]);
-  if (unitCount >= result.requirement.minimum) {
-    if (result.courses.every((c) => c.grade !== "履修中")) {
-      status = "passed";
-    } else {
-      status = "taking";
-    }
+  const validUnitCount = selectValidUnitCount([result]);
+  if (validUnitCount >= result.requirement.minimum) {
+    status = "passed";
+  } else if (unitCount >= result.requirement.minimum) {
+    status = "taking";
   } else {
     status = "failed";
   }
@@ -101,12 +100,33 @@ export const selectResultUnitCount = (selectResultList: SelectResult[]) => {
   return unitCount;
 };
 
+export const selectValidUnitCount = (selectResultList: SelectResult[]) => {
+  let unitCount = 0;
+  for (const selectResult of selectResultList) {
+    let tmpUnitCount = 0;
+    for (const course of selectResult.courses) {
+      if (
+        course.grade !== "D" &&
+        course.grade !== "F" &&
+        course.grade !== "履修中"
+      ) {
+        tmpUnitCount += course.unit;
+      }
+    }
+    unitCount += tmpUnitCount;
+  }
+  return unitCount;
+};
+
 export const countByGroup = (selectResults: SelectResult[]) => {
-  return selectResults.reduce((res, selectResult) => {
-    const group = selectResult.requirement.group.toString();
-    res[group] = (res[group] || 0) + selectResultUnitCount([selectResult]);
-    return res;
-  }, {} as { [key: string]: number });
+  return selectResults.reduce(
+    (res, selectResult) => {
+      const group = selectResult.requirement.group.toString();
+      res[group] = (res[group] || 0) + selectResultUnitCount([selectResult]);
+      return res;
+    },
+    {} as { [key: string]: number },
+  );
 };
 
 export const searchCourseFromKdb = (
