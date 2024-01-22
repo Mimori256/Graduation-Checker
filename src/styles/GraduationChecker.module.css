@@ -3,24 +3,50 @@
   margin-block-start: 30px;
 }
 
+.block {
+  width: 50%;
+  background-color: #ddd;
+  margin: 0 auto;
+  padding-block-start: 10px;
+  padding-block-end: 20px;
+}
+
+.select {
+  width: 50%;
+  background-color: #ddd;
+  margin-inline: auto;
+  margin-block: 5%;
+  padding-block-start: 10px;
+  padding-block-end: 20px;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-block-start: 30px;
+}
+
 .total {
   font-size: 1.3rem;
   margin-block: 5%;
 }
 
+.passed,
+.failed,
+.taking {
+  margin-inline-start: 1%;
+}
+
 .passed {
   color: red;
-  margin-inline-start: 1%;
 }
 
 .failed {
   color: blue;
-  margin-inline-start: 1%;
 }
 
 .taking {
   color: black;
-  margin-inline-start: 1%;
 }
 
 .ratio {
@@ -30,8 +56,9 @@
 }
 
 @media screen and (max-width: 480px) {
-  .content {
-    float: none;
+  .block,
+  .select {
+    width: 100% !important;
   }
 
   .ratio {

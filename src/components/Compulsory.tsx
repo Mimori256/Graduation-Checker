@@ -4,7 +4,7 @@ import { compulsoryResultUnitCount, getSignAndStatus } from "../features/utils";
 
 import { Details } from "./Details";
 
-import styles from "../styles/Compulsory.module.css";
+import styles from "../styles/GraduationChecker.module.css";
 
 interface CompulsoryProps {
   readonly compulsoryResultList: CompulsoryResult[];
@@ -50,7 +50,7 @@ export const Subject = ({
     );
   }
   const yearElement = includeCourseYear ? (
-    <span className={styles.year}>({compulsoryResult.courses[0].year})</span>
+    <span>({compulsoryResult.courses[0].year})</span>
   ) : null;
   return (
     <div>
@@ -69,7 +69,7 @@ export const Compulsory = ({
 }: CompulsoryProps) => {
   const sumUnit = compulsoryResultUnitCount(compulsoryResultList);
   return (
-    <div className={styles.content}>
+    <div className={styles.block}>
       <h2>必修科目</h2>
       {compulsoryResultList.map((compulsoryResult) => {
         return (

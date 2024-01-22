@@ -9,7 +9,7 @@ import {
 import { SelectDetails } from "./Details";
 import { GroupCheck } from "./GroupCheck";
 
-import styles from "../styles/Select.module.css";
+import styles from "../styles/GraduationChecker.module.css";
 
 interface ResultProps {
   readonly selectResultList: SelectResult[];
@@ -50,7 +50,7 @@ export const Select = ({
   requirement,
 }: ResultProps) => {
   return (
-    <div className={styles.content}>
+    <div className={styles.select}>
       <h2>選択科目</h2>
       {selectResultList.map((selectResult) => {
         return (
