@@ -1,6 +1,6 @@
 import type { Group } from "../types/Group";
 
-import styles from "../styles/Select.module.css";
+import styles from "../styles/GraduationChecker.module.css";
 
 interface GroupProps {
   readonly groupCount: { [key: string]: number };
@@ -29,7 +29,7 @@ const GroupSection = ({ groupCount, courseGroup }: GroupSectionProps) => {
   const minimum: number = courseGroup[1];
   const maximum: number = courseGroup[2];
   const message: string = courseGroup[3];
-  let passedElement;
+  let passedElement: any;
   if (groupCount[group] > maximum) {
     passedElement = (
       <span>
@@ -52,7 +52,7 @@ const GroupSection = ({ groupCount, courseGroup }: GroupSectionProps) => {
 export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
   const courseGroups: Group[] = requirement.courses.groups;
   return (
-    <div className={styles.group}>
+    <div>
       {courseGroups.map((courseGroup) => {
         return (
           <GroupSection groupCount={groupCount} courseGroup={courseGroup} />

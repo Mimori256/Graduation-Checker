@@ -11,19 +11,33 @@
   padding-block-end: 20px;
 }
 
+.block div {
+  margin-block: 2px;
+}
+
 .select {
   width: 50%;
   background-color: #ddd;
-  margin-inline: auto;
-  margin-block: 5%;
   padding-block-start: 10px;
   padding-block-end: 20px;
+  margin-block-start: 10%;
+  margin-inline: auto;
+}
+
+.select div {
+  margin-block: 10px;
 }
 
 .bold {
   font-weight: bold;
   font-size: 1.1rem;
   margin-block-start: 30px;
+}
+
+.semiBold {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-block-start: 20px;
 }
 
 .total {

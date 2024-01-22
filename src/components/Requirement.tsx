@@ -8,7 +8,7 @@ import type { SelectRequirement } from "../types/SelectRequirement";
 import { getAcademicYear, searchCourseFromKdb } from "../features/utils";
 
 import requirements from "../data/major.json";
-import styles from "../styles/Select.module.css";
+import styles from "../styles/GraduationChecker.module.css";
 
 interface RequirementProps {
   readonly major: Major;
