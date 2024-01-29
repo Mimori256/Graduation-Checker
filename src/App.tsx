@@ -31,10 +31,10 @@ const isMajor = (str: string): str is Major => {
     "mast-21",
     "mast-22",
     "klis-ksc-21",
-    "klis-kis-23",
-    "klis-irm-23",
     "klis-ksc-22",
+    "klis-kis-21",
     "klis-kis-22",
+    "klis-irm-21",
     "klis-irm-22",
   ].includes(str);
 };
