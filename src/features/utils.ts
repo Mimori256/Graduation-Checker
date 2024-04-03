@@ -5,6 +5,9 @@ import type { SelectResult } from "../types/SelectResult";
 
 import { errorCourse, statusSignMap } from "../consts/const";
 
+export const isFailed = (grade: string): boolean =>
+  grade === "F" || grade === "D";
+
 export const getAcademicYear = (): string => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -73,7 +76,7 @@ export const compulsoryResultUnitCount = (
   for (const compulsoryResult of compulsoryResults) {
     let tmpUnitCount = 0;
     for (const course of compulsoryResult.courses) {
-      if (course.grade !== "D" && course.grade !== "F") {
+      if (!isFailed(course.grade)) {
         tmpUnitCount += course.unit;
       }
     }
@@ -91,7 +94,7 @@ export const selectResultUnitCount = (selectResultList: SelectResult[]) => {
   for (const selectResult of selectResultList) {
     let tmpUnitCount = 0;
     for (const course of selectResult.courses) {
-      if (course.grade !== "D" && course.grade !== "F") {
+      if (!isFailed(course.grade)) {
         tmpUnitCount += course.unit;
       }
     }
@@ -105,11 +108,7 @@ export const selectValidUnitCount = (selectResultList: SelectResult[]) => {
   for (const selectResult of selectResultList) {
     let tmpUnitCount = 0;
     for (const course of selectResult.courses) {
-      if (
-        course.grade !== "D" &&
-        course.grade !== "F" &&
-        course.grade !== "履修中"
-      ) {
+      if (!isFailed(course.grade) && course.grade !== "履修中") {
         tmpUnitCount += course.unit;
       }
     }
@@ -140,17 +139,15 @@ const isAvailableSelectCourse = (courseName: string) => {
     "実習B",
     "知識情報演習",
     "アカデミックスキルズ",
-  ];
-
-  let res = true;
+  ] as const;
 
   for (const exceptionCourse of exceptionCourses) {
     if (courseName.includes(exceptionCourse)) {
-      res = false;
+      return false;
     }
   }
 
-  return res;
+  return true;
 };
 
 export const searchCourseFromKdb = (

@@ -1,7 +1,12 @@
 import type { CompulsoryResult } from "../types/CompulsoryResult";
 import type { Course, Grade } from "../types/Course";
 
-import { beginWithMatch, createElementList, searchCourse } from "./utils";
+import {
+  beginWithMatch,
+  createElementList,
+  isFailed,
+  searchCourse,
+} from "./utils";
 
 import { compulsoryEnglishDict } from "../consts/const";
 import { codeType } from "../consts/courseCodeTypes";
@@ -103,7 +108,7 @@ export const checkCompulsory = (
         compulsoryResultList.push({
           name: courseName,
           isCourseGroup: false,
-          passed: courseGrade !== "D" && courseGrade !== "F",
+          passed: !isFailed(courseGrade),
           courses: [searchCourse("name", courseName, courseList)],
         } as const);
       }
@@ -118,7 +123,7 @@ export const checkCompulsory = (
       });
       tmpCourses.map((c) => excludeCourseList.push(c));
       if (checkAlternativeRequirement(nameList, alternativeRequirement)) {
-        passed = tmpCourses.every((c) => c.grade !== "D" && c.grade !== "F");
+        passed = tmpCourses.every((c) => !isFailed(c.grade));
         compulsoryResultList.push({
           name: courseName,
           isCourseGroup: false,
