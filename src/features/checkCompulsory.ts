@@ -89,7 +89,9 @@ export const checkCompulsory = (
           const unit = searchCourse("id", id, courseList).unit;
           detectedCourses.push(searchCourse("id", id, courseList));
           excludeCourseList.push(searchCourse("id", id, courseList));
-          unitCount += unit;
+          if (!isFailed(searchCourse("id", id, courseList).grade)) {
+            unitCount += unit;
+          }
         });
 
       compulsoryResultList.push({
