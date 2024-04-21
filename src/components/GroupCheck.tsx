@@ -59,7 +59,7 @@ export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
         );
       })}
       <div className={styles.bold}>
-        {totalUnitCount(groupCount, courseGroups)}/
+        {Math.min(totalUnitCount(groupCount, courseGroups), requirement.courses.selectMinimumUnit)}/
         {requirement.courses.selectMinimumUnit}単位
       </div>
     </div>
