@@ -81,3 +81,10 @@
     margin: auto !important;
   }
 }
+
+.syllabusLink {
+  font-size: 0.9rem;
+  color: blue;
+  margin-bottom: 5px;
+  padding-inline: 2px;
+}

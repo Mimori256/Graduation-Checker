@@ -81,7 +81,7 @@ const CompulsoryRequirement = ({ requirement }: CompulsoryProps) => {
     },
   );
   return (
-    <div className={styles.content}>
+    <div className={styles.block}>
       <h2>必修科目</h2>
       {compulsoryCourses.map((courseName: string) => (
         <div>{courseName}</div>
@@ -113,7 +113,7 @@ const SelectElement = ({
             const url = `https://kdb.tsukuba.ac.jp/syllabi/${academicYear}/${course.id}/jpn`;
             return (
               <p>
-                <a href={url} target="_blank" rel="noreferrer noopener">
+                <a className={styles.syllabusLink} href={url} target="_blank" rel="noreferrer noopener">
                   {course.id} {course.name} {course.modules} {course.period}{" "}
                   {course.credits}単位 {course.registerYear}年次
                 </a>
@@ -180,7 +180,7 @@ const SelectSection = ({ requirement, kdbData }: SelectProps) => {
   ];
   const outputGroup = createOutputGroup(selects);
   return (
-    <div className={styles.content}>
+    <div className={styles.select}>
       <h2>選択科目</h2>
       {courseGroupOutputList.map((groupName: string, index: number) => {
         const group = groups[index];
@@ -214,8 +214,10 @@ export const Requirement = ({ major }: RequirementProps) => {
 
   const gradRequirements = requirements;
   const requirement = gradRequirements[major];
+  const department = requirement.header.department;
   return (
     <div>
+      <div className={styles.title}>{department} {major} の卒業要件</div>
       <CompulsoryRequirement requirement={requirement} />
       <SelectSection requirement={requirement} kdbData={kdbData} />
     </div>
