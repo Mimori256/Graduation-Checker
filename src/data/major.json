@@ -154,7 +154,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE8"], 16, 128, false, "GE8", 0],
         [["GA4", "GE4", "GE6", "GE7"], 8, 128, false, "GA4, GE4, GE6, GE7", 0],
@@ -178,7 +178,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
@@ -218,7 +218,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE8"], 16, 128, false, "GE8", 0],
         [["GA4", "GE4", "GE6", "GE7"], 8, 128, false, "GA4, GE4, GE6, GE7", 0],
@@ -242,7 +242,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
@@ -281,7 +281,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE7"], 16, 128, false, "GE7", 0],
         [["GA4", "GE4", "GE6", "GE8"], 8, 128, false, "GA4, GE4, GE6, GE8", 0],
@@ -305,7 +305,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
@@ -345,7 +345,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE7"], 16, 128, false, "GE7", 0],
         [["GA4", "GE4", "GE6", "GE8"], 8, 128, false, "GA4, GE4, GE6, GE8", 0],
@@ -369,7 +369,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
@@ -408,7 +408,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE6"], 16, 128, false, "GE6", 0],
         [["GA4", "GE4", "GE7", "GE8"], 8, 128, false, "GA4, GE4, GE7, GE8", 0],
@@ -432,7 +432,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
@@ -472,7 +472,7 @@
         "体育::2",
         "必修英語::4"
       ],
-      "compulsorySumUnit": 50,
+      "compulsorySumUnit": 41,
       "select": [
         [["GE6"], 16, 128, false, "GE6", 0],
         [["GA4", "GE4", "GE7", "GE8"], 8, 128, false, "GA4, GE4, GE7, GE8", 0],
@@ -496,7 +496,7 @@
           3
         ]
       ],
-      "selectMinimumUnit": 74,
+      "selectMinimumUnit": 83,
       "groups": [
         [0, 24, 44, "専門科目選択"],
         [1, 32, 52, "専門基礎科目選択"],
