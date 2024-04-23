@@ -22,6 +22,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vitest": "^1.1.1",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^5.0.0"
   }
 }
