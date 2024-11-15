@@ -21,7 +21,7 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vitest": "^1.1.1",
+    "vitest": "^2.1.4",
     "gh-pages": "^3.2.3"
   }
 }
