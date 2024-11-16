@@ -26,7 +26,7 @@ export const OptionSelector = ({
         <b>チェックする学類と専攻・年度</b>
       </p>
       <div>
-        <label htmlFor="major">学類-選考</label>
+        <label htmlFor="major">学類-専攻</label>
         <select name="major" id="major" onChange={handleMajorChange}>
           {majorNames.map((name, index) => (
             <option key={majors[index]} value={majors[index]}>
