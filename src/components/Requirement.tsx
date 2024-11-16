@@ -84,7 +84,7 @@ const CompulsoryRequirement = ({ requirement }: CompulsoryProps) => {
     <div className={styles.block}>
       <h2>必修科目</h2>
       {compulsoryCourses.map((courseName: string) => (
-        <div>{courseName}</div>
+        <div key={courseName}>{courseName}</div>
       ))}
       <p className={styles.bold}>合計{compulsorySumUnit}単位</p>
     </div>
@@ -112,8 +112,13 @@ const SelectElement = ({
           {availableCourses.map((course: KdbCourse) => {
             const url = `https://kdb.tsukuba.ac.jp/syllabi/${academicYear}/${course.id}/jpn`;
             return (
-              <p>
-                <a className={styles.syllabusLink} href={url} target="_blank" rel="noreferrer noopener">
+              <p key={course.id}>
+                <a
+                  className={styles.syllabusLink}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   {course.id} {course.name} {course.modules} {course.period}{" "}
                   {course.credits}単位 {course.registerYear}年次
                 </a>
@@ -146,6 +151,7 @@ const SelectGroup = ({
       {selects.map((select: SelectRequirement) => {
         return (
           <SelectElement
+            key={select.message}
             select={select}
             kdbData={kdbData}
             compulsoryList={compulsoryList}
@@ -188,6 +194,7 @@ const SelectSection = ({ requirement, kdbData }: SelectProps) => {
         const maximum = group[2];
         return (
           <SelectGroup
+            key={groupName}
             groupName={groupName}
             minimum={minimum}
             maximum={maximum}
@@ -217,7 +224,9 @@ export const Requirement = ({ major }: RequirementProps) => {
   const department = requirement.header.department;
   return (
     <div>
-      <div className={styles.title}>{department} {major} の卒業要件</div>
+      <div className={styles.title}>
+        {department} {major} の卒業要件
+      </div>
       <CompulsoryRequirement requirement={requirement} />
       <SelectSection requirement={requirement} kdbData={kdbData} />
     </div>

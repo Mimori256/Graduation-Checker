@@ -76,7 +76,7 @@ export const checkCompulsory = (
     if (courseName.includes("::")) {
       courseExists = true;
       courseTag = courseName.split("::")[0];
-      unitNumber = parseInt(courseName.split("::")[1]);
+      unitNumber = Number.parseInt(courseName.split("::")[1]);
       // Get the list of course IDs that satisfy the course tag
       codes = codeType[courseTag as keyof typeof codeType].codes;
       except = codeType[courseTag as keyof typeof codeType].except;

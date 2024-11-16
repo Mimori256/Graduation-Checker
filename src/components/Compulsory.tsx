@@ -74,6 +74,7 @@ export const Compulsory = ({
       {compulsoryResultList.map((compulsoryResult) => {
         return (
           <Subject
+            key={compulsoryResult.name}
             compulsoryResult={compulsoryResult}
             includeCourseYear={includeCourseYear}
           />

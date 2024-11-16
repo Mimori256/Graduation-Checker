@@ -55,6 +55,7 @@ export const Select = ({
       {selectResultList.map((selectResult) => {
         return (
           <Requirement
+            key={selectResult}
             selectResult={selectResult}
             includeCourseYear={includeCourseYear}
           />

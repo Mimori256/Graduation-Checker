@@ -26,7 +26,7 @@ export const OptionSelector = ({
         <b>チェックする学類と専攻・年度</b>
       </p>
       <div>
-        <label htmlFor="major" />
+        <label htmlFor="major">学類-選考</label>
         <select name="major" id="major" onChange={handleMajorChange}>
           {majorNames.map((name, index) => (
             <option key={majors[index]} value={majors[index]}>
@@ -36,7 +36,7 @@ export const OptionSelector = ({
         </select>
       </div>
       <div>
-        <label htmlFor="year" />
+        <label htmlFor="year">年度</label>
         <select name="year" id="year" onChange={handleYearChange}>
           {years.map((year, index) => (
             <option key={majors[index]} value={year}>

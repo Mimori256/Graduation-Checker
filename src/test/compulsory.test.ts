@@ -6,8 +6,8 @@ import { compulsoryResultUnitCount } from "../features/utils";
 import { test1, test2, test3 } from "./compulsoryData";
 import requirements from "../data/major.json";
 
-let result;
-let units;
+let result: ReturnType<typeof checkCompulsory>;
+let units: number;
 
 const mast21 = requirements["mast-21"];
 test("satisfies compulsory requirement", () => {

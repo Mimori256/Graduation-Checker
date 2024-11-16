@@ -16,6 +16,14 @@ export const compulsoryEnglishDict: { [key: string]: string } = {
   "English Presentation Skills II": "31L",
 };
 
+export const PASSED = "〇";
+export const FAILED = "✖";
+export const TAKING = "△";
+
+type Status = "passed" | "failed" | "taking";
+
+type StatusSign = typeof PASSED | typeof FAILED | typeof TAKING;
+
 export const errorCourse: Course = {
   id: "Error",
   name: "Error",
@@ -24,12 +32,8 @@ export const errorCourse: Course = {
   year: 0,
 };
 
-export const statusSignMap = {
-  passed: "〇",
-  failed: "✖",
-  taking: "△",
+export const statusSignMap: { [key in Status]: StatusSign } = {
+  passed: PASSED,
+  failed: FAILED,
+  taking: TAKING,
 };
-
-export const PASSED = "〇";
-export const FAILED = "✖";
-export const TAKING = "△";

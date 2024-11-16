@@ -42,7 +42,7 @@ const LeftCourses = ({ leftCourseList }: LeftCoursesProps) => {
     <div>
       {leftCourseList.map((course) => {
         return (
-          <div>
+          <div key={course.id}>
             <p>卒業要件に含まれない単位</p>
             <p>
               {course.name} {course.unit}単位
@@ -61,7 +61,7 @@ const TotalCount = ({
 }: TotalCountProps) => {
   let total = compulsoryUnitCount;
   let status: keyof typeof statusSignMap;
-  let sign;
+  let sign: string;
   const values = Object.values(groupCount);
   for (let i = 0; i < values.length; i++) {
     total += Math.min(values[i], groups[i][2]);

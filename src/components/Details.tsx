@@ -14,7 +14,7 @@ export const Details = ({ result, includeCourseYear }: DetailProps) => {
     <div>
       {result.courses.map((course) => {
         return (
-          <p>
+          <p key={course.id}>
             {course.name} {includeCourseYear ? `(${course.year})` : ""}{" "}
             {course.grade}
           </p>
@@ -32,7 +32,7 @@ export const SelectDetails = ({ result, includeCourseYear }: DetailProps) => {
     <div>
       {result.courses.map((course) => {
         return (
-          <p>
+          <p key={course.id}>
             {course.id} {course.name}{" "}
             {includeCourseYear ? `(${course.year}年度)` : ""}
             {": "}

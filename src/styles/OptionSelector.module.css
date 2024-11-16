@@ -6,6 +6,10 @@
   margin-block-end: 1rem;
 }
 
+.selector label {
+  margin-right: 0.5rem;
+}
+
 .selector p {
   font-weight: bold;
 }

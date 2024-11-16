@@ -28,6 +28,6 @@ const createTest3 = (courseList: Course[]): Course[] => {
   return newCourseList;
 };
 
-export const test1 = sample["sample"] as Course[];
+export const test1 = sample.sample as Course[];
 export const test2 = createTest2(JSON.parse(JSON.stringify(test1)));
 export const test3 = createTest3(JSON.parse(JSON.stringify(test1)));

@@ -55,12 +55,19 @@ export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
     <div>
       {courseGroups.map((courseGroup) => {
         return (
-          <GroupSection groupCount={groupCount} courseGroup={courseGroup} />
+          <GroupSection
+            key={courseGroup}
+            groupCount={groupCount}
+            courseGroup={courseGroup}
+          />
         );
       })}
       <div className={styles.bold}>
-        {Math.min(totalUnitCount(groupCount, courseGroups), requirement.courses.selectMinimumUnit)}/
-        {requirement.courses.selectMinimumUnit}単位
+        {Math.min(
+          totalUnitCount(groupCount, courseGroups),
+          requirement.courses.selectMinimumUnit,
+        )}
+        /{requirement.courses.selectMinimumUnit}単位
       </div>
     </div>
   );

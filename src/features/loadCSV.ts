@@ -1,4 +1,4 @@
-import { Course, Grade } from "../types/Course";
+import type { Course, Grade } from "../types/Course";
 
 export const loadCSV = async (csvFile: Blob): Promise<Course[]> => {
   const csv = await new Promise<string>((resolve, reject) => {
@@ -17,7 +17,7 @@ export const loadCSV = async (csvFile: Blob): Promise<Course[]> => {
       const [id, name, unit, grade, year] = [
         splitCourse[2],
         splitCourse[3],
-        parseFloat(splitCourse[4].replace(" ", "")),
+        Number.parseFloat(splitCourse[4].replace(" ", "")),
         splitCourse[7] as Grade,
         Number(splitCourse[9]),
       ];
