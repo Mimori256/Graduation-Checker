@@ -16,14 +16,20 @@ interface ResultProps {
   readonly selectResultList: SelectResult[];
   readonly includeCourseYear: boolean;
   readonly requirement: any;
+  readonly isSorted: boolean;
 }
 
 interface RequirementProps {
   readonly selectResult: SelectResult;
   readonly includeCourseYear: boolean;
+  isSorted: boolean;
 }
 
-const Requirement = ({ selectResult, includeCourseYear }: RequirementProps) => {
+const Requirement = ({
+  selectResult,
+  includeCourseYear,
+  isSorted,
+}: RequirementProps) => {
   const unitCount = selectResultUnitCount([selectResult]);
   const [status, sign] = getSignAndStatus(selectResult);
 
@@ -49,6 +55,7 @@ const Requirement = ({ selectResult, includeCourseYear }: RequirementProps) => {
             <SelectDetails
               result={selectResult}
               includeCourseYear={includeCourseYear}
+              sorted={isSorted}
             />
           </tbody>
         </table>
@@ -61,16 +68,17 @@ export const Select = ({
   selectResultList,
   includeCourseYear,
   requirement,
+  isSorted,
 }: ResultProps) => {
   return (
     <div className={styles.select}>
-      <h2>選択科目</h2>
       {selectResultList.map((selectResult) => {
         return (
           <Requirement
-            key={selectResult}
+            key={selectResult.requirement.message}
             selectResult={selectResult}
             includeCourseYear={includeCourseYear}
+            isSorted={isSorted}
           />
         );
       })}

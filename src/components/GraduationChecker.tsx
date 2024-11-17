@@ -1,3 +1,5 @@
+import { useState } from "preact/hooks";
+
 import type { Course } from "../types/Course";
 import type { Major } from "../types/Major";
 
@@ -127,20 +129,32 @@ export const GraduationChecker = ({
   const groupCount: { [key: string]: number } = countByGroup(selectResultList);
   const groups = requirement.courses.groups;
   const compulsoryUnitCount = compulsoryResultUnitCount(compulsoryResultList);
+  const [isSorted, setIsSorted] = useState(false);
   return (
     <div className={styles.content}>
       <p className={styles.title}>
         {header.department} {header.major} {header.enrollYear}年度
       </p>
+      <h2>必修科目</h2>
       <Compulsory
         compulsoryResultList={compulsoryResultList}
         includeCourseYear={includeCourseYear}
         minimumUnit={minimumUnit}
       />
+      <h2>選択科目</h2>
+      <div>
+        <label htmlFor="sortByGrade">成績順にソート</label>
+        <input
+          id="sortByGrade"
+          type="checkbox"
+          onClick={() => setIsSorted(!isSorted)}
+        />
+      </div>
       <Select
         selectResultList={selectResultList}
         includeCourseYear={includeCourseYear}
         requirement={requirement}
+        isSorted={isSorted}
       />
       <LeftCourses leftCourseList={leftCourseList} />
       <TotalCount

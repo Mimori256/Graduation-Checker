@@ -26,9 +26,9 @@ const SingleCompulsorySubject = ({
   if (compulsoryResult.courses.length === 0) {
     return (
       <tr>
-        <td></td>
+        <td />
         <td>{compulsoryResult.name}</td>
-        <td></td>
+        <td />
         <td>
           <span className={styles[status]}>{sign}</span>
         </td>
@@ -101,7 +101,6 @@ export const Compulsory = ({
   return (
     <div className={styles.block}>
       <div className={tableStyles.table}>
-        <h2>必修科目</h2>
         <table>
           <thead>
             <tr>
