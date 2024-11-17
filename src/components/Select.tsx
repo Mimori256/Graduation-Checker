@@ -10,6 +10,7 @@ import { SelectDetails } from "./Details";
 import { GroupCheck } from "./GroupCheck";
 
 import styles from "../styles/GraduationChecker.module.css";
+import tableStyles from "../styles/CourseTable.module.css";
 
 interface ResultProps {
   readonly selectResultList: SelectResult[];
@@ -27,18 +28,30 @@ const Requirement = ({ selectResult, includeCourseYear }: RequirementProps) => {
   const [status, sign] = getSignAndStatus(selectResult);
 
   return (
-    <div>
-      <details>
+    <div className={tableStyles.table}>
+      <details open>
         <summary>
           {selectResult.requirement.message}
           <span className={styles[status]}>{sign}</span>
           {unitCount}({selectResult.requirement.minimum}~
           {selectResult.requirement.maximum})
         </summary>
-        <SelectDetails
-          result={selectResult}
-          includeCourseYear={includeCourseYear}
-        />
+        <table>
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+              <th>成績</th>
+            </tr>
+          </thead>
+          <tbody>
+            <SelectDetails
+              result={selectResult}
+              includeCourseYear={includeCourseYear}
+            />
+          </tbody>
+        </table>
       </details>
     </div>
   );

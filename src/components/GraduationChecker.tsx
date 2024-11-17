@@ -86,18 +86,19 @@ const GpaSection = ({ courses }: GpaSectionProps) => {
     <div>
       <h3>累計GPA</h3>
       <p>
+        {gpa ? (
+          <span className={styles.total}>{gpa.toFixed(2)}</span>
+        ) : (
+          <span>科目データが与えられていません</span>
+        )}
+      </p>
+
+      <p>
         累計GPAの計算式は『
         <a href="https://www.tsukuba.ac.jp/education/ug-courses-gpa/pdf/gpaqa_students.pdf">
           GPA制度へのQA 学生用
         </a>
         』に基づいています
-      </p>
-      <p>
-        {gpa ? (
-          <span className="total-gpa">{gpa.toFixed(2)}</span>
-        ) : (
-          <span>科目データが与えられていません</span>
-        )}
       </p>
     </div>
   );

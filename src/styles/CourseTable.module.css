@@ -1,0 +1,51 @@
+.table details {
+  padding-block: 10px;
+}
+
+.table summary {
+  text-align: left;
+  margin-left: 10%;
+  padding-block: 10px;
+  font-size: 1.25rem;
+  background-color: #ddd;
+  width: 80%;
+}
+
+.table table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+  font-size: 1.1rem;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.table tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.table td,
+.table th {
+  text-align: left;
+  padding: 10px 5px;
+}
+
+.courseName {
+  width: 65%;
+}
+
+.courseId {
+  width: 15%;
+}
+
+.unit {
+  width: 10%;
+  text-align: center;
+}
+
+.grade {
+  width: 10%;
+  text-align: left;
+}

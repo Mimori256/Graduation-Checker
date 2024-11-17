@@ -5,6 +5,7 @@ import { compulsoryResultUnitCount, getSignAndStatus } from "../features/utils";
 import { Details } from "./Details";
 
 import styles from "../styles/GraduationChecker.module.css";
+import tableStyles from "../styles/CourseTable.module.css";
 
 interface CompulsoryProps {
   readonly compulsoryResultList: CompulsoryResult[];
@@ -17,47 +18,70 @@ interface SubjectProps {
   readonly includeCourseYear: boolean;
 }
 
-export const Subject = ({
+const SingleCompulsorySubject = ({
   compulsoryResult,
   includeCourseYear,
 }: SubjectProps) => {
   const [status, sign] = getSignAndStatus(compulsoryResult);
-
-  if (compulsoryResult.isCourseGroup) {
-    return (
-      <div>
-        <details>
-          <summary>
-            {compulsoryResult.name.split("::")[0]}{" "}
-            <span className={styles[status]}>{sign}</span>
-            {compulsoryResultUnitCount([compulsoryResult])}/
-            {compulsoryResult.minimumUnit}単位
-          </summary>
-          <Details
-            result={compulsoryResult}
-            includeCourseYear={includeCourseYear}
-          />
-        </details>
-      </div>
-    );
-  }
   if (compulsoryResult.courses.length === 0) {
     return (
-      <div>
-        {compulsoryResult.name}
-        <span className={styles[status]}>{sign}</span>
-      </div>
+      <tr>
+        <td></td>
+        <td>{compulsoryResult.name}</td>
+        <td></td>
+        <td>
+          <span className={styles[status]}>{sign}</span>
+        </td>
+      </tr>
     );
   }
-  const yearElement = includeCourseYear ? (
-    <span>({compulsoryResult.courses[0].year})</span>
-  ) : null;
+  const course = compulsoryResult.courses[0];
   return (
-    <div>
-      {compulsoryResult.name}
-      {yearElement}
-      <span className={styles[status]}>{sign}</span>
-      {compulsoryResult.courses[0].unit}単位
+    <tr>
+      <td>{course.id}</td>
+      <td>
+        {course.name}
+        {includeCourseYear && `(${course.year})`}
+      </td>
+      <td>{course.unit}単位</td>
+      <td>
+        <span className={styles[status]}>{sign}</span>
+      </td>
+    </tr>
+  );
+};
+
+const CompulsoryCourseGroup = ({
+  compulsoryResult,
+  includeCourseYear,
+}: SubjectProps) => {
+  const [status, sign] = getSignAndStatus(compulsoryResult);
+  return (
+    <div className={tableStyles.table}>
+      <details open>
+        <summary>
+          {compulsoryResult.name.split("::")[0]}{" "}
+          <span className={styles[status]}>{sign}</span>
+          {compulsoryResultUnitCount([compulsoryResult])}/
+          {compulsoryResult.minimumUnit}単位
+        </summary>
+        <table>
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th className={tableStyles.unit}>単位数</th>
+              <th className={tableStyles.grade}>成績</th>
+            </tr>
+          </thead>
+          <tbody>
+            <Details
+              result={compulsoryResult}
+              includeCourseYear={includeCourseYear}
+            />
+          </tbody>
+        </table>
+      </details>
     </div>
   );
 };
@@ -68,20 +92,47 @@ export const Compulsory = ({
   minimumUnit,
 }: CompulsoryProps) => {
   const sumUnit = compulsoryResultUnitCount(compulsoryResultList);
+  const compulsoryCourseGroups = compulsoryResultList.filter(
+    (compulsoryResult) => compulsoryResult.isCourseGroup,
+  );
+  const compulsoryNonCourseGroups = compulsoryResultList.filter(
+    (compulsoryResult) => !compulsoryResult.isCourseGroup,
+  );
   return (
     <div className={styles.block}>
-      <h2>必修科目</h2>
-      {compulsoryResultList.map((compulsoryResult) => {
-        return (
-          <Subject
+      <div className={tableStyles.table}>
+        <h2>必修科目</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th className={tableStyles.unit}>単位数</th>
+              <th className={tableStyles.grade}>合否</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compulsoryNonCourseGroups.map((compulsoryResult) => (
+              <SingleCompulsorySubject
+                key={compulsoryResult.name}
+                compulsoryResult={compulsoryResult}
+                includeCourseYear={includeCourseYear}
+              />
+            ))}
+          </tbody>
+        </table>
+        {compulsoryCourseGroups.map((compulsoryResult) => (
+          <CompulsoryCourseGroup
             key={compulsoryResult.name}
             compulsoryResult={compulsoryResult}
             includeCourseYear={includeCourseYear}
           />
-        );
-      })}
-      <div className={styles.bold}>
-        {sumUnit}/{minimumUnit}単位
+        ))}
+        <div className={styles.total}>
+          <b>
+            {sumUnit}/{minimumUnit}単位
+          </b>
+        </div>
       </div>
     </div>
   );

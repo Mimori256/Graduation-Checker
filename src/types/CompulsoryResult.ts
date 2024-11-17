@@ -1,4 +1,4 @@
-import { Course } from "./Course";
+import type { Course } from "./Course";
 
 export interface CompulsoryResult {
   name: string;
