@@ -52,6 +52,7 @@ export const SelectDetails = ({
         let grade = course.grade.toLowerCase();
         grade = grade.replace("+", "p");
         grade = grade.replace("認定", "nin");
+        grade = grade.replace("履修中", "taking");
         const gradeColor = sorted ? styles[grade] : "";
         return (
           <tr key={course.id} className={gradeColor}>
