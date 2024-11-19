@@ -1,0 +1,79 @@
+.table details {
+  padding-block: 10px;
+}
+
+.table summary {
+  text-align: left;
+  margin-left: 10%;
+  padding-block: 10px;
+  font-size: 1.25rem;
+  background-color: #ddd;
+  width: 80%;
+}
+
+.table table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+  font-size: 1.1rem;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.table tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.table td,
+.table th {
+  text-align: left;
+  padding: 10px 5px;
+}
+
+.courseName {
+  width: 65%;
+}
+
+.courseId {
+  width: 15%;
+}
+
+.unit {
+  width: 10%;
+  text-align: center;
+}
+
+.grade {
+  width: 10%;
+  text-align: left;
+}
+
+.ap {
+  background-color: rgba(255, 99, 99, 0.5) !important;
+}
+
+.a {
+  background-color: rgba(255, 159, 64, 0.5) !important;
+}
+
+.b {
+  background-color: rgba(54, 152, 255, 0.5) !important;
+}
+
+.c {
+  background-color: rgba(255, 206, 86, 0.5) !important;
+}
+
+.d {
+  background-color: rgba(75, 192, 192, 0.5) !important;
+}
+
+.nin {
+  background-color: rgb(131, 67, 51, 0.5) !important;
+}
+
+.taking {
+  background-color: #eee !important;
+}

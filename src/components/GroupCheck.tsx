@@ -1,6 +1,7 @@
 import type { Group } from "../types/Group";
 
 import styles from "../styles/GraduationChecker.module.css";
+import tableStyles from "../styles/CourseTable.module.css";
 
 interface GroupProps {
   readonly groupCount: { [key: string]: number };
@@ -42,32 +43,52 @@ const GroupSection = ({ groupCount, courseGroup }: GroupSectionProps) => {
     passedElement = <span className={styles.failed}>✖</span>;
   }
   return (
-    <div>
-      <p className={styles.semiBold}>{message}</p>
-      {groupCount[group]}/({minimum}~{maximum}){passedElement}
-    </div>
+    <tr>
+      <td>{message}</td>
+      <td>{groupCount[group]}</td>
+      <td>
+        {minimum}~{maximum}
+      </td>
+      <td>{passedElement}</td>
+    </tr>
   );
 };
 
 export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
   const courseGroups: Group[] = requirement.courses.groups;
   return (
-    <div>
-      {courseGroups.map((courseGroup) => {
-        return (
-          <GroupSection
-            key={courseGroup}
-            groupCount={groupCount}
-            courseGroup={courseGroup}
-          />
-        );
-      })}
-      <div className={styles.bold}>
-        {Math.min(
-          totalUnitCount(groupCount, courseGroups),
-          requirement.courses.selectMinimumUnit,
-        )}
-        /{requirement.courses.selectMinimumUnit}単位
+    <div className={styles.groupCheck}>
+      <div className={tableStyles.table}>
+        <table>
+          <thead>
+            <tr>
+              <th>科目グループ</th>
+              <th>取得単位数</th>
+              <th>最低/最高単位数</th>
+              <th>合否</th>
+            </tr>
+          </thead>
+          <tbody>
+            {courseGroups.map((courseGroup) => {
+              return (
+                <GroupSection
+                  key={courseGroup}
+                  groupCount={groupCount}
+                  courseGroup={courseGroup}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+        <div className={styles.total}>
+          <b>
+            {Math.min(
+              totalUnitCount(groupCount, courseGroups),
+              requirement.courses.selectMinimumUnit,
+            )}
+            /{requirement.courses.selectMinimumUnit}単位
+          </b>
+        </div>
       </div>
     </div>
   );

@@ -1,45 +1,70 @@
 import type { CompulsoryResult } from "../types/CompulsoryResult";
 import type { SelectResult } from "../types/SelectResult";
+import { sortByGrade } from "../features/utils";
 
-interface DetailProps {
-  readonly result: CompulsoryResult | SelectResult;
+import styles from "../styles/CourseTable.module.css";
+
+interface DetailsProps {
+  readonly result: CompulsoryResult;
   readonly includeCourseYear: boolean;
 }
 
-export const Details = ({ result, includeCourseYear }: DetailProps) => {
-  if (result.courses.length === 0) {
-    return <span>該当無し</span>;
+interface SelectDetailsProps {
+  readonly result: SelectResult;
+  readonly includeCourseYear: boolean;
+  readonly sorted: boolean;
+}
+
+export const Details = ({ result, includeCourseYear }: DetailsProps) => {
+  if (!result.courses) {
+    return <></>;
   }
   return (
-    <div>
+    <>
       {result.courses.map((course) => {
         return (
-          <p key={course.id}>
-            {course.name} {includeCourseYear ? `(${course.year})` : ""}{" "}
-            {course.grade}
-          </p>
+          <tr key={course.id}>
+            <td className={styles.courseId}>{course.id}</td>
+            <td className={styles.courseName}>
+              {course.name} {includeCourseYear ? `(${course.year})` : ""}
+            </td>
+            <td className={styles.unit}>{course.unit}単位</td>
+            <td className={styles.grade}>{course.grade}</td>
+          </tr>
         );
       })}
-    </div>
+    </>
   );
 };
 
-export const SelectDetails = ({ result, includeCourseYear }: DetailProps) => {
+export const SelectDetails = ({
+  result,
+  includeCourseYear,
+  sorted,
+}: SelectDetailsProps) => {
   if (result.courses.length === 0) {
-    return <span>該当無し</span>;
+    return <tr />;
   }
+  const sortedCourses = sorted ? sortByGrade(result.courses) : result.courses;
   return (
-    <div>
-      {result.courses.map((course) => {
+    <>
+      {sortedCourses.map((course) => {
+        let grade = course.grade.toLowerCase();
+        grade = grade.replace("+", "p");
+        grade = grade.replace("認定", "nin");
+        grade = grade.replace("履修中", "taking");
+        const gradeColor = sorted ? styles[grade] : "";
         return (
-          <p key={course.id}>
-            {course.id} {course.name}{" "}
-            {includeCourseYear ? `(${course.year}年度)` : ""}
-            {": "}
-            {course.grade}
-          </p>
+          <tr key={course.id} className={gradeColor}>
+            <td className={styles.courseId}>{course.id}</td>
+            <td className={styles.courseName}>
+              {course.name} {includeCourseYear ? `(${course.year}年度)` : ""}
+            </td>
+            <td className={styles.unit}>{course.unit}単位</td>
+            <td className={styles.grade}>{course.grade}</td>
+          </tr>
         );
       })}
-    </div>
+    </>
   );
 };

@@ -1,11 +1,10 @@
 .title {
-  font-size: 1.1rem;
-  margin-block-start: 30px;
+  font-size: 1.3rem;
+  padding-block-start: 30px;
 }
 
 .block {
-  width: 50%;
-  background-color: #ddd;
+  width: 80%;
   margin: 0 auto;
   padding-block: 10px 20px;
 }
@@ -15,15 +14,13 @@
 }
 
 .select {
-  width: 50%;
-  background-color: #ddd;
+  width: 80%;
   padding-block: 10px 20px;
-  margin-block-start: 10%;
   margin-inline: auto;
 }
 
-.select div {
-  margin-block: 10px;
+.groupCheck {
+  margin-block-start: 30px;
 }
 
 .bold {
@@ -40,7 +37,7 @@
 
 .total {
   font-size: 1.3rem;
-  margin-block: 5%;
+  padding-top: 5%;
 }
 
 .passed,
@@ -70,6 +67,14 @@
 @media screen and (max-width: 480px) {
   .block,
   .select {
+    width: 100% !important;
+  }
+
+  .select summary {
+    margin-left: 5px;
+  }
+
+  .select table {
     width: 100% !important;
   }
 

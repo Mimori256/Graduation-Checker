@@ -170,3 +170,10 @@ export const searchCourseFromKdb = (
   }
   return res;
 };
+
+export const sortByGrade = (courseList: Course[]): Course[] => {
+  const gradeList = ["A+", "A", "B", "C", "D", "履修中"];
+  return courseList.sort((a, b) => {
+    return gradeList.indexOf(a.grade) - gradeList.indexOf(b.grade);
+  });
+};

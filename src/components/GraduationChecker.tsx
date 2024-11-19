@@ -1,3 +1,5 @@
+import { useState } from "preact/hooks";
+
 import type { Course } from "../types/Course";
 import type { Major } from "../types/Major";
 
@@ -86,18 +88,19 @@ const GpaSection = ({ courses }: GpaSectionProps) => {
     <div>
       <h3>累計GPA</h3>
       <p>
+        {gpa ? (
+          <span className={styles.total}>{gpa.toFixed(2)}</span>
+        ) : (
+          <span>科目データが与えられていません</span>
+        )}
+      </p>
+
+      <p>
         累計GPAの計算式は『
         <a href="https://www.tsukuba.ac.jp/education/ug-courses-gpa/pdf/gpaqa_students.pdf">
           GPA制度へのQA 学生用
         </a>
         』に基づいています
-      </p>
-      <p>
-        {gpa ? (
-          <span className="total-gpa">{gpa.toFixed(2)}</span>
-        ) : (
-          <span>科目データが与えられていません</span>
-        )}
       </p>
     </div>
   );
@@ -126,20 +129,32 @@ export const GraduationChecker = ({
   const groupCount: { [key: string]: number } = countByGroup(selectResultList);
   const groups = requirement.courses.groups;
   const compulsoryUnitCount = compulsoryResultUnitCount(compulsoryResultList);
+  const [isSorted, setIsSorted] = useState(false);
   return (
     <div className={styles.content}>
       <p className={styles.title}>
         {header.department} {header.major} {header.enrollYear}年度
       </p>
+      <h2>必修科目</h2>
       <Compulsory
         compulsoryResultList={compulsoryResultList}
         includeCourseYear={includeCourseYear}
         minimumUnit={minimumUnit}
       />
+      <h2>選択科目</h2>
+      <div>
+        <label htmlFor="sortByGrade">成績順にソート</label>
+        <input
+          id="sortByGrade"
+          type="checkbox"
+          onClick={() => setIsSorted(!isSorted)}
+        />
+      </div>
       <Select
         selectResultList={selectResultList}
         includeCourseYear={includeCourseYear}
         requirement={requirement}
+        isSorted={isSorted}
       />
       <LeftCourses leftCourseList={leftCourseList} />
       <TotalCount
