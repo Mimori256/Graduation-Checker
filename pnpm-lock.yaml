@@ -7,13 +7,13 @@ settings:
 dependencies:
   chart.js:
     specifier: ^4.4.1
-    version: 4.4.5
+    version: 4.4.6
   preact:
     specifier: ^10.19.3
     version: 10.24.3
   react-chartjs-2:
     specifier: ^5.2.0
-    version: 5.2.0(chart.js@4.4.5)(react@18.3.1)
+    version: 5.2.0(chart.js@4.4.6)(react@18.3.1)
 
 devDependencies:
   '@biomejs/biome':
@@ -735,8 +735,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
 
-  /@kurkle/color@0.3.2:
-    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+  /@kurkle/color@0.3.4:
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
     dev: false
 
   /@preact/preset-vite@2.9.1(@babel/core@7.26.0)(preact@10.24.3)(vite@5.4.11):
@@ -1134,11 +1134,11 @@ packages:
       supports-color: 5.5.0
     dev: true
 
-  /chart.js@4.4.5:
-    resolution: {integrity: sha512-CVVjg1RYTJV9OCC8WeJPMx8gsV8K6WIyIEQUE3ui4AR9Hfgls9URri6Ja3hyMVBbTF8Q2KFa19PE815gWcWhng==}
+  /chart.js@4.4.6:
+    resolution: {integrity: sha512-8Y406zevUPbbIBA/HRk33khEmQPk5+cxeflWE/2rx1NJsjVWMPw/9mSP9rxHP5eqi6LNoPBVMfZHxbwLSgldYA==}
     engines: {pnpm: '>=8'}
     dependencies:
-      '@kurkle/color': 0.3.2
+      '@kurkle/color': 0.3.4
     dev: false
 
   /check-error@2.1.1:
@@ -1706,13 +1706,13 @@ packages:
   /preact@10.24.3:
     resolution: {integrity: sha512-Z2dPnBnMUfyQfSQ+GBdsGa16hz35YmLmtTLhM169uW944hYL6xzTYkJjC07j+Wosz733pMWx0fgON3JNw1jJQA==}
 
-  /react-chartjs-2@5.2.0(chart.js@4.4.5)(react@18.3.1):
+  /react-chartjs-2@5.2.0(chart.js@4.4.6)(react@18.3.1):
     resolution: {integrity: sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==}
     peerDependencies:
       chart.js: ^4.1.1
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      chart.js: 4.4.5
+      chart.js: 4.4.6
       react: 18.3.1
     dev: false
 
