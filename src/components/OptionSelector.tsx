@@ -6,6 +6,9 @@ interface OptionSelectorProps {
   readonly onYearChange: (year: string) => void;
 }
 
+// 2022~2024
+const DEFAULT_YEAR_INDEX = 1;
+
 export const OptionSelector = ({
   onMajorChange,
   onYearChange,
@@ -38,11 +41,20 @@ export const OptionSelector = ({
       <div>
         <label htmlFor="year">年度</label>
         <select name="year" id="year" onChange={handleYearChange}>
-          {years.map((year, index) => (
-            <option key={majors[index]} value={year}>
-              {year}年度
-            </option>
-          ))}
+          {years.map((year, index) => {
+            if (index === DEFAULT_YEAR_INDEX) {
+              return (
+                <option key={majors[index]} value={year} selected>
+                  {year}年度
+                </option>
+              )
+            }
+            return (
+              <option key={majors[index]} value={year}>
+                {year}年度
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>
