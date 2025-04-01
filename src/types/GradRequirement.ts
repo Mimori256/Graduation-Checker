@@ -5,7 +5,7 @@ export type Requirement = {
     header: {
       department: string;
       major: string;
-      enrollYear: number;
+      enrollYear: number | string;
     };
     courses: {
       compulsory: string[];

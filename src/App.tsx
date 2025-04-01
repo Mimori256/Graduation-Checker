@@ -17,6 +17,8 @@ const getRequirement = (major: string, year: string) => {
   let res = "";
   if (year === "2021") {
     res = `${major}-${21}`;
+  } else if (year === "2025" && major === "mast") {
+    res = `${major}-${25}`;
   } else {
     res = `${major}-${22}`;
   }
@@ -30,6 +32,7 @@ const isMajor = (str: string): str is Major => {
   return [
     "mast-21",
     "mast-22",
+    "mast-25",
     "klis-ksc-21",
     "klis-ksc-22",
     "klis-kis-21",

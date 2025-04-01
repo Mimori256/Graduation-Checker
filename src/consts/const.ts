@@ -7,7 +7,7 @@ export const majorNames = [
   "知識情報・図書館学類-知識情報システム",
   "知識情報・図書館学類-情報資源経営",
 ];
-export const years = ["2021", "2022～2024"];
+export const years = ["2021", "2022～2024", "2025"];
 
 export const compulsoryEnglishDict: { [key: string]: string } = {
   "English Reading Skills I": "31H",
