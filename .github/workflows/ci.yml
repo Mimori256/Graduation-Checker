@@ -29,3 +29,8 @@ jobs:
         run: pnpm run test
         env:
           CI: true
+          
+      - name: Build project
+        run: pnpm run build
+        env:
+          CI: true
