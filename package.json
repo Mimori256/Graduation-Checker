@@ -20,7 +20,7 @@
     "@preact/preset-vite": "^2.7.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8",
+    "vite": "^6.0.0",
     "vitest": "^2.1.4",
     "gh-pages": "^3.2.3"
   }
