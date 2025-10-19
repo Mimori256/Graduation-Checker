@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 
 import type { Course } from "../types/Course";
 import type { Major } from "../types/Major";
+import type { GradRequirement } from "../data/gradRequirementData";
 
 import { calcGpa } from "../features/calcGPA";
 import { checkCompulsory } from "../features/checkCompulsory";
@@ -13,7 +14,7 @@ import { GradePieChart } from "./GradePieChart";
 import { Select } from "./Select";
 
 import { statusSignMap } from "../consts/const";
-import requirements from "../data/major.json";
+import { gradRequirementData } from "../data/gradRequirementData";
 import styles from "../styles/GraduationChecker.module.css";
 
 interface GraduationCheckerProps {
@@ -28,7 +29,7 @@ interface LeftCoursesProps {
 
 interface TotalCountProps {
   readonly groupCount: { [key: string]: number };
-  readonly groups: any[];
+  readonly groups: (string | number)[][]
   readonly compulsoryUnitCount: number;
 }
 
@@ -66,7 +67,7 @@ const TotalCount = ({
   let sign: string;
   const values = Object.values(groupCount);
   for (let i = 0; i < values.length; i++) {
-    total += Math.min(values[i], groups[i][2]);
+    total += Math.min(values[i], groups[i][2] as number);
   }
   if (total >= 124) {
     status = "passed";
@@ -111,8 +112,8 @@ export const GraduationChecker = ({
   courseList,
   includeCourseYear,
 }: GraduationCheckerProps) => {
-  const gradRequirements = requirements;
-  const requirement = gradRequirements[requirementType];
+  const gradRequirements = gradRequirementData;
+  const requirement: GradRequirement = gradRequirements[requirementType];
   const header = requirement.header;
   const minimumUnit = requirement.courses.compulsorySumUnit;
   if (courseList.length === 0) {

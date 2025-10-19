@@ -1,4 +1,5 @@
 import type { SelectResult } from "../types/SelectResult";
+import type { GradRequirement } from "../data/gradRequirementData";
 
 import {
   countByGroup,
@@ -15,7 +16,7 @@ import tableStyles from "../styles/CourseTable.module.css";
 interface ResultProps {
   readonly selectResultList: SelectResult[];
   readonly includeCourseYear: boolean;
-  readonly requirement: any;
+  readonly requirement: GradRequirement;
   readonly isSorted: boolean;
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 
+import { type GradRequirement, gradRequirementData } from "../data/gradRequirementData";
 import type { Group } from "../types/Group";
 import type { KdbCourse, KdbData } from "../types/KdbCourse";
 import type { Major } from "../types/Major";
@@ -7,7 +8,6 @@ import type { SelectRequirement } from "../types/SelectRequirement";
 
 import { getAcademicYear, searchCourseFromKdb } from "../features/utils";
 
-import requirements from "../data/major.json";
 import styles from "../styles/GraduationChecker.module.css";
 
 interface RequirementProps {
@@ -15,11 +15,11 @@ interface RequirementProps {
 }
 
 interface CompulsoryProps {
-  readonly requirement: any;
+  readonly requirement: GradRequirement;
 }
 
 interface SelectProps {
-  readonly requirement: any;
+  readonly requirement: GradRequirement;
   readonly kdbData: KdbCourse[];
 }
 
@@ -35,7 +35,7 @@ interface SelectGroupProps {
   readonly maximum: number;
   readonly selects: SelectRequirement[];
   readonly kdbData: KdbCourse[];
-  readonly requirements: any;
+  readonly requirements: GradRequirement;
 }
 
 const getKdBData = async () => {
@@ -166,8 +166,8 @@ const SelectGroup = ({
 };
 
 const SelectSection = ({ requirement, kdbData }: SelectProps) => {
-  const tmpSelects: any = requirement.courses.select;
-  const selects: SelectRequirement[] = tmpSelects.map((select: any) => {
+  const tmpSelects: GradRequirement["courses"]["select"] = requirement.courses.select;
+  const selects = tmpSelects.map((select) => {
     return {
       codes: select[0],
       minimum: select[1],
@@ -176,8 +176,8 @@ const SelectSection = ({ requirement, kdbData }: SelectProps) => {
       message: select[4],
       group: select[5],
     } as const;
-  });
-  const groups: Group[] = requirement.courses.groups;
+  }) as SelectRequirement[];
+  const groups = requirement.courses.groups as Group[];
   const courseGroupOutputList = [
     "専門科目",
     "専門基礎科目",
@@ -219,7 +219,7 @@ export const Requirement = ({ major }: RequirementProps) => {
     fetchData();
   }, []);
 
-  const gradRequirements = requirements;
+  const gradRequirements = gradRequirementData;
   const requirement = gradRequirements[major];
   const department = requirement.header.department;
   return (

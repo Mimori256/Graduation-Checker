@@ -1,3 +1,5 @@
+import type { JSX } from "preact";
+import type { GradRequirement } from "../data/gradRequirementData";
 import type { Group } from "../types/Group";
 
 import styles from "../styles/GraduationChecker.module.css";
@@ -5,12 +7,12 @@ import tableStyles from "../styles/CourseTable.module.css";
 
 interface GroupProps {
   readonly groupCount: { [key: string]: number };
-  readonly requirement: any;
+  readonly requirement: GradRequirement;
 }
 
 interface GroupSectionProps {
   readonly groupCount: { [key: string]: number };
-  readonly courseGroup: any;
+  readonly courseGroup: Group;
 }
 
 const totalUnitCount = (
@@ -30,7 +32,7 @@ const GroupSection = ({ groupCount, courseGroup }: GroupSectionProps) => {
   const minimum: number = courseGroup[1];
   const maximum: number = courseGroup[2];
   const message: string = courseGroup[3];
-  let passedElement: any;
+  let passedElement: JSX.Element;
   if (groupCount[group] > maximum) {
     passedElement = (
       <span>
@@ -55,7 +57,7 @@ const GroupSection = ({ groupCount, courseGroup }: GroupSectionProps) => {
 };
 
 export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
-  const courseGroups: Group[] = requirement.courses.groups;
+  const courseGroups: Group[] = requirement.courses.groups as Group[];
   return (
     <div className={styles.groupCheck}>
       <div className={tableStyles.table}>

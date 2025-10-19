@@ -1,3 +1,5 @@
+import type { GradRequirement } from "../data/gradRequirementData";
+
 import type { CompulsoryResult } from "../types/CompulsoryResult";
 import type { Course, Grade } from "../types/Course";
 
@@ -36,7 +38,7 @@ interface CheckCompulsoryResult {
 
 export const checkCompulsory = (
   courseListSource: Course[],
-  requirement: any,
+  requirement: GradRequirement,
 ): CheckCompulsoryResult => {
   // Preprocess
   const courseList = checkCourseCertificate(courseListSource);

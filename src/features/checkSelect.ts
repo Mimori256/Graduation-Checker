@@ -1,4 +1,5 @@
 import type { Course } from "../types/Course";
+import type { GradRequirement } from "../data/gradRequirementData";
 import type { SelectRequirement } from "../types/SelectRequirement";
 import type { SelectResult } from "../types/SelectResult";
 
@@ -80,10 +81,10 @@ const findCourseFromCode = (
 
 export const checkSelect = (
   courseList: Course[],
-  requirementObject: any,
+  requirementObject: GradRequirement,
 ): CheckSelectResult => {
   const requirements: SelectRequirement[] =
-    requirementObject.courses.select.map((x: any) => {
+    requirementObject.courses.select.map((x) => {
       return {
         codes: x[0],
         minimum: x[1],

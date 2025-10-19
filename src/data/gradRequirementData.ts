@@ -1,4 +1,4 @@
-{
+export const gradRequirementData = {
   "mast-21": {
     "header": {
       "department": "情報メディア創成学類",
@@ -1393,3 +1393,5 @@
     }
   }
 }
+
+export type GradRequirement = (typeof gradRequirementData)[keyof typeof gradRequirementData];
