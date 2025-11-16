@@ -13,7 +13,7 @@ dependencies:
     version: 10.27.2
   react-chartjs-2:
     specifier: ^5.2.0
-    version: 5.3.0(chart.js@4.5.0)(react@19.2.0)
+    version: 5.3.1(chart.js@4.5.0)(react@19.2.0)
 
 devDependencies:
   '@biomejs/biome':
@@ -1149,7 +1149,7 @@ packages:
     dependencies:
       baseline-browser-mapping: 2.8.28
       caniuse-lite: 1.0.30001754
-      electron-to-chromium: 1.5.252
+      electron-to-chromium: 1.5.254
       node-releases: 2.0.27
       update-browserslist-db: 1.1.4(browserslist@4.28.0)
     dev: true
@@ -1305,8 +1305,8 @@ packages:
     resolution: {integrity: sha512-JlXUemX4s0+9f8mLqib/bHH8gOHf5elKS6KeWG3sk3xozb/JTq/RLXIv8OKUWiK4Ah00Wm88EFj5PYkFr4RUPA==}
     dev: true
 
-  /electron-to-chromium@1.5.252:
-    resolution: {integrity: sha512-53uTpjtRgS7gjIxZ4qCgFdNO2q+wJt/Z8+xAvxbCqXPJrY6h7ighUkadQmNMXH96crtpa6gPFNP7BF4UBGDuaA==}
+  /electron-to-chromium@1.5.254:
+    resolution: {integrity: sha512-DcUsWpVhv9svsKRxnSCZ86SjD+sp32SGidNB37KpqXJncp1mfUgKbHvBomE89WJDbfVKw1mdv5+ikrvd43r+Bg==}
     dev: true
 
   /email-addresses@3.1.0:
@@ -1755,8 +1755,8 @@ packages:
   /preact@10.27.2:
     resolution: {integrity: sha512-5SYSgFKSyhCbk6SrXyMpqjb5+MQBgfvEKE/OC+PujcY34sOpqtr+0AZQtPYx5IA6VxynQ7rUPCtKzyovpj9Bpg==}
 
-  /react-chartjs-2@5.3.0(chart.js@4.5.0)(react@19.2.0):
-    resolution: {integrity: sha512-UfZZFnDsERI3c3CZGxzvNJd02SHjaSJ8kgW1djn65H1KK8rehwTjyrRKOG3VTMG8wtHZ5rgAO5oTHtHi9GCCmw==}
+  /react-chartjs-2@5.3.1(chart.js@4.5.0)(react@19.2.0):
+    resolution: {integrity: sha512-h5IPXKg9EXpjoBzUfyWJvllMjG2mQ4EiuHQFhms/AjUm0XSZHhyRy2xVmLXHKrtcdrPO4mnGqRtYoD0vp95A0A==}
     peerDependencies:
       chart.js: ^4.1.1
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
