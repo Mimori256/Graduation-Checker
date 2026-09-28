@@ -9,11 +9,20 @@
   },
   "scripts": {
     "dev": "vite",
+    "lint": "biome lint",
+    "format": "biome format --write",
+    "prepare": "husky",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
     "deploy": "vite build && gh-pages -d dist"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,jsonc,css}": [
+      "pnpm lint --write --no-errors-on-unmatched",
+      "pnpm format --no-errors-on-unmatched"
+    ]
   },
   "dependencies": {
     "chart.js": "^4.4.1",
@@ -21,9 +30,11 @@
     "react-chartjs-2": "^5.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.4.1",
+    "@biomejs/biome": "^2.5.14",
     "@preact/preset-vite": "^2.10.6",
     "gh-pages": "^3.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "rollup-plugin-visualizer": "^7.1.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",

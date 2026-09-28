@@ -25,7 +25,7 @@ const findCourseFromCode = (
 
   // Not exclusive requirement
   if (!isExclusive) {
-    codes.map((code) => {
+    codes.forEach((code) => {
       // if the code is not a tag
       if (!code.startsWith("*")) {
         includedIDList = idList.filter((id) => id.startsWith(code));
@@ -38,7 +38,7 @@ const findCourseFromCode = (
         const tag = code.replace("*", "");
         const tagCodes = codeType[tag as keyof typeof codeType].codes;
         const tagExcept = codeType[tag as keyof typeof codeType].except;
-        tagCodes.map((tagCode) => {
+        tagCodes.forEach((tagCode) => {
           includedIDList = idList.filter(
             (id) => id.startsWith(tagCode) && !beginWithMatch(id, tagExcept),
           );
@@ -53,7 +53,7 @@ const findCourseFromCode = (
     // Exclusive requirement
     let expandedExcludeList: string[] = [];
     let expandedExceptList: string[] = [];
-    codes.map((code) => {
+    codes.forEach((code) => {
       if (!code.startsWith("*")) {
         expandedExcludeList.push(code);
       } else {
@@ -97,7 +97,7 @@ export const checkSelect = (
   let excludeCourseList: Course[] = [];
   const selectResultList: SelectResult[] = [];
   const idList = createElementList("id", courseList);
-  requirements.map((requirement) => {
+  requirements.forEach((requirement) => {
     const detectedCourses = findCourseFromCode(requirement, idList, courseList);
     excludeCourseList = excludeCourseList.concat(detectedCourses);
     selectResultList.push({

@@ -14,7 +14,7 @@ import { compulsoryEnglishDict } from "../consts/const";
 import { codeType } from "../consts/courseCodeTypes";
 
 const checkCourseCertificate = (courseList: Course[]): Course[] => {
-  courseList.map((c) => {
+  courseList.forEach((c) => {
     if (c.grade === "認" && compulsoryEnglishDict[c.name] !== undefined) {
       c.id = compulsoryEnglishDict[c.name];
     }
@@ -58,7 +58,7 @@ export const checkCompulsory = (
   let alternativeExists: boolean;
   const compulsoryResultList: CompulsoryResult[] = [];
 
-  compulsoryList.map((compulsory) => {
+  compulsoryList.forEach((compulsory) => {
     // Initialize
     courseName = compulsory;
     detectedCourses = [];
@@ -87,7 +87,7 @@ export const checkCompulsory = (
         .filter(
           (id) => beginWithMatch(id, codes) && !beginWithMatch(id, except),
         )
-        .map((id) => {
+        .forEach((id) => {
           const unit = searchCourse("id", id, courseList).unit;
           detectedCourses.push(searchCourse("id", id, courseList));
           excludeCourseList.push(searchCourse("id", id, courseList));
