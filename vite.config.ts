@@ -3,16 +3,15 @@ import { defineConfig } from "vite";
 
 import preact from "@preact/preset-vite";
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
   base: "https://mimori256.github.io/Graduation-Checker/",
   plugins: [preact()],
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       plugins: [visualizer()],
     },
 
     outDir: "dist",
-    minify: "esbuild",
   },
 });
