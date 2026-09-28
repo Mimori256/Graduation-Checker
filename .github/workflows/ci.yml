@@ -19,11 +19,13 @@ jobs:
         with:
           node-version: 24
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          install: false
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests
         run: pnpm run test

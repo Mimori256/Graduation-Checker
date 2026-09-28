@@ -6,6 +6,23 @@
 
 TWINS の成績データから、筑波大学の卒業要件を満たしているかどうか確認するツール。現在は情報学群メディア創成学類と、知識情報・図書館学類の令和 3～7 年度入学生の卒業要件のみに対応しています。
 
+## 開発環境
+
+Node.js 24 系と、`package.json` の `packageManager` に指定した pnpm 12 系を使用します。
+pnpm の導入方法は[公式ドキュメント](https://pnpm.io/installation)を参照してください。
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+テストとビルドは次のコマンドで実行できます。
+
+```sh
+pnpm test --run
+pnpm build
+```
+
 ## 卒業要件ファイルのフォーマット
 
 卒業要件を表すデータファイルは JSON 形式になっています。具体的なフォーマットは以下のようになっています。
