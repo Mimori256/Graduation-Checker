@@ -13,7 +13,7 @@ dependencies:
     version: 10.27.2
   react-chartjs-2:
     specifier: ^5.2.0
-    version: 5.3.0(chart.js@4.5.0)(react@19.2.0)
+    version: 5.3.1(chart.js@4.5.0)(react@19.2.0)
 
 devDependencies:
   '@biomejs/biome':
@@ -1755,8 +1755,8 @@ packages:
   /preact@10.27.2:
     resolution: {integrity: sha512-5SYSgFKSyhCbk6SrXyMpqjb5+MQBgfvEKE/OC+PujcY34sOpqtr+0AZQtPYx5IA6VxynQ7rUPCtKzyovpj9Bpg==}
 
-  /react-chartjs-2@5.3.0(chart.js@4.5.0)(react@19.2.0):
-    resolution: {integrity: sha512-UfZZFnDsERI3c3CZGxzvNJd02SHjaSJ8kgW1djn65H1KK8rehwTjyrRKOG3VTMG8wtHZ5rgAO5oTHtHi9GCCmw==}
+  /react-chartjs-2@5.3.1(chart.js@4.5.0)(react@19.2.0):
+    resolution: {integrity: sha512-h5IPXKg9EXpjoBzUfyWJvllMjG2mQ4EiuHQFhms/AjUm0XSZHhyRy2xVmLXHKrtcdrPO4mnGqRtYoD0vp95A0A==}
     peerDependencies:
       chart.js: ^4.1.1
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
