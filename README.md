@@ -8,7 +8,7 @@ TWINS の成績データから、筑波大学の卒業要件を満たしてい�
 
 ## 開発環境
 
-Node.js 24 系と、`package.json` の `packageManager` に指定した pnpm 12 系を使用します。
+Node.js 26 系と、`package.json` の `packageManager` に指定した pnpm 12 系を使用します。
 pnpm の導入方法は[公式ドキュメント](https://pnpm.io/installation)を参照してください。
 
 ```sh
