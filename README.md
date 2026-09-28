@@ -16,9 +16,10 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-テストとビルドは次のコマンドで実行できます。
+TypeScript 7 系を使用します。型チェック、テスト、ビルドは次のコマンドで実行できます。
 
 ```sh
+pnpm typecheck
 pnpm test --run
 pnpm build
 ```

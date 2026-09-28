@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -22,10 +23,10 @@
   "devDependencies": {
     "@biomejs/biome": "^1.4.1",
     "@preact/preset-vite": "^2.7.0",
+    "gh-pages": "^3.2.3",
     "rollup-plugin-visualizer": "^6.0.0",
-    "typescript": "^5.2.2",
+    "typescript": "^7.0.2",
     "vite": "^6.0.0",
-    "vitest": "^4.0.0",
-    "gh-pages": "^3.2.3"
+    "vitest": "^4.0.0"
   }
 }
