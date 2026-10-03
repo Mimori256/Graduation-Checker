@@ -37,11 +37,7 @@ export const Details = ({ result, includeCourseYear }: DetailsProps) => {
   );
 };
 
-export const SelectDetails = ({
-  result,
-  includeCourseYear,
-  sorted,
-}: SelectDetailsProps) => {
+export const SelectDetails = ({ result, includeCourseYear, sorted }: SelectDetailsProps) => {
   if (result.courses.length === 0) {
     return <tr />;
   }

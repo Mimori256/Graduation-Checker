@@ -52,9 +52,7 @@ const Usage = () => (
       <li>
         そのCSVファイルを上で選択すると、その成績が卒業要件を満たしているか確認することができます
       </li>
-      <li>
-        科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます
-      </li>
+      <li>科目の左の三角をクリックすることで、単位の内訳の科目を詳細表示することができます</li>
       <li>
         また、「卒業要件のみを表示」ボタンを押すことで、選択している専攻の卒業要件を表示することができます
       </li>
@@ -121,17 +119,10 @@ export function App() {
         </div>
         <label htmlFor="grade-csv">TWINSの成績ファイル</label>
         <p>
-          <input
-            type="file"
-            id="grade-csv"
-            accept=".csv"
-            onChange={onFileStateChanged}
-          />
+          <input type="file" id="grade-csv" accept=".csv" onChange={onFileStateChanged} />
         </p>
         <p>
-          <label htmlFor="include-course-year">
-            各授業の履修年度も表示する
-          </label>
+          <label htmlFor="include-course-year">各授業の履修年度も表示する</label>
           <input
             id="include-course-year"
             type="checkbox"
@@ -144,11 +135,7 @@ export function App() {
             }}
           />
         </p>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={handleReqirementButton}
-        >
+        <button type="button" className={styles.button} onClick={handleReqirementButton}>
           卒業要件のみを表示
         </button>
       </div>
