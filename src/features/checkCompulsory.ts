@@ -3,12 +3,7 @@ import type { GradRequirement } from "../data/gradRequirementData";
 import type { CompulsoryResult } from "../types/CompulsoryResult";
 import type { Course, Grade } from "../types/Course";
 
-import {
-  beginWithMatch,
-  createElementList,
-  isFailed,
-  searchCourse,
-} from "./utils";
+import { beginWithMatch, createElementList, isFailed, searchCourse } from "./utils";
 
 import { compulsoryEnglishDict } from "../consts/const";
 import { codeType } from "../consts/courseCodeTypes";
@@ -27,9 +22,7 @@ const checkAlternativeRequirement = (
   courseNameList: string[],
   alternativeRequirement: string[],
 ): boolean =>
-  alternativeRequirement.every((requiredCourse) =>
-    courseNameList.includes(requiredCourse),
-  );
+  alternativeRequirement.every((requiredCourse) => courseNameList.includes(requiredCourse));
 
 interface CheckCompulsoryResult {
   compulsoryResultList: CompulsoryResult[];
@@ -67,9 +60,7 @@ export const checkCompulsory = (
 
     // Check if the requirement has alternative courses
     if (courseName.includes("//")) {
-      alternativeRequirement = JSON.parse(
-        courseName.split("//")[1].replace(/'/g, '"'),
-      );
+      alternativeRequirement = JSON.parse(courseName.split("//")[1].replace(/'/g, '"'));
       courseName = courseName.split("//")[0];
       alternativeExists = true;
     }
@@ -84,9 +75,7 @@ export const checkCompulsory = (
       except = codeType[courseTag as keyof typeof codeType].except;
       let unitCount = 0;
       idList
-        .filter(
-          (id) => beginWithMatch(id, codes) && !beginWithMatch(id, except),
-        )
+        .filter((id) => beginWithMatch(id, codes) && !beginWithMatch(id, except))
         .forEach((id) => {
           const unit = searchCourse("id", id, courseList).unit;
           detectedCourses.push(searchCourse("id", id, courseList));
@@ -157,9 +146,7 @@ export const checkCompulsory = (
       } as const);
     }
   });
-  const newCourseList = courseList.filter(
-    (c) => !excludeCourseList.includes(c),
-  );
+  const newCourseList = courseList.filter((c) => !excludeCourseList.includes(c));
   return {
     compulsoryResultList: compulsoryResultList,
     newCourseList: newCourseList,

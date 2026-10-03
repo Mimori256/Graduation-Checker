@@ -39,8 +39,7 @@ interface SelectGroupProps {
 }
 
 const getKdBData = async () => {
-  const dataUrl =
-    "https://raw.githubusercontent.com/Mimori256/kdb-parse/main/kdb_gradcheck.json";
+  const dataUrl = "https://raw.githubusercontent.com/Mimori256/kdb-parse/main/kdb_gradcheck.json";
   const response = await fetch(dataUrl);
   const data: KdbData = await response.json();
   return data.courses;
@@ -72,14 +71,12 @@ const createOutputGroup = (
 
 const CompulsoryRequirement = ({ requirement }: CompulsoryProps) => {
   const compulsorySumUnit = requirement.courses.compulsorySumUnit;
-  const compulsoryCourses: string[] = requirement.courses.compulsory.map(
-    (name: string) => {
-      if (name.includes("::")) {
-        return `${name.replace("::", " ")}単位`;
-      }
-      return name.replace("//", " 互換: ");
-    },
-  );
+  const compulsoryCourses: string[] = requirement.courses.compulsory.map((name: string) => {
+    if (name.includes("::")) {
+      return `${name.replace("::", " ")}単位`;
+    }
+    return name.replace("//", " 互換: ");
+  });
   return (
     <div className={styles.block}>
       <h2>必修科目</h2>
@@ -91,17 +88,9 @@ const CompulsoryRequirement = ({ requirement }: CompulsoryProps) => {
   );
 };
 
-const SelectElement = ({
-  select,
-  kdbData,
-  compulsoryList,
-}: SelectElementProps) => {
+const SelectElement = ({ select, kdbData, compulsoryList }: SelectElementProps) => {
   if (isDetailAvailableSelect(select)) {
-    const availableCourses = searchCourseFromKdb(
-      select.codes,
-      kdbData,
-      compulsoryList,
-    );
+    const availableCourses = searchCourseFromKdb(select.codes, kdbData, compulsoryList);
     const academicYear = getAcademicYear();
     return (
       <div>
@@ -119,8 +108,8 @@ const SelectElement = ({
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  {course.id} {course.name} {course.modules} {course.period}{" "}
-                  {course.credits}単位 {course.registerYear}年次
+                  {course.id} {course.name} {course.modules} {course.period} {course.credits}単位{" "}
+                  {course.registerYear}年次
                 </a>
               </p>
             );
@@ -178,12 +167,7 @@ const SelectSection = ({ requirement, kdbData }: SelectProps) => {
     } as const;
   }) as SelectRequirement[];
   const groups = requirement.courses.groups as Group[];
-  const courseGroupOutputList = [
-    "専門科目",
-    "専門基礎科目",
-    "共通科目",
-    "関連科目",
-  ];
+  const courseGroupOutputList = ["専門科目", "専門基礎科目", "共通科目", "関連科目"];
   const outputGroup = createOutputGroup(selects);
   return (
     <div className={styles.select}>
@@ -216,7 +200,7 @@ export const Requirement = ({ major }: RequirementProps) => {
       const data = await getKdBData();
       setKdbData(data);
     };
-    fetchData();
+    void fetchData();
   }, []);
 
   const gradRequirements = gradRequirementData;

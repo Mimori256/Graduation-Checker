@@ -1,11 +1,7 @@
 import type { SelectResult } from "../types/SelectResult";
 import type { GradRequirement } from "../data/gradRequirementData";
 
-import {
-  countByGroup,
-  getSignAndStatus,
-  selectResultUnitCount,
-} from "../features/utils";
+import { countByGroup, getSignAndStatus, selectResultUnitCount } from "../features/utils";
 
 import { SelectDetails } from "./Details";
 import { GroupCheck } from "./GroupCheck";
@@ -26,11 +22,7 @@ interface RequirementProps {
   isSorted: boolean;
 }
 
-const Requirement = ({
-  selectResult,
-  includeCourseYear,
-  isSorted,
-}: RequirementProps) => {
+const Requirement = ({ selectResult, includeCourseYear, isSorted }: RequirementProps) => {
   const unitCount = selectResultUnitCount([selectResult]);
   const [status, sign] = getSignAndStatus(selectResult);
 
@@ -40,8 +32,7 @@ const Requirement = ({
         <summary>
           {selectResult.requirement.message}
           <span className={styles[status]}>{sign}</span>
-          {unitCount}({selectResult.requirement.minimum}~
-          {selectResult.requirement.maximum})
+          {unitCount}({selectResult.requirement.minimum}~{selectResult.requirement.maximum})
         </summary>
         <table>
           <thead>
@@ -83,10 +74,7 @@ export const Select = ({
           />
         );
       })}
-      <GroupCheck
-        groupCount={countByGroup(selectResultList)}
-        requirement={requirement}
-      />
+      <GroupCheck groupCount={countByGroup(selectResultList)} requirement={requirement} />
     </div>
   );
 };

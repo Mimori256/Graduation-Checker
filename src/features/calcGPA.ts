@@ -12,10 +12,7 @@ const gradePoints: {
   D: 0.0,
 };
 
-export const calcUnitsPerGrades = (
-  courses: Course[],
-  targetGrades: Grade[],
-) => {
+export const calcUnitsPerGrades = (courses: Course[], targetGrades: Grade[]) => {
   const ratioPerGrade: { [key in Grade]: number } = {
     "A+": 0,
     A: 0,
@@ -41,19 +38,13 @@ export const calcUnitsPerGrades = (
 
 export const calcGpa = (courses: Course[]) => {
   const unitsPerGrades = calcUnitsPerGrades(courses, gradesIncludeCalcs);
-  const totalUnits = Object.values(unitsPerGrades).reduce(
-    (acc, cur) => acc + cur,
-    0,
-  );
-  const totalGradePoints = Object.entries(unitsPerGrades).reduce(
-    (acc, [grade, units]) => {
-      if (units !== 0) {
-        return acc + gradePoints[grade as GradesIncludedInCalc] * units;
-      }
-      return acc;
-    },
-    0,
-  );
+  const totalUnits = Object.values(unitsPerGrades).reduce((acc, cur) => acc + cur, 0);
+  const totalGradePoints = Object.entries(unitsPerGrades).reduce((acc, [grade, units]) => {
+    if (units !== 0) {
+      return acc + gradePoints[grade as GradesIncludedInCalc] * units;
+    }
+    return acc;
+  }, 0);
 
   return totalGradePoints / totalUnits;
 };

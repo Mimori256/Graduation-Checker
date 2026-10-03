@@ -29,7 +29,7 @@ interface LeftCoursesProps {
 
 interface TotalCountProps {
   readonly groupCount: { [key: string]: number };
-  readonly groups: (string | number)[][]
+  readonly groups: (string | number)[][];
   readonly compulsoryUnitCount: number;
 }
 
@@ -57,11 +57,7 @@ const LeftCourses = ({ leftCourseList }: LeftCoursesProps) => {
   );
 };
 
-const TotalCount = ({
-  groupCount,
-  groups,
-  compulsoryUnitCount,
-}: TotalCountProps) => {
+const TotalCount = ({ groupCount, groups, compulsoryUnitCount }: TotalCountProps) => {
   let total = compulsoryUnitCount;
   let status: keyof typeof statusSignMap;
   let sign: string;
@@ -119,14 +115,8 @@ export const GraduationChecker = ({
   if (courseList.length === 0) {
     return <div />;
   }
-  const { compulsoryResultList, newCourseList } = checkCompulsory(
-    courseList,
-    requirement,
-  );
-  const { selectResultList, leftCourseList } = checkSelect(
-    newCourseList,
-    requirement,
-  );
+  const { compulsoryResultList, newCourseList } = checkCompulsory(courseList, requirement);
+  const { selectResultList, leftCourseList } = checkSelect(newCourseList, requirement);
   const groupCount: { [key: string]: number } = countByGroup(selectResultList);
   const groups = requirement.courses.groups;
   const compulsoryUnitCount = compulsoryResultUnitCount(compulsoryResultList);
@@ -145,11 +135,7 @@ export const GraduationChecker = ({
       <h2>選択科目</h2>
       <div>
         <label htmlFor="sortByGrade">成績順にソート</label>
-        <input
-          id="sortByGrade"
-          type="checkbox"
-          onClick={() => setIsSorted(!isSorted)}
-        />
+        <input id="sortByGrade" type="checkbox" onClick={() => setIsSorted(!isSorted)} />
       </div>
       <Select
         selectResultList={selectResultList}

@@ -9,10 +9,7 @@ interface OptionSelectorProps {
 // 2022~2024
 const DEFAULT_YEAR_INDEX = 1;
 
-export const OptionSelector = ({
-  onMajorChange,
-  onYearChange,
-}: OptionSelectorProps) => {
+export const OptionSelector = ({ onMajorChange, onYearChange }: OptionSelectorProps) => {
   const handleMajorChange = (e: Event) => {
     const target = e.target as HTMLSelectElement;
     onMajorChange(target.value);
@@ -47,7 +44,7 @@ export const OptionSelector = ({
                 <option key={majors[index]} value={year} selected>
                   {year}年度
                 </option>
-              )
+              );
             }
             return (
               <option key={majors[index]} value={year}>
