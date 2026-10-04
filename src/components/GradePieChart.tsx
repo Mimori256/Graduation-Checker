@@ -14,9 +14,7 @@ type PiechartComponentProps = {
 export const GradePieChart = ({ courseList }: PiechartComponentProps) => {
   if (!courseList) return <div />;
 
-  const unitsPerGrades: number[] = Object.values(
-    calcUnitsPerGrades(courseList, targetGrades),
-  );
+  const unitsPerGrades: number[] = Object.values(calcUnitsPerGrades(courseList, targetGrades));
 
   ChartJS.register(ArcElement, Tooltip, Legend);
 

@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import { test, expect } from "vite-plus/test";
 
 import { checkCompulsory } from "../features/checkCompulsory";
 import { compulsoryResultUnitCount } from "../features/utils";

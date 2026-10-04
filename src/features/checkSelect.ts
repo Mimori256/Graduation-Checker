@@ -66,9 +66,7 @@ const findCourseFromCode = (
       }
     });
     includedIDList = idList.filter(
-      (id) =>
-        !beginWithMatch(id, expandedExcludeList) ||
-        beginWithMatch(id, expandedExceptList),
+      (id) => !beginWithMatch(id, expandedExcludeList) || beginWithMatch(id, expandedExceptList),
     );
     excludeCourseList = excludeCourseList.concat(
       includedIDList.map((id) => {
@@ -83,17 +81,16 @@ export const checkSelect = (
   courseList: Course[],
   requirementObject: GradRequirement,
 ): CheckSelectResult => {
-  const requirements: SelectRequirement[] =
-    requirementObject.courses.select.map((x) => {
-      return {
-        codes: x[0],
-        minimum: x[1],
-        maximum: x[2],
-        isExcludeRequirement: x[3],
-        message: x[4],
-        group: x[5],
-      } as SelectRequirement;
-    });
+  const requirements: SelectRequirement[] = requirementObject.courses.select.map((x) => {
+    return {
+      codes: x[0],
+      minimum: x[1],
+      maximum: x[2],
+      isExcludeRequirement: x[3],
+      message: x[4],
+      group: x[5],
+    } as SelectRequirement;
+  });
   let excludeCourseList: Course[] = [];
   const selectResultList: SelectResult[] = [];
   const idList = createElementList("id", courseList);
@@ -105,9 +102,7 @@ export const checkSelect = (
       courses: detectedCourses,
     });
   });
-  const newCourseList = courseList.filter(
-    (course) => !excludeCourseList.includes(course),
-  );
+  const newCourseList = courseList.filter((course) => !excludeCourseList.includes(course));
   return {
     selectResultList: selectResultList,
     leftCourseList: newCourseList,

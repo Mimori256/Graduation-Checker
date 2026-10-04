@@ -18,10 +18,7 @@ interface SubjectProps {
   readonly includeCourseYear: boolean;
 }
 
-const SingleCompulsorySubject = ({
-  compulsoryResult,
-  includeCourseYear,
-}: SubjectProps) => {
+const SingleCompulsorySubject = ({ compulsoryResult, includeCourseYear }: SubjectProps) => {
   const [status, sign] = getSignAndStatus(compulsoryResult);
   if (compulsoryResult.courses.length === 0) {
     return (
@@ -51,19 +48,14 @@ const SingleCompulsorySubject = ({
   );
 };
 
-const CompulsoryCourseGroup = ({
-  compulsoryResult,
-  includeCourseYear,
-}: SubjectProps) => {
+const CompulsoryCourseGroup = ({ compulsoryResult, includeCourseYear }: SubjectProps) => {
   const [status, sign] = getSignAndStatus(compulsoryResult);
   return (
     <div className={tableStyles.table}>
       <details open>
         <summary>
-          {compulsoryResult.name.split("::")[0]}{" "}
-          <span className={styles[status]}>{sign}</span>
-          {compulsoryResultUnitCount([compulsoryResult])}/
-          {compulsoryResult.minimumUnit}単位
+          {compulsoryResult.name.split("::")[0]} <span className={styles[status]}>{sign}</span>
+          {compulsoryResultUnitCount([compulsoryResult])}/{compulsoryResult.minimumUnit}単位
         </summary>
         <table>
           <thead>
@@ -75,10 +67,7 @@ const CompulsoryCourseGroup = ({
             </tr>
           </thead>
           <tbody>
-            <Details
-              result={compulsoryResult}
-              includeCourseYear={includeCourseYear}
-            />
+            <Details result={compulsoryResult} includeCourseYear={includeCourseYear} />
           </tbody>
         </table>
       </details>

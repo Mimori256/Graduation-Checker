@@ -4,21 +4,13 @@ const Contributors = () => (
   <footer className={styles.contributor}>
     Contributed by{" "}
     <address className={`contributor ${styles.contributor}`}>
-      <a
-        href="https:///github.com/Mimori256"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
+      <a href="https:///github.com/Mimori256" target="_blank" rel="noreferrer noopener">
         Mimori
       </a>
     </address>
     ,&thinsp;
     <address className={`contributor ${styles.contributor}`}>
-      <a
-        href="https://github.com/yudukikun5120"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
+      <a href="https://github.com/yudukikun5120" target="_blank" rel="noreferrer noopener">
         yudukikun5120
       </a>
     </address>
@@ -29,9 +21,7 @@ export const Footer = () => {
   return (
     <div className={styles.footer}>
       <ul>
-        <li>
-          TWINSの成績ファイルはローカルで処理され、サーバにアップロードされることはありません
-        </li>
+        <li>TWINSの成績ファイルはローカルで処理され、サーバにアップロードされることはありません</li>
         <li>
           現在は2021～2024年度入学の情報学群メディア創成学類、知識情報図書館学類の卒業要件のみに対応しています
         </li>
@@ -46,9 +36,7 @@ export const Footer = () => {
           </a>
           に基づいています
         </li>
-        <li>
-          このツールの使用によって生じた不利益等について、開発者は一切の責任を負いません
-        </li>
+        <li>このツールの使用によって生じた不利益等について、開発者は一切の責任を負いません</li>
       </ul>
       <p>
         <a

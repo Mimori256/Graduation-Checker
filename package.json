@@ -1,28 +1,19 @@
 {
   "name": "gradchecker",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.6.0",
-  "engines": {
-    "pnpm": ">=12.0.0 <13.0.0"
-  },
   "scripts": {
-    "dev": "vite",
-    "lint": "biome lint",
-    "format": "biome format --write",
-    "prepare": "husky",
+    "dev": "vp dev",
+    "lint": "vp lint",
+    "format": "vp fmt",
+    "prepare": "vp config",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "deploy": "vite build && gh-pages -d dist"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,jsonc,css}": [
-      "pnpm lint --write --no-errors-on-unmatched",
-      "pnpm format --no-errors-on-unmatched"
-    ]
+    "build": "vp build",
+    "preview": "vp preview",
+    "test": "vp test",
+    "deploy": "vp build && gh-pages -d dist",
+    "check": "vp check"
   },
   "dependencies": {
     "chart.js": "^4.4.1",
@@ -30,14 +21,15 @@
     "react-chartjs-2": "^5.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14",
     "@preact/preset-vite": "^2.10.6",
     "gh-pages": "^3.2.3",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.6.0",
     "rollup-plugin-visualizer": "^7.1.1",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
-    "vitest": "^4.1.11"
-  }
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "pnpm": ">=12.0.0 <13.0.0"
+  },
+  "packageManager": "pnpm@12.6.0"
 }

@@ -15,10 +15,7 @@ interface GroupSectionProps {
   readonly courseGroup: Group;
 }
 
-const totalUnitCount = (
-  groupCount: { [key: string]: number },
-  courseGroups: Group[],
-) => {
+const totalUnitCount = (groupCount: { [key: string]: number }, courseGroups: Group[]) => {
   const groupValues = Object.values(groupCount);
   let total = 0;
   for (let i = 0; i < groupValues.length; i++) {
@@ -73,11 +70,7 @@ export const GroupCheck = ({ groupCount, requirement }: GroupProps) => {
           <tbody>
             {courseGroups.map((courseGroup) => {
               return (
-                <GroupSection
-                  key={courseGroup}
-                  groupCount={groupCount}
-                  courseGroup={courseGroup}
-                />
+                <GroupSection key={courseGroup} groupCount={groupCount} courseGroup={courseGroup} />
               );
             })}
           </tbody>

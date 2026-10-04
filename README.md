@@ -24,14 +24,13 @@ pnpm test --run
 pnpm build
 ```
 
-Biome による lint とフォーマットは次のコマンドで実行できます。
+Vite+ (Oxlint / Oxfmt) による lint とフォーマットは次のコマンドで実行できます。
 
 ```sh
-pnpm lint
-pnpm format
+pnpm check
 ```
 
-`pnpm install` 時に Husky の Git フックが設定されます。コミット前に、ステージ済みのファイルに対して lint の自動修正とフォーマットを実行し、修正結果をコミットに含めます。修正できない lint エラーがある場合、コミットは中止されます。
+`pnpm install` 時に Vite+ の Git フック (`vp staged`)が設定されます。コミット前に、ステージ済みのファイルに対して lint の自動修正とフォーマットを実行し、修正結果をコミットに含めます。修正できない lint エラーがある場合、コミットは中止されます。
 
 ## 卒業要件の追加・更新
 

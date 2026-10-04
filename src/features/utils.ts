@@ -5,8 +5,7 @@ import type { SelectResult } from "../types/SelectResult";
 
 import { errorCourse, statusSignMap } from "../consts/const";
 
-export const isFailed = (grade: string): boolean =>
-  grade === "F" || grade === "D";
+export const isFailed = (grade: string): boolean => grade === "F" || grade === "D";
 
 export const getAcademicYear = (): string => {
   const currentDate = new Date();
@@ -27,11 +26,7 @@ export const createElementList = (
 export const beginWithMatch = (code: string, codeList: string[]): boolean =>
   codeList.some((c) => code.startsWith(c));
 
-export const searchCourse = (
-  type: "id" | "name",
-  query: string,
-  courseList: Course[],
-): Course => {
+export const searchCourse = (type: "id" | "name", query: string, courseList: Course[]): Course => {
   const foundCourse =
     type === "id"
       ? courseList.find((course) => course.id === query)
@@ -69,9 +64,7 @@ export const getSignAndStatus = (result: CompulsoryResult | SelectResult) => {
   return [status, statusSignMap[status]];
 };
 
-export const compulsoryResultUnitCount = (
-  compulsoryResults: CompulsoryResult[],
-): number => {
+export const compulsoryResultUnitCount = (compulsoryResults: CompulsoryResult[]): number => {
   let unitCount = 0;
   for (const compulsoryResult of compulsoryResults) {
     let tmpUnitCount = 0;
